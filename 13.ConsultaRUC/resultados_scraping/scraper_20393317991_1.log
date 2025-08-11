@@ -44,4 +44,19 @@
     - Cantidad de Trabajadores: ✓
     - Actas Probatorias: 2025/08/11 16:56:45 [INFO] No hay actas probatorias registradas para el contribuyente.
 ✓
-    - Facturas Físicas: 
+    - Facturas Físicas: ✓
+  📋 Consultando información exclusiva de Personas Jurídicas...
+    - Representantes Legales: ✓
+    - Establecimientos Anexos: ✗ (no se encontró el botón de establecimientos anexos: context deadline exceeded)
+    - Reactiva Perú: ✓
+    - Programa COVID-19: ✓
+
+   ✅ Información completa guardada en: ruc_completo_20393317991.json
+
+   Resumen:
+   - Razón Social: C.P.C. AUDITORES S.A.C.
+   - Estado: ACTIVO
+   - Condición: HABIDO
+   - Representantes Legales Vigentes: 1
+
+==================================================

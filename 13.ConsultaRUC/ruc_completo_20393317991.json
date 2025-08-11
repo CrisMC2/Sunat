@@ -1,0 +1,207 @@
+{
+  "informacion_basica": {
+    "ruc": "20393317991",
+    "razon_social": "C.P.C. AUDITORES S.A.C.",
+    "tipo_contribuyente": "SOCIEDAD ANONIMA CERRADA",
+    "nombre_comercial": "-",
+    "fecha_inscripcion": "24/01/2007",
+    "fecha_inicio_actividades": "03/05/2007",
+    "estado": "ACTIVO",
+    "condicion": "HABIDO",
+    "domicilio_fiscal": "JR. PROLONGACIÓN GUILLERMO LUMBRERAS MZA. 201 LOTE. 01 U.V. CASA BLANCA (CRUCE AV. YARINA Y AV. MIRAFLORES) UCAYALI - CORONEL PORTILLO - YARINACOCHA",
+    "sistema_emision": "MANUAL",
+    "actividad_comercio_exterior": "SIN ACTIVIDAD",
+    "sistema_contabilidad": "MANUAL",
+    "actividades_economicas": [
+      "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL"
+    ],
+    "comprobantes_pago": [
+      "FACTURA",
+      "BOLETA DE VENTA",
+      "NOTA DE CREDITO"
+    ],
+    "sistema_emision_electronica": [
+      "FACTURA PORTAL DESDE 19/10/2011"
+    ],
+    "emisor_electronico_desde": "19/10/2011",
+    "comprobantes_electronicos": [
+      "FACTURA (desde 19/10/2011)"
+    ],
+    "afiliado_ple": "-",
+    "padrones": null
+  },
+  "informacion_historica": {
+    "razones_sociales": null,
+    "condiciones": [
+      {
+        "condicion": "PENDIENTE",
+        "desde": "-",
+        "hasta": "31/01/2007"
+      },
+      {
+        "condicion": "HABIDO",
+        "desde": "01/02/2007",
+        "hasta": "23/05/2007"
+      },
+      {
+        "condicion": "NO HALLADO",
+        "desde": "24/05/2007",
+        "hasta": "01/07/2007"
+      },
+      {
+        "condicion": "NO HABIDO",
+        "desde": "02/07/2007",
+        "hasta": "22/02/2008"
+      },
+      {
+        "condicion": "HABIDO",
+        "desde": "22/02/2008",
+        "hasta": "22/02/2008"
+      },
+      {
+        "condicion": "HABIDO",
+        "desde": "23/02/2008",
+        "hasta": "29/01/2009"
+      },
+      {
+        "condicion": "PENDIENTE",
+        "desde": "30/01/2009",
+        "hasta": "02/02/2009"
+      },
+      {
+        "condicion": "HABIDO",
+        "desde": "03/02/2009",
+        "hasta": "08/11/2010"
+      },
+      {
+        "condicion": "NO HALLADO",
+        "desde": "09/11/2010",
+        "hasta": "30/11/2010"
+      },
+      {
+        "condicion": "NO HABIDO",
+        "desde": "01/12/2010",
+        "hasta": "31/08/2011"
+      },
+      {
+        "condicion": "HABIDO",
+        "desde": "01/09/2011",
+        "hasta": "20/12/2013"
+      },
+      {
+        "condicion": "NO HALLADO",
+        "desde": "21/12/2013",
+        "hasta": "29/01/2014"
+      },
+      {
+        "condicion": "POR VERIFICAR",
+        "desde": "30/01/2014",
+        "hasta": "30/01/2014"
+      },
+      {
+        "condicion": "HABIDO",
+        "desde": "31/01/2014",
+        "hasta": "12/09/2014"
+      },
+      {
+        "condicion": "PENDIENTE",
+        "desde": "13/09/2014",
+        "hasta": "30/09/2014"
+      },
+      {
+        "condicion": "HABIDO",
+        "desde": "01/10/2014",
+        "hasta": "26/02/2015"
+      },
+      {
+        "condicion": "NO HALLADO",
+        "desde": "27/02/2015",
+        "hasta": "31/03/2015"
+      },
+      {
+        "condicion": "NO HABIDO",
+        "desde": "01/04/2015",
+        "hasta": "28/10/2015"
+      },
+      {
+        "condicion": "HABIDO",
+        "desde": "29/10/2015",
+        "hasta": "13/01/2020"
+      },
+      {
+        "condicion": "NO HALLADO",
+        "desde": "14/01/2020",
+        "hasta": "30/01/2020"
+      },
+      {
+        "condicion": "HABIDO",
+        "desde": "31/01/2020",
+        "hasta": "05/03/2022"
+      }
+    ],
+    "domicilios": [
+      {
+        "direccion": "JR. HUASCAR NRO. 510 INT. A URB. CERCADO DE PUCALLPA UCAYALI-CORONEL PORTILLO-CALLERIA",
+        "fecha_de_baja": "05/03/2022"
+      },
+      {
+        "direccion": "JR. HUASCAR NRO. 510A UCAYALI-CORONEL PORTILLO-CALLERIA",
+        "fecha_de_baja": "30/01/2020"
+      },
+      {
+        "direccion": "JR. 09 DE DICIEMBRE NRO. 654 UCAYALI-CORONEL PORTILLO-CALLERIA",
+        "fecha_de_baja": "29/01/2009"
+      },
+      {
+        "direccion": "JR. 09 DE DICIEMBRE NRO. 654 UCAYALI-CORONEL PORTILLO-CALLERIA",
+        "fecha_de_baja": "08/02/2008"
+      }
+    ]
+  },
+  "omisiones_tributarias": {
+    "tiene_omisiones": false,
+    "cantidad_omisiones": 0,
+    "omisiones": null
+  },
+  "cantidad_trabajadores": {
+    "periodos_disponibles": null,
+    "detalle_por_periodo": null
+  },
+  "actas_probatorias": {
+    "tiene_actas": false,
+    "cantidad_actas": 0,
+    "actas": null
+  },
+  "facturas_fisicas": {
+    "tiene_autorizacion": false,
+    "autorizaciones": null,
+    "canceladas_o_bajas": null
+  },
+  "reactiva_peru": {
+    "razon_social": "C.P.C. AUDITORES S.A.C.",
+    "tiene_deuda_coactiva": false,
+    "fecha_actualizacion": "10/08/2025",
+    "referencia_legal": "Decreto Legislativo N° 1455"
+  },
+  "programa_covid19": {
+    "razon_social": "",
+    "participa_programa": false,
+    "tiene_deuda_coactiva": false,
+    "fecha_actualizacion": "10/08/2025",
+    "base_legal": "Ley N° 31050"
+  },
+  "representantes_legales": {
+    "representantes": [
+      {
+        "tipo_documento": "DNI",
+        "numero_documento": "08100127",
+        "nombre_completo": "MONTOYA TORRES SILVIA VIRGINIA",
+        "cargo": "GERENTE GENERAL",
+        "fecha_desde": "08/01/2007",
+        "vigente": true
+      }
+    ]
+  },
+  "fecha_consulta": "2025-08-11T16:55:12.80224074-05:00",
+  "version_api": "1.0.0"
+}

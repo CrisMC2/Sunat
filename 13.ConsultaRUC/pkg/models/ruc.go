@@ -1,9 +1,11 @@
 package models
 
+// Estructura actualizada RUCInfo con el nuevo campo TipoDocumento
 type RUCInfo struct {
 	RUC                       string   `json:"ruc"`
 	RazonSocial               string   `json:"razon_social"`
 	TipoContribuyente         string   `json:"tipo_contribuyente"`
+	TipoDocumento             string   `json:"tipo_documento"` // NUEVO CAMPO
 	NombreComercial           string   `json:"nombre_comercial"`
 	FechaInscripcion          string   `json:"fecha_inscripcion"`
 	FechaInicioActividades    string   `json:"fecha_inicio_actividades"`

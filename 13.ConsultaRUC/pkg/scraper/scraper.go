@@ -136,6 +136,10 @@ func (s *SUNATScraper) mapFieldToStruct(label, value string, info *models.RUCInf
 		info.RazonSocial = value
 	case strings.Contains(label, "tipo contribuyente"):
 		info.TipoContribuyente = value
+	case strings.Contains(label, "tipo de documento"):
+		// Extraer información del documento
+		// Formato esperado: "DNI  76366932  - TARRILLO MARRUFO, YAMELITH MARILYN"
+		s.parseTipoDocumento(value, info)
 	case strings.Contains(label, "nombre comercial"):
 		info.NombreComercial = value
 	case strings.Contains(label, "fecha de inscripción") || strings.Contains(label, "fecha de inscripcion"):
@@ -168,6 +172,41 @@ func (s *SUNATScraper) mapFieldToStruct(label, value string, info *models.RUCInf
 		}
 	case strings.Contains(label, "afiliado al ple desde"):
 		info.AfiliadoPLE = value
+	}
+}
+
+// Nueva función para parsear el tipo de documento
+func (s *SUNATScraper) parseTipoDocumento(value string, info *models.RUCInfo) {
+	// Limpiar espacios extra
+	cleanValue := strings.ReplaceAll(value, "  ", " ")
+	cleanValue = strings.TrimSpace(cleanValue)
+
+	// Ejemplo: "DNI  76366932 - TARRILLO MARRUFO, YAMELITH MARILYN"
+	if strings.Contains(cleanValue, "DNI") {
+		// Extraer número de DNI y nombre
+		parts := strings.Split(cleanValue, " - ")
+		if len(parts) >= 2 {
+			// Primera parte contiene "DNI" y el número
+			dniPart := strings.TrimSpace(parts[0])
+			dniFields := strings.Fields(dniPart) // Divide por espacios
+
+			if len(dniFields) >= 2 {
+				tipoDoc := dniFields[0]                       // "DNI"
+				numeroDoc := dniFields[1]                     // "76366932"
+				nombreCompleto := strings.TrimSpace(parts[1]) // "TARRILLO MARRUFO, YAMELITH MARILYN"
+
+				// Formatear tipo de documento
+				info.TipoDocumento = fmt.Sprintf("%s %s", tipoDoc, numeroDoc)
+
+				// Si no se ha establecido RazonSocial desde el RUC, usar el nombre del documento
+				if info.RazonSocial == "" {
+					info.RazonSocial = nombreCompleto
+				}
+			}
+		}
+	} else {
+		// Para otros tipos de documento, guardar tal como está
+		info.TipoDocumento = cleanValue
 	}
 }
 

@@ -8,6 +8,7 @@ CREATE TABLE ruc_informacion_basica (
     ruc VARCHAR(11) NOT NULL UNIQUE,
     razon_social TEXT NOT NULL,
     tipo_contribuyente VARCHAR(100),
+     tipo_documento VARCHAR(50),
     nombre_comercial TEXT,
     fecha_inscripcion DATE,
     fecha_inicio_actividades DATE,
