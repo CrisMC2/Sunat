@@ -230,3 +230,17 @@
 [0;32m[SUCCESS][0m [14/26] RUC 10776888813 procesado exitosamente (127s, intento 2)
 [0;34m[INFO][0m === Procesando RUC 15/26: 20393261162 ===
 [0;34m[INFO][0m [15/26] Procesando RUC: 20393261162 (Intento 1/3)
+[0;35m[DEBUG][0m Validando JSON: ruc_completo_20393261162.json para RUC: 20393261162
+[0;35m[DEBUG][0m Tamaño del archivo JSON: 9208 bytes
+[0;35m[DEBUG][0m RUC no encontrado en campos estándar, buscando en todo el JSON...
+[1;33m[WARNING][0m RUC no encontrado en JSON. Estructura del archivo:
+[0;35m[DEBUG][0m   Clave encontrada: [
+[0;35m[DEBUG][0m   Clave encontrada: "actas_probatorias",
+[0;35m[DEBUG][0m   Clave encontrada: "cantidad_trabajadores",
+[0;35m[DEBUG][0m   Clave encontrada: "establecimientos_anexos",
+[0;35m[DEBUG][0m   Clave encontrada: "facturas_fisicas",
+[1;33m[WARNING][0m JSON tiene contenido (11 claves) pero RUC no coincide. Aceptando como válido.
+[0;32m[SUCCESS][0m [15/26] RUC 20393261162 procesado exitosamente (231s, intento 1)
+[0;34m[INFO][0m === PROGRESO: 15/26 (15 éxitos, 0 errores) - ETA: 2167s ===
+[0;34m[INFO][0m === Procesando RUC 16/26: 20393317991 ===
+[0;34m[INFO][0m [16/26] Procesando RUC: 20393317991 (Intento 1/3)
