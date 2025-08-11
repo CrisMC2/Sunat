@@ -1,0 +1,26 @@
+{
+  "ruc": "20605437070",
+  "razon_social": "MULTICONT ESTUDIO CONTABLE S.A.C.",
+  "tipo_contribuyente": "SOCIEDAD ANONIMA CERRADA",
+  "nombre_comercial": "-",
+  "fecha_inscripcion": "25/10/2019",
+  "fecha_inicio_actividades": "01/11/2019",
+  "estado": "ACTIVO",
+  "condicion": "HABIDO",
+  "domicilio_fiscal": "JR. 28 DE JULIO MZA. G LOTE. 11 UCAYALI - PADRE ABAD - IRAZOLA",
+  "sistema_emision": "COMPUTARIZADO",
+  "actividad_comercio_exterior": "SIN ACTIVIDAD",
+  "sistema_contabilidad": "COMPUTARIZADO",
+  "actividades_economicas": [
+    "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL",
+    "Secundaria 1 - 7020 - ACTIVIDADES DE CONSULTORÍA DE GESTIÓN"
+  ],
+  "comprobantes_pago": null,
+  "sistema_emision_electronica": "FACTURA (desde 13/11/2019)",
+  "emisor_electronico_desde": "13/11/2019",
+  "comprobantes_electronicos": [
+    "FACTURA PORTAL DESDE 13/11/2019"
+  ],
+  "afiliado_ple": "-",
+  "padrones": null
+}

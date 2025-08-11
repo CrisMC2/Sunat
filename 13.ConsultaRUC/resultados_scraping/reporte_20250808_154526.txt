@@ -1,0 +1,34 @@
+REPORTE DE SCRAPING - vie 08 ago 2025 15:45:26 -05
+==================================
+
+Archivos JSON generados:
+24
+
+Lista de archivos:
+-rw-r--r-- 1 cristhianm cristhianm  2579 ago  8 14:35 resultados_scraping/ruc_completo_10420242986.json
+-rw-r--r-- 1 cristhianm cristhianm  2479 ago  8 14:37 resultados_scraping/ruc_completo_10467806527.json
+-rw-r--r-- 1 cristhianm cristhianm  2158 ago  8 14:40 resultados_scraping/ruc_completo_10470593291.json
+-rw-r--r-- 1 cristhianm cristhianm  2651 ago  8 14:42 resultados_scraping/ruc_completo_10477649845.json
+-rw-r--r-- 1 cristhianm cristhianm  2642 ago  8 14:44 resultados_scraping/ruc_completo_10712337601.json
+-rw-r--r-- 1 cristhianm cristhianm  2430 ago  8 14:46 resultados_scraping/ruc_completo_10719706288.json
+-rw-r--r-- 1 cristhianm cristhianm  2446 ago  8 14:48 resultados_scraping/ruc_completo_10725461327.json
+-rw-r--r-- 1 cristhianm cristhianm  2427 ago  8 14:50 resultados_scraping/ruc_completo_10729620730.json
+-rw-r--r-- 1 cristhianm cristhianm  2235 ago  8 14:53 resultados_scraping/ruc_completo_10738074292.json
+-rw-r--r-- 1 cristhianm cristhianm  1033 ago  8 14:55 resultados_scraping/ruc_completo_10758153911.json
+-rw-r--r-- 1 cristhianm cristhianm  1873 ago  8 14:58 resultados_scraping/ruc_completo_10758787651.json
+-rw-r--r-- 1 cristhianm cristhianm  2432 ago  8 15:00 resultados_scraping/ruc_completo_10763669322.json
+-rw-r--r-- 1 cristhianm cristhianm  2333 ago  8 15:03 resultados_scraping/ruc_completo_10775397131.json
+-rw-r--r-- 1 cristhianm cristhianm  2439 ago  8 15:05 resultados_scraping/ruc_completo_10776888813.json
+-rw-r--r-- 1 cristhianm cristhianm 10391 ago  8 15:09 resultados_scraping/ruc_completo_20393261162.json
+-rw-r--r-- 1 cristhianm cristhianm  7095 ago  8 15:13 resultados_scraping/ruc_completo_20393758008.json
+-rw-r--r-- 1 cristhianm cristhianm  5553 ago  8 15:16 resultados_scraping/ruc_completo_20554129286.json
+-rw-r--r-- 1 cristhianm cristhianm  7534 ago  8 15:20 resultados_scraping/ruc_completo_20600656288.json
+-rw-r--r-- 1 cristhianm cristhianm   682 ago  8 15:23 resultados_scraping/ruc_completo_20602770568.json
+-rw-r--r-- 1 cristhianm cristhianm  3536 ago  8 15:26 resultados_scraping/ruc_completo_20604817103.json
+-rw-r--r-- 1 cristhianm cristhianm  3588 ago  8 15:30 resultados_scraping/ruc_completo_20605437070.json
+-rw-r--r-- 1 cristhianm cristhianm  5735 ago  8 15:33 resultados_scraping/ruc_completo_20606454466.json
+-rw-r--r-- 1 cristhianm cristhianm  6122 ago  8 15:37 resultados_scraping/ruc_completo_20606642131.json
+-rw-r--r-- 1 cristhianm cristhianm  6789 ago  8 15:40 resultados_scraping/ruc_completo_20606695439.json
+
+Tamaño total:
+192K	resultados_scraping

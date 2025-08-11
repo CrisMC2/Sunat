@@ -1,0 +1,83 @@
+{
+  "informacion_basica": {
+    "ruc": "10725461327",
+    "razon_social": "SANTA CRUZ BAZAN CARLOS DANIEL",
+    "tipo_contribuyente": "PERSONA NATURAL SIN NEGOCIO",
+    "nombre_comercial": "-",
+    "fecha_inscripcion": "28/02/2022",
+    "fecha_inicio_actividades": "01/02/2022",
+    "estado": "ACTIVO",
+    "condicion": "HABIDO",
+    "domicilio_fiscal": "-",
+    "sistema_emision": "MANUAL",
+    "actividad_comercio_exterior": "SIN ACTIVIDAD",
+    "sistema_contabilidad": "COMPUTARIZADO",
+    "actividades_economicas": [
+      "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL"
+    ],
+    "comprobantes_pago": null,
+    "sistema_emision_electronica": "RECIBO POR HONORARIO (desde 13/05/2022)",
+    "emisor_electronico_desde": "13/05/2022",
+    "comprobantes_electronicos": [
+      "RECIBOS POR HONORARIOS AFILIADO DESDE 13/05/2022"
+    ],
+    "afiliado_ple": "-",
+    "padrones": null
+  },
+  "informacion_historica": {
+    "ruc": "10725461327",
+    "razon_social": "",
+    "fecha_actualizada": "",
+    "razones_sociales": null,
+    "condiciones": [
+      {
+        "condicion": "No hay Información",
+        "desde": "-",
+        "hasta": "-"
+      }
+    ],
+    "domicilios": [
+      {
+        "direccion": "No hay Información",
+        "fecha_de_baja": "-"
+      }
+    ],
+    "fecha_consulta": "2025-08-08T14:47:15.631155552-05:00"
+  },
+  "deuda_coactiva": {
+    "ruc": "10725461327",
+    "total_deuda": 0,
+    "cantidad_documentos": 0,
+    "deudas": null,
+    "fecha_consulta": "2025-08-08T14:46:57.533950826-05:00"
+  },
+  "omisiones_tributarias": {
+    "ruc": "10725461327",
+    "tiene_omisiones": false,
+    "cantidad_omisiones": 0,
+    "omisiones": null,
+    "fecha_consulta": "2025-08-08T14:47:33.775236484-05:00"
+  },
+  "cantidad_trabajadores": {
+    "ruc": "10725461327",
+    "periodos_disponibles": null,
+    "detalle_por_periodo": null,
+    "fecha_consulta": "2025-08-08T14:47:51.861921202-05:00"
+  },
+  "actas_probatorias": {
+    "ruc": "10725461327",
+    "tiene_actas": false,
+    "cantidad_actas": 0,
+    "actas": null,
+    "fecha_consulta": "2025-08-08T14:48:09.95046304-05:00"
+  },
+  "facturas_fisicas": {
+    "ruc": "10725461327",
+    "tiene_autorizacion": false,
+    "autorizaciones": null,
+    "canceladas_o_bajas": null,
+    "fecha_consulta": "2025-08-08T14:48:29.093750571-05:00"
+  },
+  "fecha_consulta": "2025-08-08T14:46:39.471871743-05:00",
+  "version_api": "1.0.0"
+}

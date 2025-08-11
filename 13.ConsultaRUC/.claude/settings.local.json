@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(echo $PATH)",
+      "Bash(./run.sh:*)",
+      "Bash(export:*)",
+      "Bash(go mod:*)",
+      "Bash(go run:*)",
+      "Bash(chmod:*)",
+      "Bash(./test-rapido.sh:*)",
+      "Bash(./test-simple.sh:*)",
+      "Bash(./test-extendido-simple.sh:*)",
+      "Bash(./verificar-rucs.sh:*)",
+      "Bash(ls:*)"
+    ],
+    "deny": []
+  }
+}

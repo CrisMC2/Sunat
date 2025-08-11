@@ -1,0 +1,214 @@
+{
+  "informacion_basica": {
+    "ruc": "20606642131",
+    "razon_social": "FUCE \u0026 CIA E.I.R.L.",
+    "tipo_contribuyente": "EMPRESA INDIVIDUAL DE RESP. LTDA",
+    "nombre_comercial": "ESTUDIO CONTABLE FUCE",
+    "fecha_inscripcion": "06/10/2020",
+    "fecha_inicio_actividades": "12/10/2020",
+    "estado": "ACTIVO",
+    "condicion": "HABIDO",
+    "domicilio_fiscal": "CAR.FEDERICO BASADRE MZA. 171 LOTE. 13 URB. PAMPA YURAC (FRENTE A DEVIDA) UCAYALI - PADRE ABAD - PADRE ABAD",
+    "sistema_emision": "COMPUTARIZADO",
+    "actividad_comercio_exterior": "SIN ACTIVIDAD",
+    "sistema_contabilidad": "COMPUTARIZADO",
+    "actividades_economicas": [
+      "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL",
+      "Secundaria 1 - 7020 - ACTIVIDADES DE CONSULTORÍA DE GESTIÓN"
+    ],
+    "comprobantes_pago": null,
+    "sistema_emision_electronica": "FACTURA (desde 12/10/2020),BOLETA (desde 07/02/2022)",
+    "emisor_electronico_desde": "12/10/2020",
+    "comprobantes_electronicos": [
+      "FACTURA PORTAL DESDE 12/10/2020",
+      "BOLETA PORTAL DESDE 07/02/2022"
+    ],
+    "afiliado_ple": "-",
+    "padrones": null
+  },
+  "informacion_historica": {
+    "ruc": "20606642131",
+    "razon_social": "",
+    "fecha_actualizada": "",
+    "razones_sociales": null,
+    "condiciones": [
+      {
+        "condicion": "HABIDO",
+        "desde": "13/10/2020",
+        "hasta": "09/11/2024"
+      }
+    ],
+    "domicilios": [
+      {
+        "direccion": "JR. FLORIDA MZA. 193 LOTE. 5 U.V. 27 DE ABRIL UCAYALI-PADRE ABAD-PADRE ABAD",
+        "fecha_de_baja": "09/11/2024"
+      }
+    ],
+    "fecha_consulta": "2025-08-08T15:34:44.197823918-05:00"
+  },
+  "deuda_coactiva": {
+    "ruc": "20606642131",
+    "total_deuda": 0,
+    "cantidad_documentos": 0,
+    "deudas": null,
+    "fecha_consulta": "2025-08-08T15:34:26.100241218-05:00"
+  },
+  "omisiones_tributarias": {
+    "ruc": "20606642131",
+    "tiene_omisiones": false,
+    "cantidad_omisiones": 0,
+    "omisiones": null,
+    "fecha_consulta": "2025-08-08T15:35:02.341417552-05:00"
+  },
+  "cantidad_trabajadores": {
+    "ruc": "20606642131",
+    "periodos_disponibles": [
+      "2024-07",
+      "2024-08",
+      "2024-09",
+      "2024-10",
+      "2024-11",
+      "2024-12",
+      "2025-01",
+      "2025-02",
+      "2025-03",
+      "2025-04",
+      "2025-05",
+      "2025-06"
+    ],
+    "detalle_por_periodo": [
+      {
+        "periodo": "2024-07",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 2,
+        "cantidad_pensionistas": 0,
+        "total": 2
+      },
+      {
+        "periodo": "2024-08",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 2,
+        "cantidad_pensionistas": 0,
+        "total": 2
+      },
+      {
+        "periodo": "2024-09",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 2,
+        "cantidad_pensionistas": 0,
+        "total": 2
+      },
+      {
+        "periodo": "2024-10",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 2,
+        "cantidad_pensionistas": 0,
+        "total": 2
+      },
+      {
+        "periodo": "2024-11",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 2,
+        "cantidad_pensionistas": 0,
+        "total": 2
+      },
+      {
+        "periodo": "2024-12",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 2,
+        "cantidad_pensionistas": 0,
+        "total": 2
+      },
+      {
+        "periodo": "2025-01",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 2,
+        "cantidad_pensionistas": 0,
+        "total": 2
+      },
+      {
+        "periodo": "2025-02",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 3,
+        "cantidad_pensionistas": 0,
+        "total": 3
+      },
+      {
+        "periodo": "2025-03",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 3,
+        "cantidad_pensionistas": 0,
+        "total": 3
+      },
+      {
+        "periodo": "2025-04",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 3,
+        "cantidad_pensionistas": 0,
+        "total": 3
+      },
+      {
+        "periodo": "2025-05",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 2,
+        "cantidad_pensionistas": 0,
+        "total": 2
+      },
+      {
+        "periodo": "2025-06",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 3,
+        "cantidad_pensionistas": 0,
+        "total": 3
+      }
+    ],
+    "fecha_consulta": "2025-08-08T15:35:20.438106695-05:00"
+  },
+  "actas_probatorias": {
+    "ruc": "20606642131",
+    "tiene_actas": false,
+    "cantidad_actas": 0,
+    "actas": null,
+    "fecha_consulta": "2025-08-08T15:35:38.621633788-05:00"
+  },
+  "facturas_fisicas": {
+    "ruc": "20606642131",
+    "tiene_autorizacion": false,
+    "autorizaciones": null,
+    "canceladas_o_bajas": null,
+    "fecha_consulta": "2025-08-08T15:35:57.749236786-05:00"
+  },
+  "reactiva_peru": {
+    "ruc": "20606642131",
+    "razon_social": "FUCE \u0026 CIA E.I.R.L.",
+    "tiene_deuda_coactiva": false,
+    "fecha_actualizacion": "07/08/2025",
+    "referencia_legal": "Decreto Legislativo N° 1455",
+    "fecha_consulta": "2025-08-08T15:36:48.963824608-05:00"
+  },
+  "programa_covid19": {
+    "ruc": "20606642131",
+    "razon_social": "",
+    "participa_programa": false,
+    "tiene_deuda_coactiva": false,
+    "fecha_actualizacion": "07/08/2025",
+    "base_legal": "Ley N° 31050",
+    "fecha_consulta": "2025-08-08T15:37:07.071836125-05:00"
+  },
+  "representantes_legales": {
+    "ruc": "20606642131",
+    "representantes": [
+      {
+        "tipo_documento": "DNI",
+        "numero_documento": "43333648",
+        "nombre_completo": "CAMPOS ENRIQUE FRANKLIN ULICES",
+        "cargo": "TITULAR-GERENTE",
+        "fecha_desde": "17/09/2020",
+        "vigente": true
+      }
+    ],
+    "fecha_consulta": "2025-08-08T15:36:15.861912081-05:00"
+  },
+  "fecha_consulta": "2025-08-08T15:34:08.054166525-05:00",
+  "version_api": "1.0.0"
+}

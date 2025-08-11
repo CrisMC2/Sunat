@@ -1,0 +1,236 @@
+{
+  "informacion_basica": {
+    "ruc": "20606695439",
+    "razon_social": "CONTA CONSULT S.A.C.",
+    "tipo_contribuyente": "SOCIEDAD ANONIMA CERRADA",
+    "nombre_comercial": "-",
+    "fecha_inscripcion": "14/10/2020",
+    "fecha_inicio_actividades": "01/01/2021",
+    "estado": "ACTIVO",
+    "condicion": "HABIDO",
+    "domicilio_fiscal": "JR. LOS JAZMINES MZA. M1 LOTE. 10 URB. 23 DE MARZO UCAYALI - PADRE ABAD - PADRE ABAD",
+    "sistema_emision": "COMPUTARIZADO",
+    "actividad_comercio_exterior": "SIN ACTIVIDAD",
+    "sistema_contabilidad": "COMPUTARIZADO",
+    "actividades_economicas": [
+      "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL",
+      "Secundaria 1 - 7020 - ACTIVIDADES DE CONSULTORÍA DE GESTIÓN"
+    ],
+    "comprobantes_pago": null,
+    "sistema_emision_electronica": "FACTURA (desde 26/01/2021),BOLETA (desde 20/07/2021)",
+    "emisor_electronico_desde": "26/01/2021",
+    "comprobantes_electronicos": [
+      "FACTURA PORTAL DESDE 26/01/2021",
+      "BOLETA PORTAL DESDE 20/07/2021"
+    ],
+    "afiliado_ple": "-",
+    "padrones": null
+  },
+  "informacion_historica": {
+    "ruc": "20606695439",
+    "razon_social": "",
+    "fecha_actualizada": "",
+    "razones_sociales": null,
+    "condiciones": [
+      {
+        "condicion": "HABIDO",
+        "desde": "14/01/2021",
+        "hasta": "29/01/2025"
+      },
+      {
+        "condicion": "HABIDO",
+        "desde": "30/01/2025",
+        "hasta": "03/02/2025"
+      }
+    ],
+    "domicilios": [
+      {
+        "direccion": "CAL.10 MZA. M1 LOTE. 10 VLL. AGUAYTIA UCAYALI-PADRE ABAD-PADRE ABAD",
+        "fecha_de_baja": "03/02/2025"
+      },
+      {
+        "direccion": "JR. GARCILAZO DE LA VEGA MZA. K2 LOTE. 5A AGUAYTIA UCAYALI-PADRE ABAD-PADRE ABAD",
+        "fecha_de_baja": "29/01/2025"
+      }
+    ],
+    "fecha_consulta": "2025-08-08T15:37:58.217889099-05:00"
+  },
+  "deuda_coactiva": {
+    "ruc": "20606695439",
+    "total_deuda": 0,
+    "cantidad_documentos": 0,
+    "deudas": null,
+    "fecha_consulta": "2025-08-08T15:37:40.123740771-05:00"
+  },
+  "omisiones_tributarias": {
+    "ruc": "20606695439",
+    "tiene_omisiones": false,
+    "cantidad_omisiones": 0,
+    "omisiones": null,
+    "fecha_consulta": "2025-08-08T15:38:16.34434438-05:00"
+  },
+  "cantidad_trabajadores": {
+    "ruc": "20606695439",
+    "periodos_disponibles": [
+      "2024-07",
+      "2024-08",
+      "2024-09",
+      "2024-10",
+      "2024-11",
+      "2024-12",
+      "2025-01",
+      "2025-02",
+      "2025-03",
+      "2025-04",
+      "2025-05",
+      "2025-06"
+    ],
+    "detalle_por_periodo": [
+      {
+        "periodo": "2024-07",
+        "cantidad_trabajadores": 5,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 5
+      },
+      {
+        "periodo": "2024-08",
+        "cantidad_trabajadores": 5,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 5
+      },
+      {
+        "periodo": "2024-09",
+        "cantidad_trabajadores": 6,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 6
+      },
+      {
+        "periodo": "2024-10",
+        "cantidad_trabajadores": 6,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 6
+      },
+      {
+        "periodo": "2024-11",
+        "cantidad_trabajadores": 7,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 7
+      },
+      {
+        "periodo": "2024-12",
+        "cantidad_trabajadores": 7,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 7
+      },
+      {
+        "periodo": "2025-01",
+        "cantidad_trabajadores": 6,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 6
+      },
+      {
+        "periodo": "2025-02",
+        "cantidad_trabajadores": 6,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 6
+      },
+      {
+        "periodo": "2025-03",
+        "cantidad_trabajadores": 6,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 6
+      },
+      {
+        "periodo": "2025-04",
+        "cantidad_trabajadores": 6,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 6
+      },
+      {
+        "periodo": "2025-05",
+        "cantidad_trabajadores": 6,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 6
+      },
+      {
+        "periodo": "2025-06",
+        "cantidad_trabajadores": 6,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 6
+      }
+    ],
+    "fecha_consulta": "2025-08-08T15:38:34.451909603-05:00"
+  },
+  "actas_probatorias": {
+    "ruc": "20606695439",
+    "tiene_actas": false,
+    "cantidad_actas": 0,
+    "actas": null,
+    "fecha_consulta": "2025-08-08T15:38:52.629847052-05:00"
+  },
+  "facturas_fisicas": {
+    "ruc": "20606695439",
+    "tiene_autorizacion": false,
+    "autorizaciones": null,
+    "canceladas_o_bajas": null,
+    "fecha_consulta": "2025-08-08T15:39:11.77491708-05:00"
+  },
+  "reactiva_peru": {
+    "ruc": "20606695439",
+    "razon_social": "CONTA CONSULT S.A.C.",
+    "tiene_deuda_coactiva": false,
+    "fecha_actualizacion": "07/08/2025",
+    "referencia_legal": "Decreto Legislativo N° 1455",
+    "fecha_consulta": "2025-08-08T15:40:06.085317943-05:00"
+  },
+  "programa_covid19": {
+    "ruc": "20606695439",
+    "razon_social": "",
+    "participa_programa": false,
+    "tiene_deuda_coactiva": false,
+    "fecha_actualizacion": "07/08/2025",
+    "base_legal": "Ley N° 31050",
+    "fecha_consulta": "2025-08-08T15:40:24.197892107-05:00"
+  },
+  "representantes_legales": {
+    "ruc": "20606695439",
+    "representantes": [
+      {
+        "tipo_documento": "DNI",
+        "numero_documento": "40316383",
+        "nombre_completo": "CARRION MOLINA GUILLERMO NESTOR",
+        "cargo": "GERENTE GENERAL",
+        "fecha_desde": "21/09/2020",
+        "vigente": true
+      }
+    ],
+    "fecha_consulta": "2025-08-08T15:39:29.895614948-05:00"
+  },
+  "establecimientos_anexos": {
+    "ruc": "20606695439",
+    "cantidad_anexos": 1,
+    "establecimientos": [
+      {
+        "codigo": "0002",
+        "tipo_establecimiento": "SU. SUCURSAL",
+        "direccion": "JR. ATAHUALLPA MZA. A LOTE. 7C URB. CASTILLO GRANDE (FRENTE POLICIA NACIONAL CASTILLO GRANDE) HUANUCO - LEONCIO PRADO - CASTILLO GRANDE",
+        "actividad_economica": "-"
+      }
+    ],
+    "fecha_consulta": "2025-08-08T15:39:47.982898026-05:00"
+  },
+  "fecha_consulta": "2025-08-08T15:37:22.054939424-05:00",
+  "version_api": "1.0.0"
+}

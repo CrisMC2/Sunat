@@ -1,0 +1,83 @@
+{
+  "informacion_basica": {
+    "ruc": "10763669322",
+    "razon_social": "TARRILLO MARRUFO YAMELITH MARILYN",
+    "tipo_contribuyente": "PERSONA NATURAL SIN NEGOCIO",
+    "nombre_comercial": "-",
+    "fecha_inscripcion": "21/02/2022",
+    "fecha_inicio_actividades": "21/02/2022",
+    "estado": "ACTIVO",
+    "condicion": "HABIDO",
+    "domicilio_fiscal": "-",
+    "sistema_emision": "-",
+    "actividad_comercio_exterior": "SIN ACTIVIDAD",
+    "sistema_contabilidad": "-",
+    "actividades_economicas": [
+      "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL"
+    ],
+    "comprobantes_pago": null,
+    "sistema_emision_electronica": "RECIBO POR HONORARIO (desde 22/02/2022)",
+    "emisor_electronico_desde": "22/02/2022",
+    "comprobantes_electronicos": [
+      "RECIBOS POR HONORARIOS AFILIADO DESDE 22/02/2022"
+    ],
+    "afiliado_ple": "-",
+    "padrones": null
+  },
+  "informacion_historica": {
+    "ruc": "10763669322",
+    "razon_social": "",
+    "fecha_actualizada": "",
+    "razones_sociales": null,
+    "condiciones": [
+      {
+        "condicion": "No hay Información",
+        "desde": "-",
+        "hasta": "-"
+      }
+    ],
+    "domicilios": [
+      {
+        "direccion": "No hay Información",
+        "fecha_de_baja": "-"
+      }
+    ],
+    "fecha_consulta": "2025-08-08T14:59:17.439936559-05:00"
+  },
+  "deuda_coactiva": {
+    "ruc": "10763669322",
+    "total_deuda": 0,
+    "cantidad_documentos": 0,
+    "deudas": null,
+    "fecha_consulta": "2025-08-08T14:58:59.322114896-05:00"
+  },
+  "omisiones_tributarias": {
+    "ruc": "10763669322",
+    "tiene_omisiones": false,
+    "cantidad_omisiones": 0,
+    "omisiones": null,
+    "fecha_consulta": "2025-08-08T14:59:35.585471946-05:00"
+  },
+  "cantidad_trabajadores": {
+    "ruc": "10763669322",
+    "periodos_disponibles": null,
+    "detalle_por_periodo": null,
+    "fecha_consulta": "2025-08-08T14:59:53.701565893-05:00"
+  },
+  "actas_probatorias": {
+    "ruc": "10763669322",
+    "tiene_actas": false,
+    "cantidad_actas": 0,
+    "actas": null,
+    "fecha_consulta": "2025-08-08T15:00:11.820876895-05:00"
+  },
+  "facturas_fisicas": {
+    "ruc": "10763669322",
+    "tiene_autorizacion": false,
+    "autorizaciones": null,
+    "canceladas_o_bajas": null,
+    "fecha_consulta": "2025-08-08T15:00:30.959372259-05:00"
+  },
+  "fecha_consulta": "2025-08-08T14:58:34.30656101-05:00",
+  "version_api": "1.0.0"
+}

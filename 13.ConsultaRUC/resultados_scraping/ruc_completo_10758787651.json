@@ -1,0 +1,63 @@
+{
+  "informacion_basica": {
+    "ruc": "10758787651",
+    "razon_social": "ALARCON BARBOZA YENY ESMERALDA",
+    "tipo_contribuyente": "PERSONA NATURAL SIN NEGOCIO",
+    "nombre_comercial": "-",
+    "fecha_inscripcion": "19/06/2023",
+    "fecha_inicio_actividades": "01/05/2023",
+    "estado": "ACTIVO",
+    "condicion": "HABIDO",
+    "domicilio_fiscal": "-",
+    "sistema_emision": "COMPUTARIZADO",
+    "actividad_comercio_exterior": "SIN ACTIVIDAD",
+    "sistema_contabilidad": "COMPUTARIZADO",
+    "actividades_economicas": [
+      "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL"
+    ],
+    "comprobantes_pago": null,
+    "sistema_emision_electronica": "RECIBO POR HONORARIO (desde 03/07/2023)",
+    "emisor_electronico_desde": "03/07/2023",
+    "comprobantes_electronicos": [
+      "RECIBOS POR HONORARIOS AFILIADO DESDE 03/07/2023"
+    ],
+    "afiliado_ple": "-",
+    "padrones": null
+  },
+  "informacion_historica": {
+    "ruc": "10758787651",
+    "razon_social": "",
+    "fecha_actualizada": "",
+    "razones_sociales": null,
+    "condiciones": [
+      {
+        "condicion": "No hay Información",
+        "desde": "-",
+        "hasta": "-"
+      }
+    ],
+    "domicilios": [
+      {
+        "direccion": "No hay Información",
+        "fecha_de_baja": "-"
+      }
+    ],
+    "fecha_consulta": "2025-08-08T14:56:35.544973428-05:00"
+  },
+  "deuda_coactiva": {
+    "ruc": "10758787651",
+    "total_deuda": 0,
+    "cantidad_documentos": 0,
+    "deudas": null,
+    "fecha_consulta": "2025-08-08T14:56:17.456240286-05:00"
+  },
+  "omisiones_tributarias": {
+    "ruc": "10758787651",
+    "tiene_omisiones": false,
+    "cantidad_omisiones": 0,
+    "omisiones": null,
+    "fecha_consulta": "2025-08-08T14:56:53.675687773-05:00"
+  },
+  "fecha_consulta": "2025-08-08T14:55:59.379462989-05:00",
+  "version_api": "1.0.0"
+}

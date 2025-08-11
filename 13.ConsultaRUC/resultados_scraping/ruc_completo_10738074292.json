@@ -1,0 +1,76 @@
+{
+  "informacion_basica": {
+    "ruc": "10738074292",
+    "razon_social": "SAMAME FLORES DEYSER",
+    "tipo_contribuyente": "PERSONA NATURAL SIN NEGOCIO",
+    "nombre_comercial": "-",
+    "fecha_inscripcion": "21/04/2021",
+    "fecha_inicio_actividades": "01/04/2021",
+    "estado": "ACTIVO",
+    "condicion": "HABIDO",
+    "domicilio_fiscal": "-",
+    "sistema_emision": "-",
+    "actividad_comercio_exterior": "SIN ACTIVIDAD",
+    "sistema_contabilidad": "-",
+    "actividades_economicas": [
+      "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL"
+    ],
+    "comprobantes_pago": null,
+    "sistema_emision_electronica": "RECIBO POR HONORARIO (desde 31/05/2021)",
+    "emisor_electronico_desde": "31/05/2021",
+    "comprobantes_electronicos": [
+      "RECIBOS POR HONORARIOS AFILIADO DESDE 31/05/2021"
+    ],
+    "afiliado_ple": "-",
+    "padrones": null
+  },
+  "informacion_historica": {
+    "ruc": "10738074292",
+    "razon_social": "",
+    "fecha_actualizada": "",
+    "razones_sociales": null,
+    "condiciones": [
+      {
+        "condicion": "No hay Información",
+        "desde": "-",
+        "hasta": "-"
+      }
+    ],
+    "domicilios": [
+      {
+        "direccion": "No hay Información",
+        "fecha_de_baja": "-"
+      }
+    ],
+    "fecha_consulta": "2025-08-08T14:52:21.245796355-05:00"
+  },
+  "omisiones_tributarias": {
+    "ruc": "10738074292",
+    "tiene_omisiones": false,
+    "cantidad_omisiones": 0,
+    "omisiones": null,
+    "fecha_consulta": "2025-08-08T14:52:39.378738239-05:00"
+  },
+  "cantidad_trabajadores": {
+    "ruc": "10738074292",
+    "periodos_disponibles": null,
+    "detalle_por_periodo": null,
+    "fecha_consulta": "2025-08-08T14:52:57.496383342-05:00"
+  },
+  "actas_probatorias": {
+    "ruc": "10738074292",
+    "tiene_actas": false,
+    "cantidad_actas": 0,
+    "actas": null,
+    "fecha_consulta": "2025-08-08T14:53:15.601320729-05:00"
+  },
+  "facturas_fisicas": {
+    "ruc": "10738074292",
+    "tiene_autorizacion": false,
+    "autorizaciones": null,
+    "canceladas_o_bajas": null,
+    "fecha_consulta": "2025-08-08T14:53:34.731224669-05:00"
+  },
+  "fecha_consulta": "2025-08-08T14:51:43.442197068-05:00",
+  "version_api": "1.0.0"
+}

@@ -1,0 +1,115 @@
+{
+  "informacion_basica": {
+    "ruc": "20604817103",
+    "razon_social": "ESTUDIO CONTABLE L \u0026 M E.I.R.L.",
+    "tipo_contribuyente": "EMPRESA INDIVIDUAL DE RESP. LTDA",
+    "nombre_comercial": "-",
+    "fecha_inscripcion": "05/06/2019",
+    "fecha_inicio_actividades": "05/06/2019",
+    "estado": "ACTIVO",
+    "condicion": "HABIDO",
+    "domicilio_fiscal": "----J.V. ANDRES AVELINO CACERES NRO. S/N UCAYALI - PADRE ABAD - NESHUYA",
+    "sistema_emision": "MANUAL",
+    "actividad_comercio_exterior": "SIN ACTIVIDAD",
+    "sistema_contabilidad": "MANUAL",
+    "actividades_economicas": [
+      "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL"
+    ],
+    "comprobantes_pago": null,
+    "sistema_emision_electronica": "FACTURA (desde 15/10/2019),BOLETA (desde 31/10/2024)",
+    "emisor_electronico_desde": "15/10/2019",
+    "comprobantes_electronicos": [
+      "FACTURA PORTAL DESDE 15/10/2019",
+      "BOLETA PORTAL DESDE 31/10/2024"
+    ],
+    "afiliado_ple": "-",
+    "padrones": null
+  },
+  "informacion_historica": {
+    "ruc": "20604817103",
+    "razon_social": "",
+    "fecha_actualizada": "",
+    "razones_sociales": null,
+    "condiciones": [
+      {
+        "condicion": "No hay Información",
+        "desde": "-",
+        "hasta": "-"
+      }
+    ],
+    "domicilios": [
+      {
+        "direccion": "No hay Información",
+        "fecha_de_baja": "-"
+      }
+    ],
+    "fecha_consulta": "2025-08-08T15:24:12.499233505-05:00"
+  },
+  "deuda_coactiva": {
+    "ruc": "20604817103",
+    "total_deuda": 0,
+    "cantidad_documentos": 0,
+    "deudas": null,
+    "fecha_consulta": "2025-08-08T15:23:54.393498009-05:00"
+  },
+  "omisiones_tributarias": {
+    "ruc": "20604817103",
+    "tiene_omisiones": false,
+    "cantidad_omisiones": 0,
+    "omisiones": null,
+    "fecha_consulta": "2025-08-08T15:24:30.63037037-05:00"
+  },
+  "cantidad_trabajadores": {
+    "ruc": "20604817103",
+    "periodos_disponibles": null,
+    "detalle_por_periodo": null,
+    "fecha_consulta": "2025-08-08T15:24:48.709702627-05:00"
+  },
+  "actas_probatorias": {
+    "ruc": "20604817103",
+    "tiene_actas": false,
+    "cantidad_actas": 0,
+    "actas": null,
+    "fecha_consulta": "2025-08-08T15:25:06.806911907-05:00"
+  },
+  "facturas_fisicas": {
+    "ruc": "20604817103",
+    "tiene_autorizacion": false,
+    "autorizaciones": null,
+    "canceladas_o_bajas": null,
+    "fecha_consulta": "2025-08-08T15:25:25.931898746-05:00"
+  },
+  "reactiva_peru": {
+    "ruc": "20604817103",
+    "razon_social": "ESTUDIO CONTABLE L \u0026 M E.I.R.L.",
+    "tiene_deuda_coactiva": false,
+    "fecha_actualizacion": "07/08/2025",
+    "referencia_legal": "Decreto Legislativo N° 1455",
+    "fecha_consulta": "2025-08-08T15:26:17.164502716-05:00"
+  },
+  "programa_covid19": {
+    "ruc": "20604817103",
+    "razon_social": "",
+    "participa_programa": false,
+    "tiene_deuda_coactiva": false,
+    "fecha_actualizacion": "07/08/2025",
+    "base_legal": "Ley N° 31050",
+    "fecha_consulta": "2025-08-08T15:26:35.267830349-05:00"
+  },
+  "representantes_legales": {
+    "ruc": "20604817103",
+    "representantes": [
+      {
+        "tipo_documento": "DNI",
+        "numero_documento": "22719992",
+        "nombre_completo": "DUEÑAS ANDRES LUZ MARIA",
+        "cargo": "TITULAR-GERENTE",
+        "fecha_desde": "07/02/2017",
+        "vigente": true
+      }
+    ],
+    "fecha_consulta": "2025-08-08T15:25:44.053422387-05:00"
+  },
+  "fecha_consulta": "2025-08-08T15:23:36.342038509-05:00",
+  "version_api": "1.0.0"
+}

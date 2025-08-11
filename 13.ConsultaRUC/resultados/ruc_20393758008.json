@@ -1,0 +1,34 @@
+{
+  "ruc": "20393758008",
+  "razon_social": "SERVICIOS Y DESARROLLO COMERCIAL AXOR E.I.R.L.",
+  "tipo_contribuyente": "EMPRESA INDIVIDUAL DE RESP. LTDA",
+  "nombre_comercial": "SEDECA E.I.R.L.",
+  "fecha_inscripcion": "05/01/2012",
+  "fecha_inicio_actividades": "05/01/2012",
+  "estado": "ACTIVO",
+  "condicion": "HABIDO",
+  "domicilio_fiscal": "JR. MARIA LOZANO MZA. A LOTE. 11 A.H. AGUSTIN CAUPER UCAYALI - CORONEL PORTILLO - YARINACOCHA",
+  "sistema_emision": "MANUAL",
+  "actividad_comercio_exterior": "SIN ACTIVIDAD",
+  "sistema_contabilidad": "MANUAL/COMPUTARIZADO",
+  "actividades_economicas": [
+    "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL",
+    "Secundaria 1 - 7020 - ACTIVIDADES DE CONSULTORÍA DE GESTIÓN",
+    "Secundaria 2 - 7912 - ACTIVIDADES DE OPERADORES TURÍSTICOS"
+  ],
+  "comprobantes_pago": [
+    "FACTURA",
+    "NOTA DE CREDITO",
+    "GUIA DE REMISION - REMITENTE"
+  ],
+  "sistema_emision_electronica": "FACTURA (desde 09/11/2021),BOLETA (desde 12/11/2022)",
+  "emisor_electronico_desde": "09/11/2021",
+  "comprobantes_electronicos": [
+    "FACTURA PORTAL DESDE 09/11/2021",
+    "BOLETA PORTAL DESDE 12/11/2022"
+  ],
+  "afiliado_ple": "-",
+  "padrones": [
+    "Incorporado al Régimen de Buenos Contribuyentes (Resolución N° 1530050002373) a partir del 01/08/2015"
+  ]
+}

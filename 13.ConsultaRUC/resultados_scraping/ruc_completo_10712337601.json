@@ -1,0 +1,85 @@
+{
+  "informacion_basica": {
+    "ruc": "10712337601",
+    "razon_social": "PANDURO SANGAMA WILDER",
+    "tipo_contribuyente": "PERSONA NATURAL CON NEGOCIO",
+    "nombre_comercial": "W\u0026F CORP. SERVICIOS CONTABLES\nAfecto al Nuevo RUS: SI",
+    "fecha_inscripcion": "07/06/2017",
+    "fecha_inicio_actividades": "07/06/2017",
+    "estado": "ACTIVO",
+    "condicion": "HABIDO",
+    "domicilio_fiscal": "-",
+    "sistema_emision": "MANUAL",
+    "actividad_comercio_exterior": "SIN ACTIVIDAD",
+    "sistema_contabilidad": "MANUAL",
+    "actividades_economicas": [
+      "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL",
+      "Secundaria 1 - 9609 - OTRAS ACTIVIDADES DE SERVICIOS PERSONALES N.C.P.",
+      "Secundaria 2 - 9200 - ACTIVIDADES DE JUEGOS DE AZAR Y APUESTAS"
+    ],
+    "comprobantes_pago": null,
+    "sistema_emision_electronica": "RECIBO POR HONORARIO (desde 25/02/2019)",
+    "emisor_electronico_desde": "25/02/2019",
+    "comprobantes_electronicos": [
+      "RECIBOS POR HONORARIOS AFILIADO DESDE 25/02/2019"
+    ],
+    "afiliado_ple": "-",
+    "padrones": null
+  },
+  "informacion_historica": {
+    "ruc": "10712337601",
+    "razon_social": "",
+    "fecha_actualizada": "",
+    "razones_sociales": null,
+    "condiciones": [
+      {
+        "condicion": "No hay Información",
+        "desde": "-",
+        "hasta": "-"
+      }
+    ],
+    "domicilios": [
+      {
+        "direccion": "No hay Información",
+        "fecha_de_baja": "-"
+      }
+    ],
+    "fecha_consulta": "2025-08-08T14:43:04.962214531-05:00"
+  },
+  "deuda_coactiva": {
+    "ruc": "10712337601",
+    "total_deuda": 0,
+    "cantidad_documentos": 0,
+    "deudas": null,
+    "fecha_consulta": "2025-08-08T14:42:46.862873523-05:00"
+  },
+  "omisiones_tributarias": {
+    "ruc": "10712337601",
+    "tiene_omisiones": false,
+    "cantidad_omisiones": 0,
+    "omisiones": null,
+    "fecha_consulta": "2025-08-08T14:43:23.096501864-05:00"
+  },
+  "cantidad_trabajadores": {
+    "ruc": "10712337601",
+    "periodos_disponibles": null,
+    "detalle_por_periodo": null,
+    "fecha_consulta": "2025-08-08T14:43:41.208128724-05:00"
+  },
+  "actas_probatorias": {
+    "ruc": "10712337601",
+    "tiene_actas": false,
+    "cantidad_actas": 0,
+    "actas": null,
+    "fecha_consulta": "2025-08-08T14:43:59.292241193-05:00"
+  },
+  "facturas_fisicas": {
+    "ruc": "10712337601",
+    "tiene_autorizacion": false,
+    "autorizaciones": null,
+    "canceladas_o_bajas": null,
+    "fecha_consulta": "2025-08-08T14:44:18.417916182-05:00"
+  },
+  "fecha_consulta": "2025-08-08T14:42:28.802457407-05:00",
+  "version_api": "1.0.0"
+}

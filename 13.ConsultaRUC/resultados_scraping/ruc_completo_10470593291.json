@@ -1,0 +1,67 @@
+{
+  "informacion_basica": {
+    "ruc": "10470593291",
+    "razon_social": "REQUEJO HUAMAN MERY JESSENIA",
+    "tipo_contribuyente": "PERSONA NATURAL SIN NEGOCIO",
+    "nombre_comercial": "MOTIVOS",
+    "fecha_inscripcion": "03/03/2012",
+    "fecha_inicio_actividades": "01/03/2012",
+    "estado": "ACTIVO",
+    "condicion": "HABIDO",
+    "domicilio_fiscal": "-",
+    "sistema_emision": "MANUAL",
+    "actividad_comercio_exterior": "SIN ACTIVIDAD",
+    "sistema_contabilidad": "MANUAL",
+    "actividades_economicas": [
+      "Principal - 5630 - ACTIVIDADES DE SERVICIO DE BEBIDAS",
+      "Secundaria 1 - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL"
+    ],
+    "comprobantes_pago": [
+      "RECIBO POR HONORARIOS"
+    ],
+    "sistema_emision_electronica": "RECIBO POR HONORARIO (desde 28/09/2015),BOLETA (desde 06/03/2023)",
+    "emisor_electronico_desde": "28/09/2015",
+    "comprobantes_electronicos": [
+      "BOLETA PORTAL DESDE 06/03/2023",
+      "RECIBOS POR HONORARIOS AFILIADO DESDE 28/09/2015"
+    ],
+    "afiliado_ple": "-",
+    "padrones": null
+  },
+  "deuda_coactiva": {
+    "ruc": "10470593291",
+    "total_deuda": 0,
+    "cantidad_documentos": 0,
+    "deudas": null,
+    "fecha_consulta": "2025-08-08T14:38:24.974298845-05:00"
+  },
+  "omisiones_tributarias": {
+    "ruc": "10470593291",
+    "tiene_omisiones": false,
+    "cantidad_omisiones": 0,
+    "omisiones": null,
+    "fecha_consulta": "2025-08-08T14:39:12.352351519-05:00"
+  },
+  "cantidad_trabajadores": {
+    "ruc": "10470593291",
+    "periodos_disponibles": null,
+    "detalle_por_periodo": null,
+    "fecha_consulta": "2025-08-08T14:39:30.458805478-05:00"
+  },
+  "actas_probatorias": {
+    "ruc": "10470593291",
+    "tiene_actas": false,
+    "cantidad_actas": 0,
+    "actas": null,
+    "fecha_consulta": "2025-08-08T14:39:48.565068903-05:00"
+  },
+  "facturas_fisicas": {
+    "ruc": "10470593291",
+    "tiene_autorizacion": false,
+    "autorizaciones": null,
+    "canceladas_o_bajas": null,
+    "fecha_consulta": "2025-08-08T14:40:07.67455556-05:00"
+  },
+  "fecha_consulta": "2025-08-08T14:38:06.918421403-05:00",
+  "version_api": "1.0.0"
+}

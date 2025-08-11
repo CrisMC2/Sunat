@@ -1,0 +1,91 @@
+{
+  "informacion_basica": {
+    "ruc": "10477649845",
+    "razon_social": "SACSACHIN AVILA LEILA",
+    "tipo_contribuyente": "PERSONA NATURAL SIN NEGOCIO",
+    "nombre_comercial": "-",
+    "fecha_inscripcion": "02/05/2014",
+    "fecha_inicio_actividades": "01/05/2014",
+    "estado": "ACTIVO",
+    "condicion": "HABIDO",
+    "domicilio_fiscal": "-",
+    "sistema_emision": "MANUAL",
+    "actividad_comercio_exterior": "SIN ACTIVIDAD",
+    "sistema_contabilidad": "MANUAL",
+    "actividades_economicas": [
+      "Principal - 9609 - OTRAS ACTIVIDADES DE SERVICIOS PERSONALES N.C.P.",
+      "Secundaria 1 - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL"
+    ],
+    "comprobantes_pago": [
+      "RECIBO POR HONORARIOS"
+    ],
+    "sistema_emision_electronica": "RECIBO POR HONORARIO (desde 30/09/2021)",
+    "emisor_electronico_desde": "30/09/2021",
+    "comprobantes_electronicos": [
+      "RECIBOS POR HONORARIOS AFILIADO DESDE 30/09/2021"
+    ],
+    "afiliado_ple": "-",
+    "padrones": null
+  },
+  "informacion_historica": {
+    "ruc": "10477649845",
+    "razon_social": "",
+    "fecha_actualizada": "",
+    "razones_sociales": null,
+    "condiciones": [
+      {
+        "condicion": "HABIDO",
+        "desde": "-",
+        "hasta": "20/09/2013"
+      },
+      {
+        "condicion": "NO HALLADO",
+        "desde": "21/09/2013",
+        "hasta": "01/12/2013"
+      }
+    ],
+    "domicilios": [
+      {
+        "direccion": "No hay Información",
+        "fecha_de_baja": "-"
+      }
+    ],
+    "fecha_consulta": "2025-08-08T14:40:59.754449498-05:00"
+  },
+  "deuda_coactiva": {
+    "ruc": "10477649845",
+    "total_deuda": 0,
+    "cantidad_documentos": 0,
+    "deudas": null,
+    "fecha_consulta": "2025-08-08T14:40:41.682850616-05:00"
+  },
+  "omisiones_tributarias": {
+    "ruc": "10477649845",
+    "tiene_omisiones": false,
+    "cantidad_omisiones": 0,
+    "omisiones": null,
+    "fecha_consulta": "2025-08-08T14:41:17.88027245-05:00"
+  },
+  "cantidad_trabajadores": {
+    "ruc": "10477649845",
+    "periodos_disponibles": null,
+    "detalle_por_periodo": null,
+    "fecha_consulta": "2025-08-08T14:41:35.972993753-05:00"
+  },
+  "actas_probatorias": {
+    "ruc": "10477649845",
+    "tiene_actas": false,
+    "cantidad_actas": 0,
+    "actas": null,
+    "fecha_consulta": "2025-08-08T14:41:54.062331106-05:00"
+  },
+  "facturas_fisicas": {
+    "ruc": "10477649845",
+    "tiene_autorizacion": false,
+    "autorizaciones": null,
+    "canceladas_o_bajas": null,
+    "fecha_consulta": "2025-08-08T14:42:13.18589247-05:00"
+  },
+  "fecha_consulta": "2025-08-08T14:40:23.647012206-05:00",
+  "version_api": "1.0.0"
+}

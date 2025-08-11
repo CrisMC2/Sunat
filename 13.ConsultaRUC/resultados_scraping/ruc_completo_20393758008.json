@@ -1,0 +1,237 @@
+{
+  "informacion_basica": {
+    "ruc": "20393758008",
+    "razon_social": "SERVICIOS Y DESARROLLO COMERCIAL AXOR E.I.R.L.",
+    "tipo_contribuyente": "EMPRESA INDIVIDUAL DE RESP. LTDA",
+    "nombre_comercial": "SEDECA E.I.R.L.",
+    "fecha_inscripcion": "05/01/2012",
+    "fecha_inicio_actividades": "05/01/2012",
+    "estado": "ACTIVO",
+    "condicion": "HABIDO",
+    "domicilio_fiscal": "JR. MARIA LOZANO MZA. A LOTE. 11 A.H. AGUSTIN CAUPER UCAYALI - CORONEL PORTILLO - YARINACOCHA",
+    "sistema_emision": "MANUAL",
+    "actividad_comercio_exterior": "SIN ACTIVIDAD",
+    "sistema_contabilidad": "MANUAL/COMPUTARIZADO",
+    "actividades_economicas": [
+      "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL",
+      "Secundaria 1 - 7020 - ACTIVIDADES DE CONSULTORÍA DE GESTIÓN",
+      "Secundaria 2 - 7912 - ACTIVIDADES DE OPERADORES TURÍSTICOS"
+    ],
+    "comprobantes_pago": [
+      "FACTURA",
+      "NOTA DE CREDITO",
+      "GUIA DE REMISION - REMITENTE"
+    ],
+    "sistema_emision_electronica": "FACTURA (desde 09/11/2021),BOLETA (desde 12/11/2022)",
+    "emisor_electronico_desde": "09/11/2021",
+    "comprobantes_electronicos": [
+      "FACTURA PORTAL DESDE 09/11/2021",
+      "BOLETA PORTAL DESDE 12/11/2022"
+    ],
+    "afiliado_ple": "-",
+    "padrones": [
+      "Incorporado al Régimen de Buenos Contribuyentes (Resolución N° 1530050002373) a partir del 01/08/2015"
+    ]
+  },
+  "informacion_historica": {
+    "ruc": "20393758008",
+    "razon_social": "",
+    "fecha_actualizada": "",
+    "razones_sociales": null,
+    "condiciones": [
+      {
+        "condicion": "PENDIENTE",
+        "desde": "-",
+        "hasta": "07/01/2012"
+      }
+    ],
+    "domicilios": [
+      {
+        "direccion": "JR. MARIA LOZANO MZA. A LOTE. 11 A.H. AGUSTIN CAUPER UCAYALI-CORONEL PORTILLO-YARINACOCHA",
+        "fecha_de_baja": "02/11/2015"
+      },
+      {
+        "direccion": "JR. MARIA LOZANO MZA. A LOTE. 11 A.H. AGUSTIN CAUPER UCAYALI-CORONEL PORTILLO-YARINACOCHA",
+        "fecha_de_baja": "02/11/2015"
+      },
+      {
+        "direccion": "JR. MARIA LOZANO MZA. A LOTE. 11 A.H. AGUSTIN CAUPER UCAYALI-CORONEL PORTILLO-YARINACOCHA",
+        "fecha_de_baja": "02/11/2015"
+      },
+      {
+        "direccion": "JR. MARIA LOZANO MZA. A LOTE. 11 A.H. AGUSTIN CAUPER UCAYALI-CORONEL PORTILLO-YARINACOCHA",
+        "fecha_de_baja": "20/10/2015"
+      },
+      {
+        "direccion": "JR. MARIA LOZANO MZA. A LOTE. 11 A.H. AGUSTIN CAUPER UCAYALI-CORONEL PORTILLO-YARINACOCHA",
+        "fecha_de_baja": "20/10/2015"
+      }
+    ],
+    "fecha_consulta": "2025-08-08T15:11:04.729995569-05:00"
+  },
+  "deuda_coactiva": {
+    "ruc": "20393758008",
+    "total_deuda": 0,
+    "cantidad_documentos": 0,
+    "deudas": null,
+    "fecha_consulta": "2025-08-08T15:10:46.622144444-05:00"
+  },
+  "omisiones_tributarias": {
+    "ruc": "20393758008",
+    "tiene_omisiones": false,
+    "cantidad_omisiones": 0,
+    "omisiones": null,
+    "fecha_consulta": "2025-08-08T15:11:22.99100606-05:00"
+  },
+  "cantidad_trabajadores": {
+    "ruc": "20393758008",
+    "periodos_disponibles": [
+      "2024-07",
+      "2024-08",
+      "2024-09",
+      "2024-10",
+      "2024-11",
+      "2024-12",
+      "2025-01",
+      "2025-02",
+      "2025-03",
+      "2025-04",
+      "2025-05",
+      "2025-06"
+    ],
+    "detalle_por_periodo": [
+      {
+        "periodo": "2024-07",
+        "cantidad_trabajadores": 6,
+        "cantidad_prestadores_servicio": 1,
+        "cantidad_pensionistas": 0,
+        "total": 7
+      },
+      {
+        "periodo": "2024-08",
+        "cantidad_trabajadores": 6,
+        "cantidad_prestadores_servicio": 3,
+        "cantidad_pensionistas": 0,
+        "total": 9
+      },
+      {
+        "periodo": "2024-09",
+        "cantidad_trabajadores": 6,
+        "cantidad_prestadores_servicio": 1,
+        "cantidad_pensionistas": 0,
+        "total": 7
+      },
+      {
+        "periodo": "2024-10",
+        "cantidad_trabajadores": 6,
+        "cantidad_prestadores_servicio": 3,
+        "cantidad_pensionistas": 0,
+        "total": 9
+      },
+      {
+        "periodo": "2024-11",
+        "cantidad_trabajadores": 5,
+        "cantidad_prestadores_servicio": 2,
+        "cantidad_pensionistas": 0,
+        "total": 7
+      },
+      {
+        "periodo": "2024-12",
+        "cantidad_trabajadores": 4,
+        "cantidad_prestadores_servicio": 1,
+        "cantidad_pensionistas": 0,
+        "total": 5
+      },
+      {
+        "periodo": "2025-01",
+        "cantidad_trabajadores": 5,
+        "cantidad_prestadores_servicio": 2,
+        "cantidad_pensionistas": 0,
+        "total": 7
+      },
+      {
+        "periodo": "2025-02",
+        "cantidad_trabajadores": 6,
+        "cantidad_prestadores_servicio": 1,
+        "cantidad_pensionistas": 0,
+        "total": 7
+      },
+      {
+        "periodo": "2025-03",
+        "cantidad_trabajadores": 6,
+        "cantidad_prestadores_servicio": 1,
+        "cantidad_pensionistas": 0,
+        "total": 7
+      },
+      {
+        "periodo": "2025-04",
+        "cantidad_trabajadores": 6,
+        "cantidad_prestadores_servicio": 1,
+        "cantidad_pensionistas": 0,
+        "total": 7
+      },
+      {
+        "periodo": "2025-05",
+        "cantidad_trabajadores": 6,
+        "cantidad_prestadores_servicio": 1,
+        "cantidad_pensionistas": 0,
+        "total": 7
+      },
+      {
+        "periodo": "2025-06",
+        "cantidad_trabajadores": 5,
+        "cantidad_prestadores_servicio": 1,
+        "cantidad_pensionistas": 0,
+        "total": 6
+      }
+    ],
+    "fecha_consulta": "2025-08-08T15:11:41.116984782-05:00"
+  },
+  "actas_probatorias": {
+    "ruc": "20393758008",
+    "tiene_actas": false,
+    "cantidad_actas": 0,
+    "actas": null,
+    "fecha_consulta": "2025-08-08T15:11:59.300730206-05:00"
+  },
+  "facturas_fisicas": {
+    "ruc": "20393758008",
+    "tiene_autorizacion": false,
+    "autorizaciones": null,
+    "canceladas_o_bajas": null,
+    "fecha_consulta": "2025-08-08T15:12:18.449926263-05:00"
+  },
+  "reactiva_peru": {
+    "ruc": "20393758008",
+    "razon_social": "SERVICIOS Y DESARROLLO COMERCIAL AXOR E.I.R.L.",
+    "tiene_deuda_coactiva": false,
+    "fecha_actualizacion": "07/08/2025",
+    "referencia_legal": "Decreto Legislativo N° 1455",
+    "fecha_consulta": "2025-08-08T15:13:10.662653422-05:00"
+  },
+  "programa_covid19": {
+    "ruc": "20393758008",
+    "razon_social": "",
+    "participa_programa": false,
+    "tiene_deuda_coactiva": false,
+    "fecha_actualizacion": "07/08/2025",
+    "base_legal": "Ley N° 31050",
+    "fecha_consulta": "2025-08-08T15:13:34.878693504-05:00"
+  },
+  "representantes_legales": {
+    "ruc": "20393758008",
+    "representantes": [
+      {
+        "tipo_documento": "DNI",
+        "numero_documento": "00105297",
+        "nombre_completo": "ORMEÑO CARMONA IVAN LEONARDO",
+        "cargo": "TITULAR-GERENTE",
+        "fecha_desde": "04/01/2012",
+        "vigente": true
+      }
+    ],
+    "fecha_consulta": "2025-08-08T15:12:36.581429664-05:00"
+  },
+  "fecha_consulta": "2025-08-08T15:10:28.560614702-05:00",
+  "version_api": "1.0.0"
+}

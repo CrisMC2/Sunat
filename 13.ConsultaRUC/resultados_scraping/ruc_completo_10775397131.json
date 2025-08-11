@@ -1,0 +1,81 @@
+{
+  "informacion_basica": {
+    "ruc": "10775397131",
+    "razon_social": "PEREZ DIAZ LIDIA",
+    "tipo_contribuyente": "PERSONA NATURAL SIN NEGOCIO",
+    "nombre_comercial": "-",
+    "fecha_inscripcion": "04/03/2021",
+    "fecha_inicio_actividades": "02/03/2021",
+    "estado": "ACTIVO",
+    "condicion": "HABIDO",
+    "domicilio_fiscal": "-",
+    "sistema_emision": "COMPUTARIZADO",
+    "actividad_comercio_exterior": "SIN ACTIVIDAD",
+    "sistema_contabilidad": "COMPUTARIZADO",
+    "actividades_economicas": [
+      "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL"
+    ],
+    "comprobantes_pago": null,
+    "sistema_emision_electronica": "-",
+    "emisor_electronico_desde": "-",
+    "comprobantes_electronicos": null,
+    "afiliado_ple": "-",
+    "padrones": null
+  },
+  "informacion_historica": {
+    "ruc": "10775397131",
+    "razon_social": "",
+    "fecha_actualizada": "",
+    "razones_sociales": null,
+    "condiciones": [
+      {
+        "condicion": "No hay Información",
+        "desde": "-",
+        "hasta": "-"
+      }
+    ],
+    "domicilios": [
+      {
+        "direccion": "No hay Información",
+        "fecha_de_baja": "-"
+      }
+    ],
+    "fecha_consulta": "2025-08-08T15:01:45.238530134-05:00"
+  },
+  "deuda_coactiva": {
+    "ruc": "10775397131",
+    "total_deuda": 0,
+    "cantidad_documentos": 0,
+    "deudas": null,
+    "fecha_consulta": "2025-08-08T15:01:27.135522331-05:00"
+  },
+  "omisiones_tributarias": {
+    "ruc": "10775397131",
+    "tiene_omisiones": false,
+    "cantidad_omisiones": 0,
+    "omisiones": null,
+    "fecha_consulta": "2025-08-08T15:02:03.346236744-05:00"
+  },
+  "cantidad_trabajadores": {
+    "ruc": "10775397131",
+    "periodos_disponibles": null,
+    "detalle_por_periodo": null,
+    "fecha_consulta": "2025-08-08T15:02:21.444023708-05:00"
+  },
+  "actas_probatorias": {
+    "ruc": "10775397131",
+    "tiene_actas": false,
+    "cantidad_actas": 0,
+    "actas": null,
+    "fecha_consulta": "2025-08-08T15:02:39.550914249-05:00"
+  },
+  "facturas_fisicas": {
+    "ruc": "10775397131",
+    "tiene_autorizacion": false,
+    "autorizaciones": null,
+    "canceladas_o_bajas": null,
+    "fecha_consulta": "2025-08-08T15:03:08.731610622-05:00"
+  },
+  "fecha_consulta": "2025-08-08T15:01:09.069173277-05:00",
+  "version_api": "1.0.0"
+}

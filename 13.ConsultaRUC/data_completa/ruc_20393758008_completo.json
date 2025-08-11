@@ -1,0 +1,111 @@
+{
+  "informacion_basica": {
+    "ruc": "20393758008",
+    "razon_social": "SERVICIOS Y DESARROLLO COMERCIAL AXOR E.I.R.L.",
+    "tipo_contribuyente": "EMPRESA INDIVIDUAL DE RESP. LTDA",
+    "nombre_comercial": "SEDECA E.I.R.L.",
+    "fecha_inscripcion": "05/01/2012",
+    "fecha_inicio_actividades": "05/01/2012",
+    "estado": "ACTIVO",
+    "condicion": "HABIDO",
+    "domicilio_fiscal": "JR. MARIA LOZANO MZA. A LOTE. 11 A.H. AGUSTIN CAUPER UCAYALI - CORONEL PORTILLO - YARINACOCHA",
+    "sistema_emision": "MANUAL",
+    "actividad_comercio_exterior": "SIN ACTIVIDAD",
+    "sistema_contabilidad": "MANUAL/COMPUTARIZADO",
+    "actividades_economicas": [
+      "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL",
+      "Secundaria 1 - 7020 - ACTIVIDADES DE CONSULTORÍA DE GESTIÓN",
+      "Secundaria 2 - 7912 - ACTIVIDADES DE OPERADORES TURÍSTICOS"
+    ],
+    "comprobantes_pago": [
+      "FACTURA",
+      "NOTA DE CREDITO",
+      "GUIA DE REMISION - REMITENTE"
+    ],
+    "sistema_emision_electronica": "FACTURA (desde 09/11/2021),BOLETA (desde 12/11/2022)",
+    "emisor_electronico_desde": "09/11/2021",
+    "comprobantes_electronicos": [
+      "FACTURA PORTAL DESDE 09/11/2021",
+      "BOLETA PORTAL DESDE 12/11/2022"
+    ],
+    "afiliado_ple": "-",
+    "padrones": [
+      "Incorporado al Régimen de Buenos Contribuyentes (Resolución N° 1530050002373) a partir del 01/08/2015"
+    ]
+  },
+  "informacion_historica": {
+    "ruc": "",
+    "cambios_razon_social": null,
+    "cambios_domicilio": null,
+    "cambios_estado": null,
+    "cambios_condicion": null,
+    "actividades_historicas": null
+  },
+  "deuda_coactiva": {
+    "ruc": "",
+    "total_deuda": 0,
+    "cantidad_documentos": 0,
+    "deudas": null,
+    "fecha_consulta": "2025-08-02T23:03:15.82677-05:00"
+  },
+  "omisiones_tributarias": {
+    "ruc": "",
+    "tiene_omisiones": false,
+    "cantidad_omisiones": 0,
+    "omisiones": null,
+    "fecha_consulta": "2025-08-02T23:03:20.901603-05:00"
+  },
+  "cantidad_trabajadores": {
+    "ruc": "",
+    "periodos_disponibles": null,
+    "detalle_por_periodo": null,
+    "fecha_consulta": "2025-08-02T23:03:25.998478-05:00"
+  },
+  "actas_probatorias": {
+    "ruc": "",
+    "tiene_actas": false,
+    "cantidad_actas": 0,
+    "actas": null,
+    "fecha_consulta": "2025-08-02T23:03:31.09792-05:00"
+  },
+  "facturas_fisicas": {
+    "ruc": "",
+    "tiene_autorizacion": false,
+    "autorizaciones": null,
+    "fecha_consulta": "2025-08-02T23:03:36.195112-05:00"
+  },
+  "reactiva_peru": {
+    "ruc": "",
+    "participa_programa": false,
+    "tiene_deuda_coactiva": false,
+    "monto_deuda_programa": 0,
+    "detalle_creditos": null,
+    "fecha_consulta": "2025-08-02T23:03:41.297552-05:00"
+  },
+  "programa_covid19": {
+    "ruc": "",
+    "participa_programa": false,
+    "tiene_deuda_coactiva": false,
+    "monto_total_garantizado": 0,
+    "detalle_garantias": null,
+    "fecha_consulta": "2025-08-02T23:03:46.400551-05:00"
+  },
+  "representantes_legales": {
+    "ruc": "",
+    "representantes": [
+      {
+        "tipo_documento": "DNI",
+        "numero_documento": "00105297",
+        "apellido_paterno": "ORMEÑO",
+        "apellido_materno": "CARMONA",
+        "nombres": "IVAN LEONARDO",
+        "cargo": "04/01/2012",
+        "fecha_desde": "",
+        "vigente": false
+      }
+    ],
+    "fecha_consulta": "2025-08-02T23:03:51.477479-05:00"
+  },
+  "fecha_consulta": "2025-08-02T23:03:07.563337-05:00",
+  "version_api": "2.0"
+}

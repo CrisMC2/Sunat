@@ -1,0 +1,29 @@
+{
+  "informacion_basica": {
+    "ruc": "10758153911",
+    "razon_social": "HEREDIA CHAVEZ SELENI SARAI",
+    "tipo_contribuyente": "PERSONA NATURAL SIN NEGOCIO",
+    "nombre_comercial": "-",
+    "fecha_inscripcion": "04/07/2023",
+    "fecha_inicio_actividades": "01/07/2023",
+    "estado": "ACTIVO",
+    "condicion": "HABIDO",
+    "domicilio_fiscal": "-",
+    "sistema_emision": "COMPUTARIZADO",
+    "actividad_comercio_exterior": "SIN ACTIVIDAD",
+    "sistema_contabilidad": "COMPUTARIZADO",
+    "actividades_economicas": [
+      "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL"
+    ],
+    "comprobantes_pago": null,
+    "sistema_emision_electronica": "RECIBO POR HONORARIO (desde 27/11/2024)",
+    "emisor_electronico_desde": "27/11/2024",
+    "comprobantes_electronicos": [
+      "RECIBOS POR HONORARIOS AFILIADO DESDE 27/11/2024"
+    ],
+    "afiliado_ple": "-",
+    "padrones": null
+  },
+  "fecha_consulta": "2025-08-08T14:53:50.304176731-05:00",
+  "version_api": "1.0.0"
+}

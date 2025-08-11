@@ -1,0 +1,1057 @@
+=== INICIO DE SCRAPING - vie 08 ago 2025 14:33:28 -05 ===
+[0;34m[INFO][0m Verificando dependencias...
+[0;32m[SUCCESS][0m Todas las dependencias están disponibles
+[0;34m[INFO][0m Obteniendo RUCs de la tabla ruc_pruebas...
+[0;32m[SUCCESS][0m Se encontraron 26 RUCs para procesar
+[0;34m[INFO][0m RUCs a procesar:
+10420242986
+10467806527
+10470593291
+10477649845
+10712337601
+10719706288
+10725461327
+10729620730
+10738074292
+10758153911
+[0;34m[INFO][0m ... y 16 más
+[1;33m[WARNING][0m ⚠️  Se procesarán 26 RUCs
+[1;33m[WARNING][0m ⚠️  Esto puede tomar varios minutos/horas
+[0;34m[INFO][0m Iniciando procesamiento de 26 RUCs...
+[0;34m[INFO][0m [1/26] Procesando RUC: 10420242986
+
+=== Consultando RUC: 10420242986 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 10420242986 es: Persona Natural
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✓
+    - Información Histórica: 2025/08/08 14:34:25 📋 Procesando tabla 1 con encabezado: 'nombre o razón social:'
+2025/08/08 14:34:25 📝 Procesando razón social histórica...
+2025/08/08 14:34:25 📋 Procesando tabla 2 con encabezado: 'condición del contribuyente'
+2025/08/08 14:34:25 📊 Procesando condición del contribuyente...
+2025/08/08 14:34:25   ✅ Condición: No hay Información (desde: - hasta: -)
+2025/08/08 14:34:25 📋 Procesando tabla 3 con encabezado: 'dirección del domicilio fiscal'
+2025/08/08 14:34:25 🏠 Procesando domicilio fiscal histórico...
+2025/08/08 14:34:25   ✅ Domicilio: No hay Información (baja: -)
+✓
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✓
+    - Actas Probatorias: 2025/08/08 14:35:23 [INFO] No hay actas probatorias registradas para el contribuyente.
+✓
+    - Facturas Físicas: ✓
+
+   ✅ Información completa guardada en: ruc_completo_10420242986.json
+
+   Resumen:
+   - Razón Social: MALCA PEREZ ELIAS
+   - Estado: ACTIVO
+   - Condición: HABIDO
+   - Deuda Coactiva: NO
+
+==================================================
+[0;32m[SUCCESS][0m [1/26] RUC 10420242986 procesado exitosamente (129s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_10420242986.json
+[0;34m[INFO][0m [2/26] Procesando RUC: 10467806527
+
+=== Consultando RUC: 10467806527 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 10467806527 es: Persona Natural
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✓
+    - Información Histórica: 2025/08/08 14:36:37 📋 Procesando tabla 1 con encabezado: 'nombre o razón social:'
+2025/08/08 14:36:37 📝 Procesando razón social histórica...
+2025/08/08 14:36:37 📋 Procesando tabla 2 con encabezado: 'condición del contribuyente'
+2025/08/08 14:36:37 📊 Procesando condición del contribuyente...
+2025/08/08 14:36:37   ✅ Condición: No hay Información (desde: - hasta: -)
+2025/08/08 14:36:37 📋 Procesando tabla 3 con encabezado: 'dirección del domicilio fiscal'
+2025/08/08 14:36:37 🏠 Procesando domicilio fiscal histórico...
+2025/08/08 14:36:37   ✅ Domicilio: No hay Información (baja: -)
+✓
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✓
+    - Actas Probatorias: 2025/08/08 14:37:31 [INFO] No hay actas probatorias registradas para el contribuyente.
+✓
+    - Facturas Físicas: ✓
+
+   ✅ Información completa guardada en: ruc_completo_10467806527.json
+
+   Resumen:
+   - Razón Social: HUANCA PERALTA JOSE LIDER
+   - Estado: ACTIVO
+   - Condición: HABIDO
+   - Deuda Coactiva: NO
+
+==================================================
+[0;32m[SUCCESS][0m [2/26] RUC 10467806527 procesado exitosamente (126s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_10467806527.json
+[0;34m[INFO][0m [3/26] Procesando RUC: 10470593291
+
+=== Consultando RUC: 10470593291 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 10470593291 es: Persona Natural
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✓
+    - Información Histórica: ✗ (error al hacer clic en el botón de información histórica: context deadline exceeded)
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✓
+    - Actas Probatorias: 2025/08/08 14:39:48 [INFO] No hay actas probatorias registradas para el contribuyente.
+✓
+    - Facturas Físicas: ✓
+
+   ✅ Información completa guardada en: ruc_completo_10470593291.json
+
+   Resumen:
+   - Razón Social: REQUEJO HUAMAN MERY JESSENIA
+   - Estado: ACTIVO
+   - Condición: HABIDO
+   - Deuda Coactiva: NO
+
+==================================================
+[0;32m[SUCCESS][0m [3/26] RUC 10470593291 procesado exitosamente (135s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_10470593291.json
+[0;34m[INFO][0m [4/26] Procesando RUC: 10477649845
+
+=== Consultando RUC: 10477649845 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 10477649845 es: Persona Natural
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✓
+    - Información Histórica: 2025/08/08 14:40:59 📋 Procesando tabla 1 con encabezado: 'nombre o razón social:'
+2025/08/08 14:40:59 📝 Procesando razón social histórica...
+2025/08/08 14:40:59 📋 Procesando tabla 2 con encabezado: 'condición del contribuyente'
+2025/08/08 14:40:59 📊 Procesando condición del contribuyente...
+2025/08/08 14:40:59   ✅ Condición: HABIDO (desde: - hasta: 20/09/2013)
+2025/08/08 14:40:59   ✅ Condición: NO HALLADO (desde: 21/09/2013 hasta: 01/12/2013)
+2025/08/08 14:40:59 📋 Procesando tabla 3 con encabezado: 'dirección del domicilio fiscal'
+2025/08/08 14:40:59 🏠 Procesando domicilio fiscal histórico...
+2025/08/08 14:40:59   ✅ Domicilio: No hay Información (baja: -)
+✓
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✓
+    - Actas Probatorias: 2025/08/08 14:41:54 [INFO] No hay actas probatorias registradas para el contribuyente.
+✓
+    - Facturas Físicas: ✓
+
+   ✅ Información completa guardada en: ruc_completo_10477649845.json
+
+   Resumen:
+   - Razón Social: SACSACHIN AVILA LEILA
+   - Estado: ACTIVO
+   - Condición: HABIDO
+   - Deuda Coactiva: NO
+
+==================================================
+[0;32m[SUCCESS][0m [4/26] RUC 10477649845 procesado exitosamente (124s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_10477649845.json
+[0;34m[INFO][0m [5/26] Procesando RUC: 10712337601
+
+=== Consultando RUC: 10712337601 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 10712337601 es: Persona Natural
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✓
+    - Información Histórica: 2025/08/08 14:43:04 📋 Procesando tabla 1 con encabezado: 'nombre o razón social:'
+2025/08/08 14:43:04 📝 Procesando razón social histórica...
+2025/08/08 14:43:04 📋 Procesando tabla 2 con encabezado: 'condición del contribuyente'
+2025/08/08 14:43:04 📊 Procesando condición del contribuyente...
+2025/08/08 14:43:04   ✅ Condición: No hay Información (desde: - hasta: -)
+2025/08/08 14:43:04 📋 Procesando tabla 3 con encabezado: 'dirección del domicilio fiscal'
+2025/08/08 14:43:04 🏠 Procesando domicilio fiscal histórico...
+2025/08/08 14:43:05   ✅ Domicilio: No hay Información (baja: -)
+✓
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✓
+    - Actas Probatorias: 2025/08/08 14:43:59 [INFO] No hay actas probatorias registradas para el contribuyente.
+✓
+    - Facturas Físicas: ✓
+
+   ✅ Información completa guardada en: ruc_completo_10712337601.json
+
+   Resumen:
+   - Razón Social: PANDURO SANGAMA WILDER
+   - Estado: ACTIVO
+   - Condición: HABIDO
+   - Deuda Coactiva: NO
+
+==================================================
+[0;32m[SUCCESS][0m [5/26] RUC 10712337601 procesado exitosamente (123s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_10712337601.json
+[0;34m[INFO][0m [6/26] Procesando RUC: 10719706288
+
+=== Consultando RUC: 10719706288 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 10719706288 es: Persona Natural
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✓
+    - Información Histórica: 2025/08/08 14:45:10 📋 Procesando tabla 1 con encabezado: 'nombre o razón social:'
+2025/08/08 14:45:10 📝 Procesando razón social histórica...
+2025/08/08 14:45:10 📋 Procesando tabla 2 con encabezado: 'condición del contribuyente'
+2025/08/08 14:45:10 📊 Procesando condición del contribuyente...
+2025/08/08 14:45:10   ✅ Condición: No hay Información (desde: - hasta: -)
+2025/08/08 14:45:10 📋 Procesando tabla 3 con encabezado: 'dirección del domicilio fiscal'
+2025/08/08 14:45:10 🏠 Procesando domicilio fiscal histórico...
+2025/08/08 14:45:10   ✅ Domicilio: No hay Información (baja: -)
+✓
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✓
+    - Actas Probatorias: 2025/08/08 14:46:04 [INFO] No hay actas probatorias registradas para el contribuyente.
+✓
+    - Facturas Físicas: ✓
+
+   ✅ Información completa guardada en: ruc_completo_10719706288.json
+
+   Resumen:
+   - Razón Social: MEDINA MALDONADO BLANCA NELIDA
+   - Estado: ACTIVO
+   - Condición: HABIDO
+   - Deuda Coactiva: NO
+
+==================================================
+[0;32m[SUCCESS][0m [6/26] RUC 10719706288 procesado exitosamente (123s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_10719706288.json
+[0;34m[INFO][0m [7/26] Procesando RUC: 10725461327
+
+=== Consultando RUC: 10725461327 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 10725461327 es: Persona Natural
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✓
+    - Información Histórica: 2025/08/08 14:47:15 📋 Procesando tabla 1 con encabezado: 'nombre o razón social:'
+2025/08/08 14:47:15 📝 Procesando razón social histórica...
+2025/08/08 14:47:15 📋 Procesando tabla 2 con encabezado: 'condición del contribuyente'
+2025/08/08 14:47:15 📊 Procesando condición del contribuyente...
+2025/08/08 14:47:15   ✅ Condición: No hay Información (desde: - hasta: -)
+2025/08/08 14:47:15 📋 Procesando tabla 3 con encabezado: 'dirección del domicilio fiscal'
+2025/08/08 14:47:15 🏠 Procesando domicilio fiscal histórico...
+2025/08/08 14:47:15   ✅ Domicilio: No hay Información (baja: -)
+✓
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✓
+    - Actas Probatorias: 2025/08/08 14:48:09 [INFO] No hay actas probatorias registradas para el contribuyente.
+✓
+    - Facturas Físicas: ✓
+
+   ✅ Información completa guardada en: ruc_completo_10725461327.json
+
+   Resumen:
+   - Razón Social: SANTA CRUZ BAZAN CARLOS DANIEL
+   - Estado: ACTIVO
+   - Condición: HABIDO
+   - Deuda Coactiva: NO
+
+==================================================
+[0;32m[SUCCESS][0m [7/26] RUC 10725461327 procesado exitosamente (124s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_10725461327.json
+[0;34m[INFO][0m [8/26] Procesando RUC: 10729620730
+
+=== Consultando RUC: 10729620730 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 10729620730 es: Persona Natural
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✓
+    - Información Histórica: 2025/08/08 14:49:22 📋 Procesando tabla 1 con encabezado: 'nombre o razón social:'
+2025/08/08 14:49:22 📝 Procesando razón social histórica...
+2025/08/08 14:49:22 📋 Procesando tabla 2 con encabezado: 'condición del contribuyente'
+2025/08/08 14:49:22 📊 Procesando condición del contribuyente...
+2025/08/08 14:49:22   ✅ Condición: No hay Información (desde: - hasta: -)
+2025/08/08 14:49:22 📋 Procesando tabla 3 con encabezado: 'dirección del domicilio fiscal'
+2025/08/08 14:49:22 🏠 Procesando domicilio fiscal histórico...
+2025/08/08 14:49:22   ✅ Domicilio: No hay Información (baja: -)
+✓
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✓
+    - Actas Probatorias: 2025/08/08 14:50:38 [INFO] No hay actas probatorias registradas para el contribuyente.
+✓
+    - Facturas Físicas: ✓
+
+   ✅ Información completa guardada en: ruc_completo_10729620730.json
+
+   Resumen:
+   - Razón Social: DONAYRE MENDOZA ROLANDO TITO
+   - Estado: ACTIVO
+   - Condición: HABIDO
+   - Deuda Coactiva: NO
+
+==================================================
+[0;32m[SUCCESS][0m [8/26] RUC 10729620730 procesado exitosamente (147s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_10729620730.json
+[0;34m[INFO][0m [9/26] Procesando RUC: 10738074292
+
+=== Consultando RUC: 10738074292 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 10738074292 es: Persona Natural
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✗ (error al hacer clic en el botón de deuda coactiva: context deadline exceeded)
+    - Información Histórica: 2025/08/08 14:52:21 📋 Procesando tabla 1 con encabezado: 'nombre o razón social:'
+2025/08/08 14:52:21 📝 Procesando razón social histórica...
+2025/08/08 14:52:21 📋 Procesando tabla 2 con encabezado: 'condición del contribuyente'
+2025/08/08 14:52:21 📊 Procesando condición del contribuyente...
+2025/08/08 14:52:21   ✅ Condición: No hay Información (desde: - hasta: -)
+2025/08/08 14:52:21 📋 Procesando tabla 3 con encabezado: 'dirección del domicilio fiscal'
+2025/08/08 14:52:21 🏠 Procesando domicilio fiscal histórico...
+2025/08/08 14:52:21   ✅ Domicilio: No hay Información (baja: -)
+✓
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✓
+    - Actas Probatorias: 2025/08/08 14:53:15 [INFO] No hay actas probatorias registradas para el contribuyente.
+✓
+    - Facturas Físicas: ✓
+
+   ✅ Información completa guardada en: ruc_completo_10738074292.json
+
+   Resumen:
+   - Razón Social: SAMAME FLORES DEYSER
+   - Estado: ACTIVO
+   - Condición: HABIDO
+
+==================================================
+[0;32m[SUCCESS][0m [9/26] RUC 10738074292 procesado exitosamente (154s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_10738074292.json
+[0;34m[INFO][0m [10/26] Procesando RUC: 10758153911
+
+=== Consultando RUC: 10758153911 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 10758153911 es: Persona Natural
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✗ (error al hacer clic en el botón de volver: context deadline exceeded)
+    - Información Histórica: ✗ (no se encontró el botón de información histórica: context deadline exceeded)
+    - Omisiones Tributarias: ✗ (no se encontró el botón de omisiones tributarias: context deadline exceeded)
+    - Cantidad de Trabajadores: ✗ (no se encontró el botón de cantidad de trabajadores: context deadline exceeded)
+    - Actas Probatorias: ✗ (no se encontró el botón de actas probatorias: context deadline exceeded)
+    - Facturas Físicas: ✗ (no se encontró el botón de facturas físicas: context deadline exceeded)
+
+   ✅ Información completa guardada en: ruc_completo_10758153911.json
+
+   Resumen:
+   - Razón Social: HEREDIA CHAVEZ SELENI SARAI
+   - Estado: ACTIVO
+   - Condición: HABIDO
+
+==================================================
+[0;32m[SUCCESS][0m [10/26] RUC 10758153911 procesado exitosamente (127s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_10758153911.json
+[0;34m[INFO][0m Progreso: 10/26 (10 éxitos, 0 errores) - ETA: 2128s
+[0;34m[INFO][0m [11/26] Procesando RUC: 10758787651
+
+=== Consultando RUC: 10758787651 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 10758787651 es: Persona Natural
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✓
+    - Información Histórica: 2025/08/08 14:56:35 📋 Procesando tabla 1 con encabezado: 'nombre o razón social:'
+2025/08/08 14:56:35 📝 Procesando razón social histórica...
+2025/08/08 14:56:35 📋 Procesando tabla 2 con encabezado: 'condición del contribuyente'
+2025/08/08 14:56:35 📊 Procesando condición del contribuyente...
+2025/08/08 14:56:35   ✅ Condición: No hay Información (desde: - hasta: -)
+2025/08/08 14:56:35 📋 Procesando tabla 3 con encabezado: 'dirección del domicilio fiscal'
+2025/08/08 14:56:35 🏠 Procesando domicilio fiscal histórico...
+2025/08/08 14:56:35   ✅ Domicilio: No hay Información (baja: -)
+✓
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✗ (no se encontró el botón de información histórica: context deadline exceeded)
+    - Actas Probatorias: ✗ (no se encontró el botón de actas probatorias: context deadline exceeded)
+    - Facturas Físicas: ✗ (no se encontró el botón de facturas físicas: context deadline exceeded)
+
+   ✅ Información completa guardada en: ruc_completo_10758787651.json
+
+   Resumen:
+   - Razón Social: ALARCON BARBOZA YENY ESMERALDA
+   - Estado: ACTIVO
+   - Condición: HABIDO
+   - Deuda Coactiva: NO
+
+==================================================
+[0;32m[SUCCESS][0m [11/26] RUC 10758787651 procesado exitosamente (147s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_10758787651.json
+[0;34m[INFO][0m [12/26] Procesando RUC: 10763669322
+
+=== Consultando RUC: 10763669322 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 10763669322 es: Persona Natural
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✓
+    - Información Histórica: 2025/08/08 14:59:17 📋 Procesando tabla 1 con encabezado: 'nombre o razón social:'
+2025/08/08 14:59:17 📝 Procesando razón social histórica...
+2025/08/08 14:59:17 📋 Procesando tabla 2 con encabezado: 'condición del contribuyente'
+2025/08/08 14:59:17 📊 Procesando condición del contribuyente...
+2025/08/08 14:59:17   ✅ Condición: No hay Información (desde: - hasta: -)
+2025/08/08 14:59:17 📋 Procesando tabla 3 con encabezado: 'dirección del domicilio fiscal'
+2025/08/08 14:59:17 🏠 Procesando domicilio fiscal histórico...
+2025/08/08 14:59:17   ✅ Domicilio: No hay Información (baja: -)
+✓
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✓
+    - Actas Probatorias: 2025/08/08 15:00:11 [INFO] No hay actas probatorias registradas para el contribuyente.
+✓
+    - Facturas Físicas: ✓
+
+   ✅ Información completa guardada en: ruc_completo_10763669322.json
+
+   Resumen:
+   - Razón Social: TARRILLO MARRUFO YAMELITH MARILYN
+   - Estado: ACTIVO
+   - Condición: HABIDO
+   - Deuda Coactiva: NO
+
+==================================================
+[0;32m[SUCCESS][0m [12/26] RUC 10763669322 procesado exitosamente (137s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_10763669322.json
+[0;34m[INFO][0m [13/26] Procesando RUC: 10775397131
+
+=== Consultando RUC: 10775397131 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 10775397131 es: Persona Natural
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✓
+    - Información Histórica: 2025/08/08 15:01:45 📋 Procesando tabla 1 con encabezado: 'nombre o razón social:'
+2025/08/08 15:01:45 📝 Procesando razón social histórica...
+2025/08/08 15:01:45 📋 Procesando tabla 2 con encabezado: 'condición del contribuyente'
+2025/08/08 15:01:45 📊 Procesando condición del contribuyente...
+2025/08/08 15:01:45   ✅ Condición: No hay Información (desde: - hasta: -)
+2025/08/08 15:01:45 📋 Procesando tabla 3 con encabezado: 'dirección del domicilio fiscal'
+2025/08/08 15:01:45 🏠 Procesando domicilio fiscal histórico...
+2025/08/08 15:01:45   ✅ Domicilio: No hay Información (baja: -)
+✓
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✓
+    - Actas Probatorias: 2025/08/08 15:02:39 [INFO] No hay actas probatorias registradas para el contribuyente.
+✓
+    - Facturas Físicas: ✓
+
+   ✅ Información completa guardada en: ruc_completo_10775397131.json
+
+   Resumen:
+   - Razón Social: PEREZ DIAZ LIDIA
+   - Estado: ACTIVO
+   - Condición: HABIDO
+   - Deuda Coactiva: NO
+
+==================================================
+[0;32m[SUCCESS][0m [13/26] RUC 10775397131 procesado exitosamente (155s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_10775397131.json
+[0;34m[INFO][0m [14/26] Procesando RUC: 10776888813
+
+=== Consultando RUC: 10776888813 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 10776888813 es: Persona Natural
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✓
+    - Información Histórica: 2025/08/08 15:04:05 📋 Procesando tabla 1 con encabezado: 'nombre o razón social:'
+2025/08/08 15:04:05 📝 Procesando razón social histórica...
+2025/08/08 15:04:05 📋 Procesando tabla 2 con encabezado: 'condición del contribuyente'
+2025/08/08 15:04:05 📊 Procesando condición del contribuyente...
+2025/08/08 15:04:05   ✅ Condición: No hay Información (desde: - hasta: -)
+2025/08/08 15:04:05 📋 Procesando tabla 3 con encabezado: 'dirección del domicilio fiscal'
+2025/08/08 15:04:05 🏠 Procesando domicilio fiscal histórico...
+2025/08/08 15:04:05   ✅ Domicilio: No hay Información (baja: -)
+✓
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✓
+    - Actas Probatorias: 2025/08/08 15:05:00 [INFO] No hay actas probatorias registradas para el contribuyente.
+✓
+    - Facturas Físicas: ✓
+
+   ✅ Información completa guardada en: ruc_completo_10776888813.json
+
+   Resumen:
+   - Razón Social: VILCAMANGO VALLE JERLY JUDITH
+   - Estado: ACTIVO
+   - Condición: HABIDO
+   - Deuda Coactiva: NO
+
+==================================================
+[0;32m[SUCCESS][0m [14/26] RUC 10776888813 procesado exitosamente (129s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_10776888813.json
+[0;34m[INFO][0m [15/26] Procesando RUC: 20393261162
+
+=== Consultando RUC: 20393261162 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 20393261162 es: Persona Jurídica
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✓
+    - Información Histórica: 2025/08/08 15:06:39 📋 Procesando tabla 1 con encabezado: 'nombre o razón social:'
+2025/08/08 15:06:39 📝 Procesando razón social histórica...
+2025/08/08 15:06:39 📋 Procesando tabla 2 con encabezado: 'condición del contribuyente'
+2025/08/08 15:06:39 📊 Procesando condición del contribuyente...
+2025/08/08 15:06:39   ✅ Condición: HABIDO (desde: - hasta: 04/03/2009)
+2025/08/08 15:06:39   ✅ Condición: HABIDO (desde: 05/03/2009 hasta: 15/12/2012)
+2025/08/08 15:06:39   ✅ Condición: PENDIENTE (desde: 16/12/2012 hasta: 03/01/2013)
+2025/08/08 15:06:39   ✅ Condición: HABIDO (desde: 04/01/2013 hasta: 29/01/2013)
+2025/08/08 15:06:39   ✅ Condición: NO HALLADO (desde: 30/01/2013 hasta: 06/02/2013)
+2025/08/08 15:06:39   ✅ Condición: POR VERIFICAR (desde: 07/02/2013 hasta: 14/02/2013)
+2025/08/08 15:06:39   ✅ Condición: HABIDO (desde: 15/02/2013 hasta: 03/05/2013)
+2025/08/08 15:06:39   ✅ Condición: PENDIENTE (desde: 04/05/2013 hasta: 11/05/2013)
+2025/08/08 15:06:39   ✅ Condición: HABIDO (desde: 12/05/2013 hasta: 13/06/2016)
+2025/08/08 15:06:39   ✅ Condición: PENDIENTE (desde: 14/06/2016 hasta: 17/06/2016)
+2025/08/08 15:06:39   ✅ Condición: NO HALLADO (desde: 18/06/2016 hasta: 20/07/2016)
+2025/08/08 15:06:39   ✅ Condición: POR VERIFICAR (desde: 21/07/2016 hasta: 22/07/2016)
+2025/08/08 15:06:39   ✅ Condición: HABIDO (desde: 23/07/2016 hasta: 22/10/2019)
+2025/08/08 15:06:39   ✅ Condición: HABIDO (desde: 22/10/2019 hasta: 22/10/2019)
+2025/08/08 15:06:39   ✅ Condición: HABIDO (desde: 22/10/2019 hasta: 22/10/2019)
+2025/08/08 15:06:39   ✅ Condición: HABIDO (desde: 23/10/2019 hasta: 01/02/2020)
+2025/08/08 15:06:39   ✅ Condición: HABIDO (desde: 01/02/2020 hasta: 01/02/2020)
+2025/08/08 15:06:39   ✅ Condición: HABIDO (desde: 01/02/2020 hasta: 01/02/2020)
+2025/08/08 15:06:39   ✅ Condición: HABIDO (desde: 01/02/2020 hasta: 01/02/2020)
+2025/08/08 15:06:39 📋 Procesando tabla 3 con encabezado: 'dirección del domicilio fiscal'
+2025/08/08 15:06:39 🏠 Procesando domicilio fiscal histórico...
+2025/08/08 15:06:39   ✅ Domicilio: JR. YARINACOCHA MZA. A LOTE. 23 URB. PUCALLPA UCAYALI-CORONEL PORTILLO-YARINACOCHA (baja: 01/02/2020)
+2025/08/08 15:06:39   ✅ Domicilio: JR. YARINACOCHA MZ. A LT. 23 MZA. A LOTE. 23 URB. PUCALLPA UCAYALI-CORONEL PORTILLO-YARINACOCHA (baja: 01/02/2020)
+2025/08/08 15:06:39   ✅ Domicilio: JR. JR. AUGUSTO B. LEGUIA NRO. 620 URB. PUCALLPA UCAYALI-CORONEL PORTILLO-CALLERIA (baja: 01/02/2020)
+2025/08/08 15:06:39   ✅ Domicilio: JR. JR. YARINACOCHA MZ. A LT. 23 NRO. S/N URB. PUCALLPA UCAYALI-CORONEL PORTILLO-YARINACOCHA (baja: 01/02/2020)
+2025/08/08 15:06:39   ✅ Domicilio: JR. AUGUSTO B. LEGUIA NRO. 620 URB. PUCALLPA UCAYALI-CORONEL PORTILLO-CALLERIA (baja: 22/10/2019)
+2025/08/08 15:06:39   ✅ Domicilio: JR. YARINACOCHA MZ. A LT. 23 NRO. S/N A.H. YARINACOCHA UCAYALI-CORONEL PORTILLO-YARINACOCHA (baja: 22/10/2019)
+2025/08/08 15:06:39   ✅ Domicilio: JR. YARINACOCHA MZ. A LT. 23 NRO. S/N A.H. RAMIRO PRIALE UCAYALI-CORONEL PORTILLO-YARINACOCHA (baja: 22/10/2019)
+2025/08/08 15:06:39   ✅ Domicilio: JR. LOS FRUTALES NRO. 367 A.H. EMANCIPACION UCAYALI-CORONEL PORTILLO-CALLERIA (baja: 20/07/2016)
+2025/08/08 15:06:39   ✅ Domicilio: CAL.1 MZA. E LOTE. 1 URB. SANTA BEATRIZ UCAYALI-CORONEL PORTILLO-YARINACOCHA (baja: 03/05/2013)
+2025/08/08 15:06:39   ✅ Domicilio: CAL.UNO MZA. E LOTE. 1 URB. SANTA BEATRIZ UCAYALI-CORONEL PORTILLO-YARINACOCHA (baja: 06/02/2013)
+2025/08/08 15:06:39   ✅ Domicilio: JR. YURIMAGUAS NRO. 121 UCAYALI-CORONEL PORTILLO-CALLERIA (baja: 15/12/2012)
+✓
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✓
+    - Actas Probatorias: 2025/08/08 15:07:34 [INFO] No hay actas probatorias registradas para el contribuyente.
+✓
+    - Facturas Físicas: ✓
+  📋 Consultando información exclusiva de Personas Jurídicas...
+    - Representantes Legales: ✓
+    - Establecimientos Anexos: ✓
+    - Reactiva Perú: ✓
+    - Programa COVID-19: ✓
+
+   ✅ Información completa guardada en: ruc_completo_20393261162.json
+
+   Resumen:
+   - Razón Social: MULTISERVICIOS RKR S.R.L.
+   - Estado: ACTIVO
+   - Condición: HABIDO
+   - Deuda Coactiva: NO
+   - Representantes Legales Vigentes: 1
+   - Establecimientos Anexos: 2
+
+==================================================
+[0;32m[SUCCESS][0m [15/26] RUC 20393261162 procesado exitosamente (224s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_20393261162.json
+[0;34m[INFO][0m [16/26] Procesando RUC: 20393317991
+
+=== Consultando RUC: 20393317991 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+panic: navigation failed: net::ERR_CERT_VERIFIER_CHANGED
+
+goroutine 1 [running]:
+github.com/go-rod/rod/lib/utils.init.func2({0x81ade0?, 0xc000308460?})
+	/home/cristhianm/go/pkg/mod/github.com/go-rod/rod@v0.114.5/lib/utils/utils.go:68 +0x1d
+github.com/consulta-ruc-scraper/pkg/scraper.NewSUNATScraper.New.(*Browser).WithPanic.genE.func1({0xc000308570?, 0x51?, 0x0?})
+	/home/cristhianm/go/pkg/mod/github.com/go-rod/rod@v0.114.5/must.go:37 +0x62
+github.com/go-rod/rod.(*Browser).MustPage(0xc0000fed80, {0xc0001bbb98?, 0x413465?, 0x0?})
+	/home/cristhianm/go/pkg/mod/github.com/go-rod/rod@v0.114.5/must.go:72 +0xd2
+github.com/consulta-ruc-scraper/pkg/scraper.(*ScraperExtendido).ScrapeRUCCompleto(0xc0001bbec0, {0x7ffebc5fd88a, 0xb})
+	/home/cristhianm/Downloads/13.ConsultaRUC/13.ConsultaRUC/pkg/scraper/scraper_extendido.go:39 +0x95
+main.main()
+	/home/cristhianm/Downloads/13.ConsultaRUC/13.ConsultaRUC/cmd/scraper-completo/main.go:33 +0x27d
+exit status 2
+[0;31m[ERROR][0m [16/26] Error procesando RUC 20393317991 (código: 1, tiempo: 65s)
+[0;34m[INFO][0m [17/26] Procesando RUC: 20393758008
+
+=== Consultando RUC: 20393758008 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 20393758008 es: Persona Jurídica
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✓
+    - Información Histórica: 2025/08/08 15:11:04 📋 Procesando tabla 1 con encabezado: 'nombre o razón social:'
+2025/08/08 15:11:04 📝 Procesando razón social histórica...
+2025/08/08 15:11:04 📋 Procesando tabla 2 con encabezado: 'condición del contribuyente'
+2025/08/08 15:11:04 📊 Procesando condición del contribuyente...
+2025/08/08 15:11:04   ✅ Condición: PENDIENTE (desde: - hasta: 07/01/2012)
+2025/08/08 15:11:04 📋 Procesando tabla 3 con encabezado: 'dirección del domicilio fiscal'
+2025/08/08 15:11:04 🏠 Procesando domicilio fiscal histórico...
+2025/08/08 15:11:04   ✅ Domicilio: JR. MARIA LOZANO MZA. A LOTE. 11 A.H. AGUSTIN CAUPER UCAYALI-CORONEL PORTILLO-YARINACOCHA (baja: 02/11/2015)
+2025/08/08 15:11:04   ✅ Domicilio: JR. MARIA LOZANO MZA. A LOTE. 11 A.H. AGUSTIN CAUPER UCAYALI-CORONEL PORTILLO-YARINACOCHA (baja: 02/11/2015)
+2025/08/08 15:11:04   ✅ Domicilio: JR. MARIA LOZANO MZA. A LOTE. 11 A.H. AGUSTIN CAUPER UCAYALI-CORONEL PORTILLO-YARINACOCHA (baja: 02/11/2015)
+2025/08/08 15:11:04   ✅ Domicilio: JR. MARIA LOZANO MZA. A LOTE. 11 A.H. AGUSTIN CAUPER UCAYALI-CORONEL PORTILLO-YARINACOCHA (baja: 20/10/2015)
+2025/08/08 15:11:04   ✅ Domicilio: JR. MARIA LOZANO MZA. A LOTE. 11 A.H. AGUSTIN CAUPER UCAYALI-CORONEL PORTILLO-YARINACOCHA (baja: 20/10/2015)
+✓
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✓
+    - Actas Probatorias: 2025/08/08 15:11:59 [INFO] No hay actas probatorias registradas para el contribuyente.
+✓
+    - Facturas Físicas: ✓
+  📋 Consultando información exclusiva de Personas Jurídicas...
+    - Representantes Legales: ✓
+    - Establecimientos Anexos: ✗ (no se encontró el botón de establecimientos anexos: context deadline exceeded)
+    - Reactiva Perú: ✓
+    - Programa COVID-19: ✓
+
+   ✅ Información completa guardada en: ruc_completo_20393758008.json
+
+   Resumen:
+   - Razón Social: SERVICIOS Y DESARROLLO COMERCIAL AXOR E.I.R.L.
+   - Estado: ACTIVO
+   - Condición: HABIDO
+   - Deuda Coactiva: NO
+   - Representantes Legales Vigentes: 1
+
+==================================================
+[0;32m[SUCCESS][0m [17/26] RUC 20393758008 procesado exitosamente (200s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_20393758008.json
+[0;34m[INFO][0m [18/26] Procesando RUC: 20554129286
+
+=== Consultando RUC: 20554129286 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 20554129286 es: Persona Jurídica
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✓
+    - Información Histórica: 2025/08/08 15:14:27 📋 Procesando tabla 1 con encabezado: 'nombre o razón social:'
+2025/08/08 15:14:27 📝 Procesando razón social histórica...
+2025/08/08 15:14:27 📋 Procesando tabla 2 con encabezado: 'condición del contribuyente'
+2025/08/08 15:14:27 📊 Procesando condición del contribuyente...
+2025/08/08 15:14:27   ✅ Condición: HABIDO (desde: - hasta: 11/03/2016)
+2025/08/08 15:14:27   ✅ Condición: PENDIENTE (desde: 12/03/2016 hasta: 30/03/2016)
+2025/08/08 15:14:27   ✅ Condición: HABIDO (desde: 31/03/2016 hasta: 31/03/2016)
+2025/08/08 15:14:27   ✅ Condición: NO HALLADO (desde: 01/04/2016 hasta: 01/04/2016)
+2025/08/08 15:14:27   ✅ Condición: POR VERIFICAR (desde: 02/04/2016 hasta: 08/04/2016)
+2025/08/08 15:14:27   ✅ Condición: HABIDO (desde: 09/04/2016 hasta: 21/03/2024)
+2025/08/08 15:14:27   ✅ Condición: HABIDO (desde: 22/03/2024 hasta: 26/03/2024)
+2025/08/08 15:14:27 📋 Procesando tabla 3 con encabezado: 'dirección del domicilio fiscal'
+2025/08/08 15:14:27 🏠 Procesando domicilio fiscal histórico...
+2025/08/08 15:14:27   ✅ Domicilio: JR. LA INMACULADA NRO. 295 URB. CERCADO DE PUCALLPA UCAYALI-CORONEL PORTILLO-CALLERIA (baja: 26/03/2024)
+2025/08/08 15:14:27   ✅ Domicilio: JR. VICTOR MONTALVO NRO. 840 URB. CERCADO DE PUCALLPA UCAYALI-CORONEL PORTILLO-CALLERIA (baja: 21/03/2024)
+2025/08/08 15:14:27   ✅ Domicilio: JR. VICTOR MONTALVO NRO. 840 URB. CERCADO DE PUCALLPA UCAYALI-CORONEL PORTILLO-CALLERIA (baja: 01/04/2016)
+2025/08/08 15:14:27   ✅ Domicilio: AV. EDUARDO DE HABICH NRO. 561 URB. INGENIERIA LIMA-LIMA-SAN MARTIN DE PORRES (baja: 11/03/2016)
+✓
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✓
+    - Actas Probatorias: 2025/08/08 15:15:26 [INFO] No hay actas probatorias registradas para el contribuyente.
+✓
+    - Facturas Físicas: ✓
+  📋 Consultando información exclusiva de Personas Jurídicas...
+    - Representantes Legales: ✓
+    - Establecimientos Anexos: ✓
+    - Reactiva Perú: ✓
+    - Programa COVID-19: ✓
+
+   ✅ Información completa guardada en: ruc_completo_20554129286.json
+
+   Resumen:
+   - Razón Social: ARTURO LEON & ASOCIADOS SOCIEDAD CIVIL
+   - Estado: BAJA PROV. POR OFICIO
+Fecha de Baja: 30/06/2025
+   - Condición: HABIDO
+   - Deuda Coactiva: NO
+   - Representantes Legales Vigentes: 2
+   - Establecimientos Anexos: 1
+
+==================================================
+[0;32m[SUCCESS][0m [18/26] RUC 20554129286 procesado exitosamente (202s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_20554129286.json
+[0;34m[INFO][0m [19/26] Procesando RUC: 20600656288
+
+=== Consultando RUC: 20600656288 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 20600656288 es: Persona Jurídica
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✗ (error al hacer clic en el botón de deuda coactiva: context deadline exceeded)
+    - Información Histórica: 2025/08/08 15:17:50 📋 Procesando tabla 1 con encabezado: 'nombre o razón social:'
+2025/08/08 15:17:50 📝 Procesando razón social histórica...
+2025/08/08 15:17:50 📋 Procesando tabla 2 con encabezado: 'condición del contribuyente'
+2025/08/08 15:17:50 📊 Procesando condición del contribuyente...
+2025/08/08 15:17:50   ✅ Condición: PENDIENTE (desde: - hasta: 17/09/2015)
+2025/08/08 15:17:50   ✅ Condición: HABIDO (desde: 18/09/2015 hasta: 28/09/2016)
+2025/08/08 15:17:50   ✅ Condición: HABIDO (desde: 29/09/2016 hasta: 22/02/2018)
+2025/08/08 15:17:50   ✅ Condición: HABIDO (desde: 23/02/2018 hasta: 19/07/2018)
+2025/08/08 15:17:50   ✅ Condición: HABIDO (desde: 20/07/2018 hasta: 07/03/2019)
+2025/08/08 15:17:50   ✅ Condición: HABIDO (desde: 07/03/2019 hasta: 07/03/2019)
+2025/08/08 15:17:50   ✅ Condición: HABIDO (desde: 08/03/2019 hasta: 08/03/2019)
+2025/08/08 15:17:50 📋 Procesando tabla 3 con encabezado: 'dirección del domicilio fiscal'
+2025/08/08 15:17:50 🏠 Procesando domicilio fiscal histórico...
+2025/08/08 15:17:50   ✅ Domicilio: AV. CENTENARIO KM. 4 MZA. 365 LOTE. 16 INT. LS04 OTR. CARRETERA FEDERICO BASADRE UCAYALI-CORONEL PORTILLO-YARINACOCHA (baja: 08/03/2019)
+2025/08/08 15:17:50   ✅ Domicilio: AV. CENTENARIO MZA. 365 LOTE. 16 INT. LS04 A.H. CENTENARIO UCAYALI-CORONEL PORTILLO-YARINACOCHA (baja: 07/03/2019)
+2025/08/08 15:17:50   ✅ Domicilio: PJ. DAVID ABENSUR MZA. F LOTE. 19 A.H. DAVID ABENSUR UCAYALI-CORONEL PORTILLO-YARINACOCHA (baja: 07/03/2019)
+2025/08/08 15:17:50   ✅ Domicilio: PJ. LAS ALMENDRAS MZA. 100B LOTE. 7 URB. CUARTA ETAPA DEL CENTRO POBLADO DE YARINACOCHA UCAYALI-CORONEL PORTILLO-YARINACOCHA (baja: 19/07/2018)
+2025/08/08 15:17:50   ✅ Domicilio: JR. IMOSA MZA. B LOTE. 34 UCAYALI-CORONEL PORTILLO-CALLERIA (baja: 22/02/2018)
+2025/08/08 15:17:50   ✅ Domicilio: PJ. DAVID ABENSUR MZA. F LOTE. 19 UCAYALI-CORONEL PORTILLO-YARINACOCHA (baja: 28/09/2016)
+✓
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✓
+    - Actas Probatorias: 2025/08/08 15:18:44 [INFO] No hay actas probatorias registradas para el contribuyente.
+✓
+    - Facturas Físicas: ✓
+  📋 Consultando información exclusiva de Personas Jurídicas...
+    - Representantes Legales: ✓
+    - Establecimientos Anexos: ✗ (no se encontró el botón de establecimientos anexos: context deadline exceeded)
+    - Reactiva Perú: ✓
+    - Programa COVID-19: ✓
+
+   ✅ Información completa guardada en: ruc_completo_20600656288.json
+
+   Resumen:
+   - Razón Social: ASESORIA CONTABLE Y EMPRESARIAL DEL ORIENTE S.A.C.
+   - Estado: ACTIVO
+   - Condición: HABIDO
+   - Representantes Legales Vigentes: 1
+
+==================================================
+[0;32m[SUCCESS][0m [19/26] RUC 20600656288 procesado exitosamente (192s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_20600656288.json
+[0;34m[INFO][0m [20/26] Procesando RUC: 20602770568
+
+=== Consultando RUC: 20602770568 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 20602770568 es: Persona Jurídica
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✗ (no se encontró el botón de deuda coactiva: context deadline exceeded)
+    - Información Histórica: ✗ (no se encontró el botón de información histórica: context deadline exceeded)
+    - Omisiones Tributarias: ✗ (no se encontró el botón de omisiones tributarias: context deadline exceeded)
+    - Cantidad de Trabajadores: ✗ (no se encontró el botón de cantidad de trabajadores: context deadline exceeded)
+    - Actas Probatorias: ✗ (no se encontró el botón de actas probatorias: context deadline exceeded)
+    - Facturas Físicas: ✗ (no se encontró el botón de facturas físicas: context deadline exceeded)
+  📋 Consultando información exclusiva de Personas Jurídicas...
+    - Representantes Legales: ✗ (no se encontró el botón de representantes legales: context deadline exceeded)
+    - Establecimientos Anexos: ✗ (no se encontró el botón de establecimientos anexos: context deadline exceeded)
+    - Reactiva Perú: ✗ (no se encontró el botón de Reactiva Perú: context deadline exceeded)
+    - Programa COVID-19: ✗ (no se encontró el botón de Programa COVID-19: context deadline exceeded)
+
+   ✅ Información completa guardada en: ruc_completo_20602770568.json
+
+   Resumen:
+   - Razón Social: 
+   - Estado: 
+   - Condición: 
+
+==================================================
+[0;32m[SUCCESS][0m [20/26] RUC 20602770568 procesado exitosamente (174s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_20602770568.json
+[0;34m[INFO][0m Progreso: 20/26 (19 éxitos, 1 errores) - ETA: 888s
+[0;34m[INFO][0m [21/26] Procesando RUC: 20604817103
+
+=== Consultando RUC: 20604817103 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 20604817103 es: Persona Jurídica
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✓
+    - Información Histórica: 2025/08/08 15:24:12 📋 Procesando tabla 1 con encabezado: 'nombre o razón social:'
+2025/08/08 15:24:12 📝 Procesando razón social histórica...
+2025/08/08 15:24:12 📋 Procesando tabla 2 con encabezado: 'condición del contribuyente'
+2025/08/08 15:24:12 📊 Procesando condición del contribuyente...
+2025/08/08 15:24:12   ✅ Condición: No hay Información (desde: - hasta: -)
+2025/08/08 15:24:12 📋 Procesando tabla 3 con encabezado: 'dirección del domicilio fiscal'
+2025/08/08 15:24:12 🏠 Procesando domicilio fiscal histórico...
+2025/08/08 15:24:12   ✅ Domicilio: No hay Información (baja: -)
+✓
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✓
+    - Actas Probatorias: 2025/08/08 15:25:06 [INFO] No hay actas probatorias registradas para el contribuyente.
+✓
+    - Facturas Físicas: ✓
+  📋 Consultando información exclusiva de Personas Jurídicas...
+    - Representantes Legales: ✓
+    - Establecimientos Anexos: ✗ (no se encontró el botón de establecimientos anexos: context deadline exceeded)
+    - Reactiva Perú: ✓
+    - Programa COVID-19: ✓
+
+   ✅ Información completa guardada en: ruc_completo_20604817103.json
+
+   Resumen:
+   - Razón Social: ESTUDIO CONTABLE L & M E.I.R.L.
+   - Estado: ACTIVO
+   - Condición: HABIDO
+   - Deuda Coactiva: NO
+   - Representantes Legales Vigentes: 1
+
+==================================================
+[0;32m[SUCCESS][0m [21/26] RUC 20604817103 procesado exitosamente (205s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_20604817103.json
+[0;34m[INFO][0m [22/26] Procesando RUC: 20605437070
+
+=== Consultando RUC: 20605437070 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 20605437070 es: Persona Jurídica
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✓
+    - Información Histórica: 2025/08/08 15:27:27 📋 Procesando tabla 1 con encabezado: 'nombre o razón social:'
+2025/08/08 15:27:27 📝 Procesando razón social histórica...
+2025/08/08 15:27:27 📋 Procesando tabla 2 con encabezado: 'condición del contribuyente'
+2025/08/08 15:27:27 📊 Procesando condición del contribuyente...
+2025/08/08 15:27:27   ✅ Condición: No hay Información (desde: - hasta: -)
+2025/08/08 15:27:27 📋 Procesando tabla 3 con encabezado: 'dirección del domicilio fiscal'
+2025/08/08 15:27:27 🏠 Procesando domicilio fiscal histórico...
+2025/08/08 15:27:27   ✅ Domicilio: JR. 28 DE JULIO MZA. G LOTE. 11 UCAYALI-PADRE ABAD-IRAZOLA (baja: 02/10/2024)
+✓
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✓
+    - Actas Probatorias: 2025/08/08 15:28:33 [INFO] No hay actas probatorias registradas para el contribuyente.
+✓
+    - Facturas Físicas: ✓
+  📋 Consultando información exclusiva de Personas Jurídicas...
+    - Representantes Legales: ✓
+    - Establecimientos Anexos: ✗ (no se encontró el botón de establecimientos anexos: context deadline exceeded)
+    - Reactiva Perú: ✓
+    - Programa COVID-19: ✓
+
+   ✅ Información completa guardada en: ruc_completo_20605437070.json
+
+   Resumen:
+   - Razón Social: MULTICONT ESTUDIO CONTABLE S.A.C.
+   - Estado: ACTIVO
+   - Condición: HABIDO
+   - Deuda Coactiva: NO
+   - Representantes Legales Vigentes: 1
+
+==================================================
+[0;32m[SUCCESS][0m [22/26] RUC 20605437070 procesado exitosamente (205s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_20605437070.json
+[0;34m[INFO][0m [23/26] Procesando RUC: 20606454466
+
+=== Consultando RUC: 20606454466 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 20606454466 es: Persona Jurídica
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✓
+    - Información Histórica: 2025/08/08 15:31:22 📋 Procesando tabla 1 con encabezado: 'nombre o razón social:'
+2025/08/08 15:31:22 📝 Procesando razón social histórica...
+2025/08/08 15:31:22 📋 Procesando tabla 2 con encabezado: 'condición del contribuyente'
+2025/08/08 15:31:22 📊 Procesando condición del contribuyente...
+2025/08/08 15:31:22   ✅ Condición: HABIDO (desde: - hasta: 24/09/2020)
+2025/08/08 15:31:22 📋 Procesando tabla 3 con encabezado: 'dirección del domicilio fiscal'
+2025/08/08 15:31:22 🏠 Procesando domicilio fiscal histórico...
+2025/08/08 15:31:22   ✅ Domicilio: CAL.LAS CASAS NRO. 146 LIMA-LIMA-SAN ISIDRO (baja: 24/09/2020)
+✓
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✓
+    - Actas Probatorias: 2025/08/08 15:32:16 [INFO] No hay actas probatorias registradas para el contribuyente.
+✓
+    - Facturas Físicas: ✓
+  📋 Consultando información exclusiva de Personas Jurídicas...
+    - Representantes Legales: ✓
+    - Establecimientos Anexos: ✗ (no se encontró el botón de establecimientos anexos: context deadline exceeded)
+    - Reactiva Perú: ✓
+    - Programa COVID-19: ✗ (error al hacer clic en el botón de Programa COVID-19: context deadline exceeded)
+
+   ✅ Información completa guardada en: ruc_completo_20606454466.json
+
+   Resumen:
+   - Razón Social: CONSULTING PERU
+   - Estado: ACTIVO
+   - Condición: HABIDO
+   - Deuda Coactiva: NO
+   - Representantes Legales Vigentes: 1
+
+==================================================
+[0;32m[SUCCESS][0m [23/26] RUC 20606454466 procesado exitosamente (227s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_20606454466.json
+[0;34m[INFO][0m [24/26] Procesando RUC: 20606642131
+
+=== Consultando RUC: 20606642131 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 20606642131 es: Persona Jurídica
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✓
+    - Información Histórica: 2025/08/08 15:34:44 📋 Procesando tabla 1 con encabezado: 'nombre o razón social:'
+2025/08/08 15:34:44 📝 Procesando razón social histórica...
+2025/08/08 15:34:44 📋 Procesando tabla 2 con encabezado: 'condición del contribuyente'
+2025/08/08 15:34:44 📊 Procesando condición del contribuyente...
+2025/08/08 15:34:44   ✅ Condición: HABIDO (desde: 13/10/2020 hasta: 09/11/2024)
+2025/08/08 15:34:44 📋 Procesando tabla 3 con encabezado: 'dirección del domicilio fiscal'
+2025/08/08 15:34:44 🏠 Procesando domicilio fiscal histórico...
+2025/08/08 15:34:44   ✅ Domicilio: JR. FLORIDA MZA. 193 LOTE. 5 U.V. 27 DE ABRIL UCAYALI-PADRE ABAD-PADRE ABAD (baja: 09/11/2024)
+✓
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✓
+    - Actas Probatorias: 2025/08/08 15:35:38 [INFO] No hay actas probatorias registradas para el contribuyente.
+✓
+    - Facturas Físicas: ✓
+  📋 Consultando información exclusiva de Personas Jurídicas...
+    - Representantes Legales: ✓
+    - Establecimientos Anexos: ✗ (no se encontró el botón de establecimientos anexos: context deadline exceeded)
+    - Reactiva Perú: ✓
+    - Programa COVID-19: ✓
+
+   ✅ Información completa guardada en: ruc_completo_20606642131.json
+
+   Resumen:
+   - Razón Social: FUCE & CIA E.I.R.L.
+   - Estado: ACTIVO
+   - Condición: HABIDO
+   - Deuda Coactiva: NO
+   - Representantes Legales Vigentes: 1
+
+==================================================
+[0;32m[SUCCESS][0m [24/26] RUC 20606642131 procesado exitosamente (194s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_20606642131.json
+[0;34m[INFO][0m [25/26] Procesando RUC: 20606695439
+
+=== Consultando RUC: 20606695439 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 20606695439 es: Persona Jurídica
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✓
+    - Información Histórica: 2025/08/08 15:37:58 📋 Procesando tabla 1 con encabezado: 'nombre o razón social:'
+2025/08/08 15:37:58 📝 Procesando razón social histórica...
+2025/08/08 15:37:58 📋 Procesando tabla 2 con encabezado: 'condición del contribuyente'
+2025/08/08 15:37:58 📊 Procesando condición del contribuyente...
+2025/08/08 15:37:58   ✅ Condición: HABIDO (desde: 14/01/2021 hasta: 29/01/2025)
+2025/08/08 15:37:58   ✅ Condición: HABIDO (desde: 30/01/2025 hasta: 03/02/2025)
+2025/08/08 15:37:58 📋 Procesando tabla 3 con encabezado: 'dirección del domicilio fiscal'
+2025/08/08 15:37:58 🏠 Procesando domicilio fiscal histórico...
+2025/08/08 15:37:58   ✅ Domicilio: CAL.10 MZA. M1 LOTE. 10 VLL. AGUAYTIA UCAYALI-PADRE ABAD-PADRE ABAD (baja: 03/02/2025)
+2025/08/08 15:37:58   ✅ Domicilio: JR. GARCILAZO DE LA VEGA MZA. K2 LOTE. 5A AGUAYTIA UCAYALI-PADRE ABAD-PADRE ABAD (baja: 29/01/2025)
+✓
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✓
+    - Actas Probatorias: 2025/08/08 15:38:52 [INFO] No hay actas probatorias registradas para el contribuyente.
+✓
+    - Facturas Físicas: ✓
+  📋 Consultando información exclusiva de Personas Jurídicas...
+    - Representantes Legales: ✓
+    - Establecimientos Anexos: ✓
+    - Reactiva Perú: ✓
+    - Programa COVID-19: ✓
+
+   ✅ Información completa guardada en: ruc_completo_20606695439.json
+
+   Resumen:
+   - Razón Social: CONTA CONSULT S.A.C.
+   - Estado: ACTIVO
+   - Condición: HABIDO
+   - Deuda Coactiva: NO
+   - Representantes Legales Vigentes: 1
+   - Establecimientos Anexos: 1
+
+==================================================
+[0;32m[SUCCESS][0m [25/26] RUC 20606695439 procesado exitosamente (195s)
+[0;34m[INFO][0m Archivo JSON movido a: resultados_scraping/ruc_completo_20606695439.json
+[0;34m[INFO][0m [26/26] Procesando RUC: 20613467999
+
+=== Consultando RUC: 20613467999 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 20613467999 es: Persona Jurídica
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✓
+    - Información Histórica: 2025/08/08 15:43:34 📋 Procesando tabla 1 con encabezado: 'nombre o razón social:'
+2025/08/08 15:43:34 📝 Procesando razón social histórica...
+2025/08/08 15:43:34 📋 Procesando tabla 2 con encabezado: 'condición del contribuyente'
+2025/08/08 15:43:34 📊 Procesando condición del contribuyente...
+2025/08/08 15:43:34 📋 Procesando tabla 3 con encabezado: 'dirección del domicilio fiscal'
+2025/08/08 15:43:34 🏠 Procesando domicilio fiscal histórico...
+2025/08/08 15:43:34   ✅ Domicilio: No hay Información (baja: -)
+✓
+    - Omisiones Tributarias: ✓
+    - Cantidad de Trabajadores: ✓
+    - Actas Probatorias: 2025/08/08 15:44:28 [INFO] No hay actas probatorias registradas para el contribuyente.
+✓
+    - Facturas Físicas: ✓
+  📋 Consultando información exclusiva de Personas Jurídicas...
+    - Representantes Legales: ✓
+    - Establecimientos Anexos: ✗ (no se encontró el botón de establecimientos anexos: context deadline exceeded)
+    - Reactiva Perú: [0;31m[ERROR][0m [26/26] Timeout procesando RUC 20613467999 (>300s)
+[0;34m[INFO][0m Progreso: 26/26 (24 éxitos, 2 errores) - ETA: 0s
+[0;32m[SUCCESS][0m === RESUMEN FINAL ===
+[0;32m[SUCCESS][0m Total procesados: 26
+[0;32m[SUCCESS][0m Exitosos: 24
+[0;32m[SUCCESS][0m Errores: 2
+[0;32m[SUCCESS][0m Tiempo total: 4313s
+[0;32m[SUCCESS][0m Promedio por RUC: 165s
+[0;32m[SUCCESS][0m Archivos generados en: resultados_scraping/
+[0;34m[INFO][0m Generando reporte de archivos...
+[0;32m[SUCCESS][0m Reporte generado en: resultados_scraping/reporte_20250808_154526.txt
+[0;32m[SUCCESS][0m 🎉 Procesamiento completado. Revisa los archivos en: resultados_scraping/

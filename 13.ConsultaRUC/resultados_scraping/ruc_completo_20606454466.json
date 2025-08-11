@@ -1,0 +1,205 @@
+{
+  "informacion_basica": {
+    "ruc": "20606454466",
+    "razon_social": "CONSULTING PERU",
+    "tipo_contribuyente": "SOCIEDAD ANONIMA CERRADA",
+    "nombre_comercial": "-",
+    "fecha_inscripcion": "03/09/2020",
+    "fecha_inicio_actividades": "01/09/2020",
+    "estado": "ACTIVO",
+    "condicion": "HABIDO",
+    "domicilio_fiscal": "JR. IPARIA NRO. 1769 OTR. IPARIA (OFICINA 601) UCAYALI - CORONEL PORTILLO - YARINACOCHA",
+    "sistema_emision": "COMPUTARIZADO",
+    "actividad_comercio_exterior": "SIN ACTIVIDAD",
+    "sistema_contabilidad": "COMPUTARIZADO",
+    "actividades_economicas": [
+      "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL"
+    ],
+    "comprobantes_pago": null,
+    "sistema_emision_electronica": "FACTURA (desde 26/01/2022),BOLETA (desde 04/02/2022)",
+    "emisor_electronico_desde": "26/01/2022",
+    "comprobantes_electronicos": [
+      "FACTURA PORTAL DESDE 26/01/2022",
+      "DESDE LOS SISTEMAS DEL CONTRIBUYENTE. AUTORIZ DESDE 04/02/2022",
+      "SEE-FACTURADOR . AUTORIZ DESDE 15/02/2022"
+    ],
+    "afiliado_ple": "-",
+    "padrones": null
+  },
+  "informacion_historica": {
+    "ruc": "20606454466",
+    "razon_social": "",
+    "fecha_actualizada": "",
+    "razones_sociales": null,
+    "condiciones": [
+      {
+        "condicion": "HABIDO",
+        "desde": "-",
+        "hasta": "24/09/2020"
+      }
+    ],
+    "domicilios": [
+      {
+        "direccion": "CAL.LAS CASAS NRO. 146 LIMA-LIMA-SAN ISIDRO",
+        "fecha_de_baja": "24/09/2020"
+      }
+    ],
+    "fecha_consulta": "2025-08-08T15:31:22.100977753-05:00"
+  },
+  "deuda_coactiva": {
+    "ruc": "20606454466",
+    "total_deuda": 0,
+    "cantidad_documentos": 0,
+    "deudas": null,
+    "fecha_consulta": "2025-08-08T15:31:03.993137686-05:00"
+  },
+  "omisiones_tributarias": {
+    "ruc": "20606454466",
+    "tiene_omisiones": false,
+    "cantidad_omisiones": 0,
+    "omisiones": null,
+    "fecha_consulta": "2025-08-08T15:31:40.213757-05:00"
+  },
+  "cantidad_trabajadores": {
+    "ruc": "20606454466",
+    "periodos_disponibles": [
+      "2024-07",
+      "2024-08",
+      "2024-09",
+      "2024-10",
+      "2024-11",
+      "2024-12",
+      "2025-01",
+      "2025-02",
+      "2025-03",
+      "2025-04",
+      "2025-05",
+      "2025-06"
+    ],
+    "detalle_por_periodo": [
+      {
+        "periodo": "2024-07",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 0
+      },
+      {
+        "periodo": "2024-08",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 0
+      },
+      {
+        "periodo": "2024-09",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 0
+      },
+      {
+        "periodo": "2024-10",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 0
+      },
+      {
+        "periodo": "2024-11",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 0
+      },
+      {
+        "periodo": "2024-12",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 0
+      },
+      {
+        "periodo": "2025-01",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 0
+      },
+      {
+        "periodo": "2025-02",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 1,
+        "cantidad_pensionistas": 0,
+        "total": 1
+      },
+      {
+        "periodo": "2025-03",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 0
+      },
+      {
+        "periodo": "2025-04",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 0
+      },
+      {
+        "periodo": "2025-05",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 0
+      },
+      {
+        "periodo": "2025-06",
+        "cantidad_trabajadores": 0,
+        "cantidad_prestadores_servicio": 0,
+        "cantidad_pensionistas": 0,
+        "total": 0
+      }
+    ],
+    "fecha_consulta": "2025-08-08T15:31:58.330077534-05:00"
+  },
+  "actas_probatorias": {
+    "ruc": "20606454466",
+    "tiene_actas": false,
+    "cantidad_actas": 0,
+    "actas": null,
+    "fecha_consulta": "2025-08-08T15:32:16.480181264-05:00"
+  },
+  "facturas_fisicas": {
+    "ruc": "20606454466",
+    "tiene_autorizacion": false,
+    "autorizaciones": null,
+    "canceladas_o_bajas": null,
+    "fecha_consulta": "2025-08-08T15:32:35.615689311-05:00"
+  },
+  "reactiva_peru": {
+    "ruc": "20606454466",
+    "razon_social": "CONSULTING PERU",
+    "tiene_deuda_coactiva": false,
+    "fecha_actualizacion": "07/08/2025",
+    "referencia_legal": "Decreto Legislativo N° 1455",
+    "fecha_consulta": "2025-08-08T15:33:26.851814254-05:00"
+  },
+  "representantes_legales": {
+    "ruc": "20606454466",
+    "representantes": [
+      {
+        "tipo_documento": "DNI",
+        "numero_documento": "41714305",
+        "nombre_completo": "MOREYRA MARINO ELIAS ELE",
+        "cargo": "GERENTE GENERAL",
+        "fecha_desde": "23/09/2024",
+        "vigente": true
+      }
+    ],
+    "fecha_consulta": "2025-08-08T15:32:53.752349857-05:00"
+  },
+  "fecha_consulta": "2025-08-08T15:30:45.922866089-05:00",
+  "version_api": "1.0.0"
+}
