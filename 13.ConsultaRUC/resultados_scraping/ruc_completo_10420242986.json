@@ -20,17 +20,17 @@
       "RECIBO POR HONORARIOS",
       "BOLETA DE VENTA"
     ],
-    "sistema_emision_electronica": "RECIBO POR HONORARIO (desde 17/02/2017)",
+    "sistema_emision_electronica": [
+      "RECIBOS POR HONORARIOS AFILIADO DESDE 17/02/2017"
+    ],
     "emisor_electronico_desde": "17/02/2017",
     "comprobantes_electronicos": [
-      "RECIBOS POR HONORARIOS AFILIADO DESDE 17/02/2017"
+      "RECIBO POR HONORARIO (desde 17/02/2017)"
     ],
     "afiliado_ple": "-",
     "padrones": null
   },
   "informacion_historica": {
-    "ruc": "10420242986",
-    "razon_social": "",
     "fecha_actualizada": "",
     "razones_sociales": null,
     "condiciones": [
@@ -45,43 +45,32 @@
         "direccion": "No hay Información",
         "fecha_de_baja": "-"
       }
-    ],
-    "fecha_consulta": "2025-08-08T14:34:25.735450165-05:00"
+    ]
   },
   "deuda_coactiva": {
-    "ruc": "10420242986",
     "total_deuda": 0,
     "cantidad_documentos": 0,
-    "deudas": null,
-    "fecha_consulta": "2025-08-08T14:34:07.617603372-05:00"
+    "deudas": null
   },
   "omisiones_tributarias": {
-    "ruc": "10420242986",
     "tiene_omisiones": false,
     "cantidad_omisiones": 0,
-    "omisiones": null,
-    "fecha_consulta": "2025-08-08T14:34:43.845742761-05:00"
+    "omisiones": null
   },
   "cantidad_trabajadores": {
-    "ruc": "10420242986",
     "periodos_disponibles": null,
-    "detalle_por_periodo": null,
-    "fecha_consulta": "2025-08-08T14:35:01.931065659-05:00"
+    "detalle_por_periodo": null
   },
   "actas_probatorias": {
-    "ruc": "10420242986",
     "tiene_actas": false,
     "cantidad_actas": 0,
-    "actas": null,
-    "fecha_consulta": "2025-08-08T14:35:23.199594913-05:00"
+    "actas": null
   },
   "facturas_fisicas": {
-    "ruc": "10420242986",
     "tiene_autorizacion": false,
     "autorizaciones": null,
-    "canceladas_o_bajas": null,
-    "fecha_consulta": "2025-08-08T14:35:42.314201162-05:00"
+    "canceladas_o_bajas": null
   },
-  "fecha_consulta": "2025-08-08T14:33:49.55594592-05:00",
+  "fecha_consulta": "2025-08-11T16:07:33.662135513-05:00",
   "version_api": "1.0.0"
 }

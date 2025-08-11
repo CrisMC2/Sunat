@@ -79,7 +79,6 @@ CREATE TABLE ruc_consultas (
 CREATE TABLE ruc_informacion_historica (
     id BIGSERIAL PRIMARY KEY,
     ruc_id BIGINT NOT NULL REFERENCES ruc_informacion_basica(id) ON DELETE CASCADE,
-    fecha_actualizada DATE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

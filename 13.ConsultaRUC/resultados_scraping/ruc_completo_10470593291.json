@@ -19,49 +19,64 @@
     "comprobantes_pago": [
       "RECIBO POR HONORARIOS"
     ],
-    "sistema_emision_electronica": "RECIBO POR HONORARIO (desde 28/09/2015),BOLETA (desde 06/03/2023)",
-    "emisor_electronico_desde": "28/09/2015",
-    "comprobantes_electronicos": [
+    "sistema_emision_electronica": [
       "BOLETA PORTAL DESDE 06/03/2023",
       "RECIBOS POR HONORARIOS AFILIADO DESDE 28/09/2015"
+    ],
+    "emisor_electronico_desde": "28/09/2015",
+    "comprobantes_electronicos": [
+      "RECIBO POR HONORARIO (desde 28/09/2015)",
+      "BOLETA (desde 06/03/2023)"
     ],
     "afiliado_ple": "-",
     "padrones": null
   },
+  "informacion_historica": {
+    "fecha_actualizada": "",
+    "razones_sociales": null,
+    "condiciones": [
+      {
+        "condicion": "HABIDO",
+        "desde": "-",
+        "hasta": "10/12/2010"
+      },
+      {
+        "condicion": "NO HALLADO",
+        "desde": "11/12/2010",
+        "hasta": "28/02/2011"
+      }
+    ],
+    "domicilios": [
+      {
+        "direccion": "No hay Información",
+        "fecha_de_baja": "-"
+      }
+    ]
+  },
   "deuda_coactiva": {
-    "ruc": "10470593291",
     "total_deuda": 0,
     "cantidad_documentos": 0,
-    "deudas": null,
-    "fecha_consulta": "2025-08-08T14:38:24.974298845-05:00"
+    "deudas": null
   },
   "omisiones_tributarias": {
-    "ruc": "10470593291",
     "tiene_omisiones": false,
     "cantidad_omisiones": 0,
-    "omisiones": null,
-    "fecha_consulta": "2025-08-08T14:39:12.352351519-05:00"
+    "omisiones": null
   },
   "cantidad_trabajadores": {
-    "ruc": "10470593291",
     "periodos_disponibles": null,
-    "detalle_por_periodo": null,
-    "fecha_consulta": "2025-08-08T14:39:30.458805478-05:00"
+    "detalle_por_periodo": null
   },
   "actas_probatorias": {
-    "ruc": "10470593291",
     "tiene_actas": false,
     "cantidad_actas": 0,
-    "actas": null,
-    "fecha_consulta": "2025-08-08T14:39:48.565068903-05:00"
+    "actas": null
   },
   "facturas_fisicas": {
-    "ruc": "10470593291",
     "tiene_autorizacion": false,
     "autorizaciones": null,
-    "canceladas_o_bajas": null,
-    "fecha_consulta": "2025-08-08T14:40:07.67455556-05:00"
+    "canceladas_o_bajas": null
   },
-  "fecha_consulta": "2025-08-08T14:38:06.918421403-05:00",
+  "fecha_consulta": "2025-08-11T16:14:52.82504117-05:00",
   "version_api": "1.0.0"
 }

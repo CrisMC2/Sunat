@@ -16,17 +16,17 @@
       "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL"
     ],
     "comprobantes_pago": null,
-    "sistema_emision_electronica": "RECIBO POR HONORARIO (desde 03/07/2023)",
+    "sistema_emision_electronica": [
+      "RECIBOS POR HONORARIOS AFILIADO DESDE 03/07/2023"
+    ],
     "emisor_electronico_desde": "03/07/2023",
     "comprobantes_electronicos": [
-      "RECIBOS POR HONORARIOS AFILIADO DESDE 03/07/2023"
+      "RECIBO POR HONORARIO (desde 03/07/2023)"
     ],
     "afiliado_ple": "-",
     "padrones": null
   },
   "informacion_historica": {
-    "ruc": "10758787651",
-    "razon_social": "",
     "fecha_actualizada": "",
     "razones_sociales": null,
     "condiciones": [
@@ -41,23 +41,32 @@
         "direccion": "No hay Información",
         "fecha_de_baja": "-"
       }
-    ],
-    "fecha_consulta": "2025-08-08T14:56:35.544973428-05:00"
+    ]
   },
   "deuda_coactiva": {
-    "ruc": "10758787651",
     "total_deuda": 0,
     "cantidad_documentos": 0,
-    "deudas": null,
-    "fecha_consulta": "2025-08-08T14:56:17.456240286-05:00"
+    "deudas": null
   },
   "omisiones_tributarias": {
-    "ruc": "10758787651",
     "tiene_omisiones": false,
     "cantidad_omisiones": 0,
-    "omisiones": null,
-    "fecha_consulta": "2025-08-08T14:56:53.675687773-05:00"
+    "omisiones": null
   },
-  "fecha_consulta": "2025-08-08T14:55:59.379462989-05:00",
+  "cantidad_trabajadores": {
+    "periodos_disponibles": null,
+    "detalle_por_periodo": null
+  },
+  "actas_probatorias": {
+    "tiene_actas": false,
+    "cantidad_actas": 0,
+    "actas": null
+  },
+  "facturas_fisicas": {
+    "tiene_autorizacion": false,
+    "autorizaciones": null,
+    "canceladas_o_bajas": null
+  },
+  "fecha_consulta": "2025-08-11T16:38:47.745981632-05:00",
   "version_api": "1.0.0"
 }

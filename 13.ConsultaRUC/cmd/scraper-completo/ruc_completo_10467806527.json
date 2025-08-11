@@ -1,27 +1,27 @@
 {
   "informacion_basica": {
-    "ruc": "10729620730",
-    "razon_social": "DONAYRE MENDOZA ROLANDO TITO",
+    "ruc": "10467806527",
+    "razon_social": "HUANCA PERALTA JOSE LIDER",
     "tipo_contribuyente": "PERSONA NATURAL SIN NEGOCIO",
-    "nombre_comercial": "-",
-    "fecha_inscripcion": "29/06/2021",
-    "fecha_inicio_actividades": "02/05/2021",
+    "nombre_comercial": "HUANCA PERALTA JOSE LIDER",
+    "fecha_inscripcion": "26/03/2015",
+    "fecha_inicio_actividades": "01/03/2015",
     "estado": "ACTIVO",
     "condicion": "HABIDO",
     "domicilio_fiscal": "-",
-    "sistema_emision": "-",
+    "sistema_emision": "MANUAL/COMPUTARIZADO",
     "actividad_comercio_exterior": "SIN ACTIVIDAD",
-    "sistema_contabilidad": "-",
+    "sistema_contabilidad": "COMPUTARIZADO",
     "actividades_economicas": [
       "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL"
     ],
     "comprobantes_pago": null,
     "sistema_emision_electronica": [
-      "RECIBOS POR HONORARIOS AFILIADO DESDE 01/07/2021"
+      "RECIBOS POR HONORARIOS AFILIADO DESDE 31/03/2015"
     ],
-    "emisor_electronico_desde": "01/07/2021",
+    "emisor_electronico_desde": "31/03/2015",
     "comprobantes_electronicos": [
-      "RECIBO POR HONORARIO (desde 01/07/2021)"
+      "RECIBO POR HONORARIO (desde 31/03/2015)"
     ],
     "afiliado_ple": "-",
     "padrones": null
@@ -67,6 +67,6 @@
     "autorizaciones": null,
     "canceladas_o_bajas": null
   },
-  "fecha_consulta": "2025-08-11T16:31:25.675628052-05:00",
+  "fecha_consulta": "2025-08-11T15:51:51.342514443-05:00",
   "version_api": "1.0.0"
 }

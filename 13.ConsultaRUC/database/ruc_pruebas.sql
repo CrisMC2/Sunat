@@ -16,3 +16,9 @@ CREATE TABLE empresas_sunat (
     distrito VARCHAR(50),
     periodo_publicacion CHAR(6)
 );
+
+-- Crear la tabla ruc_pruebas
+CREATE TABLE IF NOT EXISTS ruc_pruebas (
+    id SERIAL PRIMARY KEY,
+    ruc VARCHAR(11) NOT NULL UNIQUE  -- UNIQUE constraint agregada
+);

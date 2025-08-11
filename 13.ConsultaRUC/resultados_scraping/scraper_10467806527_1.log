@@ -1,0 +1,19 @@
+
+=== Consultando RUC: 10467806527 ===
+
+1. Información Completa (todas las consultas):
+   Obteniendo toda la información disponible...
+panic: navigation failed: net::ERR_CERT_VERIFIER_CHANGED
+
+goroutine 1 [running]:
+github.com/go-rod/rod/lib/utils.init.func2({0x81ade0?, 0xc00022b0e0?})
+	/home/cristhianm/go/pkg/mod/github.com/go-rod/rod@v0.114.5/lib/utils/utils.go:68 +0x1d
+github.com/consulta-ruc-scraper/pkg/scraper.NewSUNATScraper.New.(*Browser).WithPanic.genE.func1({0xc00022b1f0?, 0x51?, 0x0?})
+	/home/cristhianm/go/pkg/mod/github.com/go-rod/rod@v0.114.5/must.go:37 +0x62
+github.com/go-rod/rod.(*Browser).MustPage(0xc0002427e0, {0xc00013bb98?, 0x413465?, 0x0?})
+	/home/cristhianm/go/pkg/mod/github.com/go-rod/rod@v0.114.5/must.go:72 +0xd2
+github.com/consulta-ruc-scraper/pkg/scraper.(*ScraperExtendido).ScrapeRUCCompleto(0xc00013bec0, {0x7ffe2b9dc886, 0xb})
+	/home/cristhianm/Downloads/13.ConsultaRUC/13.ConsultaRUC/pkg/scraper/scraper_extendido.go:39 +0x95
+main.main()
+	/home/cristhianm/Downloads/13.ConsultaRUC/13.ConsultaRUC/cmd/scraper-completo/main.go:33 +0x27d
+exit status 2

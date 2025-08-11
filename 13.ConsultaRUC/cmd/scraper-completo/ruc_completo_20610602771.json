@@ -1,67 +1,88 @@
 {
   "informacion_basica": {
-    "ruc": "20606454466",
-    "razon_social": "CONSULTING PERU",
-    "tipo_contribuyente": "SOCIEDAD ANONIMA CERRADA",
+    "ruc": "20610602771",
+    "razon_social": "REPRESENTACIONES VALDERRAMA E.I.R.L.",
+    "tipo_contribuyente": "EMPRESA INDIVIDUAL DE RESP. LTDA",
     "nombre_comercial": "-",
-    "fecha_inscripcion": "03/09/2020",
-    "fecha_inicio_actividades": "01/09/2020",
+    "fecha_inscripcion": "14/02/2023",
+    "fecha_inicio_actividades": "01/02/2023",
     "estado": "ACTIVO",
-    "condicion": "HABIDO",
-    "domicilio_fiscal": "JR. IPARIA NRO. 1769 OTR. IPARIA (OFICINA 601) UCAYALI - CORONEL PORTILLO - YARINACOCHA",
+    "condicion": "NO HABIDO\nDeberá declarar el nuevo domicilio fiscal o confirmar el señalado en el RUC. Para ello, deberá acercarse a los Centros de Servicios al Contribuyente con los documentos que sustenten el nuevo domicilio.",
+    "domicilio_fiscal": "JR. PUNO NRO. 466 CERCADO DE LIMA LIMA - LIMA - LIMA",
     "sistema_emision": "COMPUTARIZADO",
     "actividad_comercio_exterior": "SIN ACTIVIDAD",
-    "sistema_contabilidad": "COMPUTARIZADO",
+    "sistema_contabilidad": "MANUAL",
     "actividades_economicas": [
-      "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL"
+      "Principal - 4663 - VENTA AL POR MAYOR DE MATERIALES DE CONSTRUCCIÓN, ARTÍCULOS DE FERRETERÍA Y EQUIPO Y MATERIALES DE FONTANERÍA Y CALEFACCIÓN",
+      "Secundaria 1 - 4530 - VENTA DE PARTES, PIEZAS Y ACCESORIOS PARA VEHÍCULOS AUTOMOTORES",
+      "Secundaria 2 - 4659 - VENTA AL POR MAYOR DE OTROS TIPOS DE MAQUINARIA Y EQUIPO"
     ],
     "comprobantes_pago": null,
-    "sistema_emision_electronica": "FACTURA (desde 26/01/2022),BOLETA (desde 04/02/2022)",
-    "emisor_electronico_desde": "26/01/2022",
+    "sistema_emision_electronica": [
+      "FACTURA PORTAL DESDE 28/03/2023",
+      "BOLETA PORTAL DESDE 31/05/2023",
+      "DESDE LOS SISTEMAS DEL CONTRIBUYENTE. AUTORIZ DESDE 22/03/2023"
+    ],
+    "emisor_electronico_desde": "22/03/2023",
     "comprobantes_electronicos": [
-      "FACTURA PORTAL DESDE 26/01/2022",
-      "DESDE LOS SISTEMAS DEL CONTRIBUYENTE. AUTORIZ DESDE 04/02/2022",
-      "SEE-FACTURADOR . AUTORIZ DESDE 15/02/2022"
+      "FACTURA (desde 22/03/2023)",
+      "BOLETA (desde 22/03/2023)"
     ],
     "afiliado_ple": "-",
     "padrones": null
   },
   "informacion_historica": {
-    "ruc": "20606454466",
-    "razon_social": "",
     "fecha_actualizada": "",
     "razones_sociales": null,
     "condiciones": [
       {
         "condicion": "HABIDO",
-        "desde": "-",
-        "hasta": "24/09/2020"
+        "desde": "06/03/2023",
+        "hasta": "14/10/2024"
+      },
+      {
+        "condicion": "NO HALLADO",
+        "desde": "15/10/2024",
+        "hasta": "01/12/2024"
       }
     ],
     "domicilios": [
       {
-        "direccion": "CAL.LAS CASAS NRO. 146 LIMA-LIMA-SAN ISIDRO",
-        "fecha_de_baja": "24/09/2020"
+        "direccion": "No hay Información",
+        "fecha_de_baja": "-"
       }
-    ],
-    "fecha_consulta": "2025-08-08T15:31:22.100977753-05:00"
+    ]
   },
   "deuda_coactiva": {
-    "ruc": "20606454466",
-    "total_deuda": 0,
-    "cantidad_documentos": 0,
-    "deudas": null,
-    "fecha_consulta": "2025-08-08T15:31:03.993137686-05:00"
+    "total_deuda": 11018,
+    "cantidad_documentos": 3,
+    "deudas": [
+      {
+        "monto": 45,
+        "periodo_tributario": "2024 - 01",
+        "fecha_inicio_cobranza": "24/04/2024",
+        "entidad": "Tesoro Público"
+      },
+      {
+        "monto": 5232,
+        "periodo_tributario": "2025 - 03",
+        "fecha_inicio_cobranza": "15/05/2025",
+        "entidad": "Tesoro Público"
+      },
+      {
+        "monto": 5741,
+        "periodo_tributario": "2025 - 04",
+        "fecha_inicio_cobranza": "29/05/2025",
+        "entidad": "Essalud"
+      }
+    ]
   },
   "omisiones_tributarias": {
-    "ruc": "20606454466",
     "tiene_omisiones": false,
     "cantidad_omisiones": 0,
-    "omisiones": null,
-    "fecha_consulta": "2025-08-08T15:31:40.213757-05:00"
+    "omisiones": null
   },
   "cantidad_trabajadores": {
-    "ruc": "20606454466",
     "periodos_disponibles": [
       "2024-07",
       "2024-08",
@@ -79,17 +100,17 @@
     "detalle_por_periodo": [
       {
         "periodo": "2024-07",
-        "cantidad_trabajadores": 0,
+        "cantidad_trabajadores": 2,
         "cantidad_prestadores_servicio": 0,
         "cantidad_pensionistas": 0,
-        "total": 0
+        "total": 2
       },
       {
         "periodo": "2024-08",
-        "cantidad_trabajadores": 0,
+        "cantidad_trabajadores": 2,
         "cantidad_prestadores_servicio": 0,
         "cantidad_pensionistas": 0,
-        "total": 0
+        "total": 2
       },
       {
         "periodo": "2024-09",
@@ -129,9 +150,9 @@
       {
         "periodo": "2025-02",
         "cantidad_trabajadores": 0,
-        "cantidad_prestadores_servicio": 1,
+        "cantidad_prestadores_servicio": 0,
         "cantidad_pensionistas": 0,
-        "total": 1
+        "total": 0
       },
       {
         "periodo": "2025-03",
@@ -161,45 +182,36 @@
         "cantidad_pensionistas": 0,
         "total": 0
       }
-    ],
-    "fecha_consulta": "2025-08-08T15:31:58.330077534-05:00"
+    ]
   },
   "actas_probatorias": {
-    "ruc": "20606454466",
     "tiene_actas": false,
     "cantidad_actas": 0,
-    "actas": null,
-    "fecha_consulta": "2025-08-08T15:32:16.480181264-05:00"
+    "actas": null
   },
   "facturas_fisicas": {
-    "ruc": "20606454466",
     "tiene_autorizacion": false,
     "autorizaciones": null,
-    "canceladas_o_bajas": null,
-    "fecha_consulta": "2025-08-08T15:32:35.615689311-05:00"
+    "canceladas_o_bajas": null
   },
   "reactiva_peru": {
-    "ruc": "20606454466",
-    "razon_social": "CONSULTING PERU",
+    "razon_social": "REPRESENTACIONES VALDERRAMA E.I.R.L.",
     "tiene_deuda_coactiva": false,
-    "fecha_actualizacion": "07/08/2025",
-    "referencia_legal": "Decreto Legislativo N° 1455",
-    "fecha_consulta": "2025-08-08T15:33:26.851814254-05:00"
+    "fecha_actualizacion": "10/08/2025",
+    "referencia_legal": "Decreto Legislativo N° 1455"
   },
   "representantes_legales": {
-    "ruc": "20606454466",
     "representantes": [
       {
         "tipo_documento": "DNI",
-        "numero_documento": "41714305",
-        "nombre_completo": "MOREYRA MARINO ELIAS ELE",
-        "cargo": "GERENTE GENERAL",
-        "fecha_desde": "23/09/2024",
+        "numero_documento": "46055658",
+        "nombre_completo": "JARA VALDERRAMA ENMA",
+        "cargo": "TITULAR-GERENTE",
+        "fecha_desde": "07/02/2023",
         "vigente": true
       }
-    ],
-    "fecha_consulta": "2025-08-08T15:32:53.752349857-05:00"
+    ]
   },
-  "fecha_consulta": "2025-08-08T15:30:45.922866089-05:00",
+  "fecha_consulta": "2025-08-11T15:15:39.279837665-05:00",
   "version_api": "1.0.0"
 }

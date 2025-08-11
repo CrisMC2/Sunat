@@ -16,17 +16,17 @@
       "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL"
     ],
     "comprobantes_pago": null,
-    "sistema_emision_electronica": "RECIBO POR HONORARIO (desde 31/03/2015)",
+    "sistema_emision_electronica": [
+      "RECIBOS POR HONORARIOS AFILIADO DESDE 31/03/2015"
+    ],
     "emisor_electronico_desde": "31/03/2015",
     "comprobantes_electronicos": [
-      "RECIBOS POR HONORARIOS AFILIADO DESDE 31/03/2015"
+      "RECIBO POR HONORARIO (desde 31/03/2015)"
     ],
     "afiliado_ple": "-",
     "padrones": null
   },
   "informacion_historica": {
-    "ruc": "10467806527",
-    "razon_social": "",
     "fecha_actualizada": "",
     "razones_sociales": null,
     "condiciones": [
@@ -41,43 +41,32 @@
         "direccion": "No hay Información",
         "fecha_de_baja": "-"
       }
-    ],
-    "fecha_consulta": "2025-08-08T14:36:37.033564469-05:00"
+    ]
   },
   "deuda_coactiva": {
-    "ruc": "10467806527",
     "total_deuda": 0,
     "cantidad_documentos": 0,
-    "deudas": null,
-    "fecha_consulta": "2025-08-08T14:36:18.940375672-05:00"
+    "deudas": null
   },
   "omisiones_tributarias": {
-    "ruc": "10467806527",
     "tiene_omisiones": false,
     "cantidad_omisiones": 0,
-    "omisiones": null,
-    "fecha_consulta": "2025-08-08T14:36:55.170828918-05:00"
+    "omisiones": null
   },
   "cantidad_trabajadores": {
-    "ruc": "10467806527",
     "periodos_disponibles": null,
-    "detalle_por_periodo": null,
-    "fecha_consulta": "2025-08-08T14:37:13.28034039-05:00"
+    "detalle_por_periodo": null
   },
   "actas_probatorias": {
-    "ruc": "10467806527",
     "tiene_actas": false,
     "cantidad_actas": 0,
-    "actas": null,
-    "fecha_consulta": "2025-08-08T14:37:31.362762875-05:00"
+    "actas": null
   },
   "facturas_fisicas": {
-    "ruc": "10467806527",
     "tiene_autorizacion": false,
     "autorizaciones": null,
-    "canceladas_o_bajas": null,
-    "fecha_consulta": "2025-08-08T14:37:50.508664944-05:00"
+    "canceladas_o_bajas": null
   },
-  "fecha_consulta": "2025-08-08T14:36:00.892811572-05:00",
+  "fecha_consulta": "2025-08-11T16:12:41.174706136-05:00",
   "version_api": "1.0.0"
 }

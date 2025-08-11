@@ -1,0 +1,14 @@
+=== LOG DE ERRORES - lun 11 ago 2025 16:05:06 -05 ===
+[0;31m[ERROR][0m [1/26] RUC 10420242986: Error del scraper (código: 1, 122s, intento 1)
+[0;31m[ERROR][0m Detalles del error:
+[0;31m[ERROR][0m   panic: context canceled
+[0;31m[ERROR][0m   github.com/consulta-ruc-scraper/pkg/scraper.NewSUNATScraper.New.(*Browser).WithPanic.genE.func1({0xc0005044b0?, 0xc000047930?, 0x1?})
+[0;31m[ERROR][0m [2/26] RUC 10467806527: Error del scraper (código: 1, 78s, intento 1)
+[0;31m[ERROR][0m Detalles del error:
+[0;31m[ERROR][0m   panic: navigation failed: net::ERR_CERT_VERIFIER_CHANGED
+[0;31m[ERROR][0m   github.com/consulta-ruc-scraper/pkg/scraper.NewSUNATScraper.New.(*Browser).WithPanic.genE.func1({0xc00022b1f0?, 0x51?, 0x0?})
+[0;31m[ERROR][0m [8/26] RUC 10729620730: Timeout (>300s, intento 1)
+[0;31m[ERROR][0m [14/26] RUC 10776888813: Error del scraper (código: 1, 74s, intento 1)
+[0;31m[ERROR][0m Detalles del error:
+[0;31m[ERROR][0m   panic: navigation failed: net::ERR_CERT_VERIFIER_CHANGED
+[0;31m[ERROR][0m   github.com/consulta-ruc-scraper/pkg/scraper.NewSUNATScraper.New.(*Browser).WithPanic.genE.func1({0xc00011ea20?, 0x51?, 0x0?})

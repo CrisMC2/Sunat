@@ -2,10 +2,9 @@ package models
 
 // InformacionHistorica representa los cambios históricos del RUC
 type InformacionHistorica struct {
-	FechaActualizada string                     `json:"fecha_actualizada"` // "07/08/2025"
-	RazonesSociales  []RazonSocialHistorica     `json:"razones_sociales"`
-	Condiciones      []CondicionHistorica       `json:"condiciones"`
-	Domicilios       []DomicilioFiscalHistorico `json:"domicilios"`
+	RazonesSociales []RazonSocialHistorica     `json:"razones_sociales"`
+	Condiciones     []CondicionHistorica       `json:"condiciones"`
+	Domicilios      []DomicilioFiscalHistorico `json:"domicilios"`
 }
 
 type RazonSocialHistorica struct {

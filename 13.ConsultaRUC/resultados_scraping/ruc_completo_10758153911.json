@@ -16,14 +16,57 @@
       "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL"
     ],
     "comprobantes_pago": null,
-    "sistema_emision_electronica": "RECIBO POR HONORARIO (desde 27/11/2024)",
+    "sistema_emision_electronica": [
+      "RECIBOS POR HONORARIOS AFILIADO DESDE 27/11/2024"
+    ],
     "emisor_electronico_desde": "27/11/2024",
     "comprobantes_electronicos": [
-      "RECIBOS POR HONORARIOS AFILIADO DESDE 27/11/2024"
+      "RECIBO POR HONORARIO (desde 27/11/2024)"
     ],
     "afiliado_ple": "-",
     "padrones": null
   },
-  "fecha_consulta": "2025-08-08T14:53:50.304176731-05:00",
+  "informacion_historica": {
+    "fecha_actualizada": "",
+    "razones_sociales": null,
+    "condiciones": [
+      {
+        "condicion": "No hay Información",
+        "desde": "-",
+        "hasta": "-"
+      }
+    ],
+    "domicilios": [
+      {
+        "direccion": "No hay Información",
+        "fecha_de_baja": "-"
+      }
+    ]
+  },
+  "deuda_coactiva": {
+    "total_deuda": 0,
+    "cantidad_documentos": 0,
+    "deudas": null
+  },
+  "omisiones_tributarias": {
+    "tiene_omisiones": false,
+    "cantidad_omisiones": 0,
+    "omisiones": null
+  },
+  "cantidad_trabajadores": {
+    "periodos_disponibles": null,
+    "detalle_por_periodo": null
+  },
+  "actas_probatorias": {
+    "tiene_actas": false,
+    "cantidad_actas": 0,
+    "actas": null
+  },
+  "facturas_fisicas": {
+    "tiene_autorizacion": false,
+    "autorizaciones": null,
+    "canceladas_o_bajas": null
+  },
+  "fecha_consulta": "2025-08-11T16:36:36.277390436-05:00",
   "version_api": "1.0.0"
 }
