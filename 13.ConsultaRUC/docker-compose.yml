@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  scraper:
+    build: .
+    volumes:
+      - ./output:/app
+    environment:
+      - DISPLAY=host.docker.internal:0
+    command: ["20606316977"]

@@ -1,0 +1,70 @@
+{
+  "informacion_basica": {
+    "ruc": "10719706288",
+    "razon_social": "MEDINA MALDONADO BLANCA NELIDA",
+    "tipo_contribuyente": "PERSONA NATURAL SIN NEGOCIO",
+    "nombre_comercial": "-",
+    "fecha_inscripcion": "22/11/2022",
+    "fecha_inicio_actividades": "14/07/2022",
+    "estado": "ACTIVO",
+    "condicion": "HABIDO",
+    "domicilio_fiscal": "-",
+    "sistema_emision": "-",
+    "actividad_comercio_exterior": "SIN ACTIVIDAD",
+    "sistema_contabilidad": "-",
+    "actividades_economicas": [
+      "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL"
+    ],
+    "comprobantes_pago": null,
+    "sistema_emision_electronica": "RECIBO POR HONORARIO (desde 30/11/2022)",
+    "emisor_electronico_desde": "30/11/2022",
+    "comprobantes_electronicos": [
+      "RECIBOS POR HONORARIOS AFILIADO DESDE 30/11/2022"
+    ],
+    "afiliado_ple": "-",
+    "padrones": null
+  },
+  "informacion_historica": {
+    "ruc": "",
+    "cambios_razon_social": null,
+    "cambios_domicilio": null,
+    "cambios_estado": null,
+    "cambios_condicion": null,
+    "actividades_historicas": null
+  },
+  "deuda_coactiva": {
+    "ruc": "",
+    "total_deuda": 0,
+    "cantidad_documentos": 0,
+    "deudas": null,
+    "fecha_consulta": "2025-08-02T23:28:36.269703-05:00"
+  },
+  "omisiones_tributarias": {
+    "ruc": "",
+    "tiene_omisiones": false,
+    "cantidad_omisiones": 0,
+    "omisiones": null,
+    "fecha_consulta": "2025-08-02T23:28:41.335464-05:00"
+  },
+  "cantidad_trabajadores": {
+    "ruc": "",
+    "periodos_disponibles": null,
+    "detalle_por_periodo": null,
+    "fecha_consulta": "2025-08-02T23:28:46.404611-05:00"
+  },
+  "actas_probatorias": {
+    "ruc": "",
+    "tiene_actas": false,
+    "cantidad_actas": 0,
+    "actas": null,
+    "fecha_consulta": "2025-08-02T23:28:51.472908-05:00"
+  },
+  "facturas_fisicas": {
+    "ruc": "",
+    "tiene_autorizacion": false,
+    "autorizaciones": null,
+    "fecha_consulta": "2025-08-02T23:28:56.537856-05:00"
+  },
+  "fecha_consulta": "2025-08-02T23:28:28.039778-05:00",
+  "version_api": "2.0"
+}

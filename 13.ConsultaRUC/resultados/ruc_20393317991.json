@@ -1,0 +1,29 @@
+{
+  "ruc": "20393317991",
+  "razon_social": "C.P.C. AUDITORES S.A.C.",
+  "tipo_contribuyente": "SOCIEDAD ANONIMA CERRADA",
+  "nombre_comercial": "-",
+  "fecha_inscripcion": "24/01/2007",
+  "fecha_inicio_actividades": "03/05/2007",
+  "estado": "ACTIVO",
+  "condicion": "HABIDO",
+  "domicilio_fiscal": "JR. PROLONGACIÓN GUILLERMO LUMBRERAS MZA. 201 LOTE. 01 U.V. CASA BLANCA (CRUCE AV. YARINA Y AV. MIRAFLORES) UCAYALI - CORONEL PORTILLO - YARINACOCHA",
+  "sistema_emision": "MANUAL",
+  "actividad_comercio_exterior": "SIN ACTIVIDAD",
+  "sistema_contabilidad": "MANUAL",
+  "actividades_economicas": [
+    "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL"
+  ],
+  "comprobantes_pago": [
+    "FACTURA",
+    "BOLETA DE VENTA",
+    "NOTA DE CREDITO"
+  ],
+  "sistema_emision_electronica": "FACTURA (desde 19/10/2011)",
+  "emisor_electronico_desde": "19/10/2011",
+  "comprobantes_electronicos": [
+    "FACTURA PORTAL DESDE 19/10/2011"
+  ],
+  "afiliado_ple": "-",
+  "padrones": null
+}

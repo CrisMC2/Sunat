@@ -1,0 +1,27 @@
+{
+  "ruc": "20606454466",
+  "razon_social": "CONSULTING PERU",
+  "tipo_contribuyente": "SOCIEDAD ANONIMA CERRADA",
+  "nombre_comercial": "-",
+  "fecha_inscripcion": "03/09/2020",
+  "fecha_inicio_actividades": "01/09/2020",
+  "estado": "ACTIVO",
+  "condicion": "HABIDO",
+  "domicilio_fiscal": "JR. IPARIA NRO. 1769 OTR. IPARIA (OFICINA 601) UCAYALI - CORONEL PORTILLO - YARINACOCHA",
+  "sistema_emision": "COMPUTARIZADO",
+  "actividad_comercio_exterior": "SIN ACTIVIDAD",
+  "sistema_contabilidad": "COMPUTARIZADO",
+  "actividades_economicas": [
+    "Principal - 6920 - ACTIVIDADES DE CONTABILIDAD, TENEDURÍA DE LIBROS Y AUDITORÍA; CONSULTORÍA FISCAL"
+  ],
+  "comprobantes_pago": null,
+  "sistema_emision_electronica": "FACTURA (desde 26/01/2022),BOLETA (desde 04/02/2022)",
+  "emisor_electronico_desde": "26/01/2022",
+  "comprobantes_electronicos": [
+    "FACTURA PORTAL DESDE 26/01/2022",
+    "DESDE LOS SISTEMAS DEL CONTRIBUYENTE. AUTORIZ DESDE 04/02/2022",
+    "SEE-FACTURADOR . AUTORIZ DESDE 15/02/2022"
+  ],
+  "afiliado_ple": "-",
+  "padrones": null
+}
