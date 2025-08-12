@@ -35,7 +35,6 @@ func NewScraperExtendido() (*ScraperExtendido, error) {
 
 // ScrapeRUCCompleto obtiene toda la información disponible de un RUC
 func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, error) {
-
 	page := s.browser.MustPage(s.baseURL)
 	defer page.MustClose()
 	page.MustWaitLoad()
@@ -45,16 +44,14 @@ func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, e
 	rucInput := page.MustElement("#txtRuc")
 	rucInput.MustWaitVisible()
 	rucInput.MustInput(ruc)
-
 	searchBtn := page.MustElement("#btnAceptar")
 	searchBtn.MustWaitVisible()
 	searchBtn.MustClick()
+	time.Sleep(3 * time.Second)
 
-	time.Sleep(5 * time.Second)
-
-	// Consultas disponibles para todos los tipos de RUC
-	fmt.Println("  📋 Consultando información principal...")
-	fmt.Print("    - Información General: ")
+	// Consulta información general (siempre disponible)
+	fmt.Println(" 📋 Consultando información principal...")
+	fmt.Print(" - Información General: ")
 	infob, err := s.ScrapeRUC(ruc, page)
 	if err == nil {
 		fmt.Println("✓")
@@ -69,25 +66,17 @@ func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, e
 		VersionAPI:        "1.0.0",
 	}
 
-	// Determinar qué consultas están disponibles según el tipo de RUC
+	// Determinar tipo de RUC
 	esPersonaJuridica := strings.HasPrefix(ruc, "20")
+	fmt.Printf(" ℹ️ RUC %s es: %s\n", ruc, map[bool]string{true: "Persona Jurídica", false: "Persona Natural"}[esPersonaJuridica])
 
-	fmt.Printf("  ℹ️  RUC %s es: %s\n", ruc, map[bool]string{true: "Persona Jurídica", false: "Persona Natural"}[esPersonaJuridica])
+	// ========================================
+	// CONSULTAS PRINCIPALES (SIEMPRE DISPONIBLES)
+	// ========================================
+	fmt.Println(" 📋 Consultando información principal obligatoria...")
 
-	// Consultas disponibles para todos los tipos de RUC
-	fmt.Println("  📋 Consultando información adicional...")
-
-	// Deuda Coactiva
-	fmt.Print("    - Deuda Coactiva: ")
-	if deuda, err := s.ScrapeDeudaCoactiva(ruc, page); err == nil {
-		rucCompleto.DeudaCoactiva = deuda
-		fmt.Println("✓")
-	} else {
-		fmt.Printf("✗ (%v)\n", err)
-	}
-
-	// Información Histórica
-	fmt.Print("    - Información Histórica: ")
+	// 1. Información Histórica (PRINCIPAL)
+	fmt.Print(" - Información Histórica: ")
 	if infoHist, err := s.ScrapeInformacionHistorica(ruc, page); err == nil {
 		rucCompleto.InformacionHistorica = infoHist
 		fmt.Println("✓")
@@ -95,8 +84,17 @@ func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, e
 		fmt.Printf("✗ (%v)\n", err)
 	}
 
-	// Omisiones Tributarias
-	fmt.Print("    - Omisiones Tributarias: ")
+	// 2. Deuda Coactiva (PRINCIPAL)
+	fmt.Print(" - Deuda Coactiva: ")
+	if deuda, err := s.ScrapeDeudaCoactiva(ruc, page); err == nil {
+		rucCompleto.DeudaCoactiva = deuda
+		fmt.Println("✓")
+	} else {
+		fmt.Printf("✗ (%v)\n", err)
+	}
+
+	// 3. Omisiones Tributarias (PRINCIPAL)
+	fmt.Print(" - Omisiones Tributarias: ")
 	if omis, err := s.ScrapeOmisionesTributarias(ruc, page); err == nil {
 		rucCompleto.OmisionesTributarias = omis
 		fmt.Println("✓")
@@ -104,8 +102,8 @@ func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, e
 		fmt.Printf("✗ (%v)\n", err)
 	}
 
-	// Cantidad de Trabajadores
-	fmt.Print("    - Cantidad de Trabajadores: ")
+	// 4. Cantidad de Trabajadores (PRINCIPAL)
+	fmt.Print(" - Cantidad de Trabajadores: ")
 	if trab, err := s.ScrapeCantidadTrabajadores(ruc, page); err == nil {
 		rucCompleto.CantidadTrabajadores = trab
 		fmt.Println("✓")
@@ -113,8 +111,8 @@ func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, e
 		fmt.Printf("✗ (%v)\n", err)
 	}
 
-	// Actas Probatorias
-	fmt.Print("    - Actas Probatorias: ")
+	// 5. Actas Probatorias (PRINCIPAL)
+	fmt.Print(" - Actas Probatorias: ")
 	if actas, err := s.ScrapeActasProbatorias(ruc, page); err == nil {
 		rucCompleto.ActasProbatorias = actas
 		fmt.Println("✓")
@@ -122,8 +120,8 @@ func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, e
 		fmt.Printf("✗ (%v)\n", err)
 	}
 
-	// Facturas Físicas
-	fmt.Print("    - Facturas Físicas: ")
+	// 6. Facturas Físicas (PRINCIPAL)
+	fmt.Print(" - Facturas Físicas: ")
 	if fact, err := s.ScrapeFacturasFisicas(ruc, page); err == nil {
 		rucCompleto.FacturasFisicas = fact
 		fmt.Println("✓")
@@ -131,12 +129,15 @@ func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, e
 		fmt.Printf("✗ (%v)\n", err)
 	}
 
-	// Consultas solo disponibles para Personas Jurídicas
+	// ========================================
+	// CONSULTAS ESPECÍFICAS POR TIPO DE RUC
+	// ========================================
 	if esPersonaJuridica {
-		fmt.Println("  📋 Consultando información exclusiva de Personas Jurídicas...")
+		// PERSONAS JURÍDICAS (RUC 20): 3 consultas principales adicionales
+		fmt.Println(" 📋 Consultando información principal de Personas Jurídicas...")
 
-		// Representantes Legales
-		fmt.Print("    - Representantes Legales: ")
+		// 7. Representantes Legales (PRINCIPAL para RUC 20)
+		fmt.Print(" - Representantes Legales: ")
 		if reps, err := s.ScrapeRepresentantesLegales(ruc, page); err == nil {
 			rucCompleto.RepresentantesLegales = reps
 			fmt.Println("✓")
@@ -144,17 +145,8 @@ func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, e
 			fmt.Printf("✗ (%v)\n", err)
 		}
 
-		// Establecimientos Anexos
-		fmt.Print("    - Establecimientos Anexos: ")
-		if estab, err := s.ScrapeEstablecimientosAnexos(ruc, page); err == nil {
-			rucCompleto.EstablecimientosAnexos = estab
-			fmt.Println("✓")
-		} else {
-			fmt.Printf("✗ (%v)\n", err)
-		}
-
-		// Reactiva Perú
-		fmt.Print("    - Reactiva Perú: ")
+		// 8. Reactiva Perú (PRINCIPAL para RUC 20)
+		fmt.Print(" - Reactiva Perú: ")
 		if react, err := s.ScrapeReactivaPeru(ruc, page); err == nil {
 			rucCompleto.ReactivaPeru = react
 			fmt.Println("✓")
@@ -162,8 +154,44 @@ func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, e
 			fmt.Printf("✗ (%v)\n", err)
 		}
 
-		// Programa COVID-19
-		fmt.Print("    - Programa COVID-19: ")
+		// 9. Programa COVID-19 (PRINCIPAL para RUC 20)
+		fmt.Print(" - Programa COVID-19: ")
+		if covid, err := s.ScrapeProgramaCovid19(ruc, page); err == nil {
+			rucCompleto.ProgramaCovid19 = covid
+			fmt.Println("✓")
+		} else {
+			fmt.Printf("✗ (%v)\n", err)
+		}
+
+		// ========================================
+		// CONSULTAS OCASIONALES PARA RUC 20
+		// ========================================
+		fmt.Println(" 📋 Consultando información ocasional de Personas Jurídicas...")
+
+		// Establecimientos Anexos (OCASIONAL para RUC 20)
+		fmt.Print(" - Establecimientos Anexos: ")
+		if estab, err := s.ScrapeEstablecimientosAnexos(ruc, page); err == nil {
+			rucCompleto.EstablecimientosAnexos = estab
+			fmt.Println("✓")
+		} else {
+			fmt.Printf("✗ (%v)\n", err)
+		}
+
+	} else {
+		// PERSONAS NATURALES (RUC 10): consultas ocasionales
+		fmt.Println(" 📋 Consultando información ocasional de Personas Naturales...")
+
+		// Reactiva Perú (OCASIONAL para RUC 10)
+		fmt.Print(" - Reactiva Perú: ")
+		if react, err := s.ScrapeReactivaPeru(ruc, page); err == nil {
+			rucCompleto.ReactivaPeru = react
+			fmt.Println("✓")
+		} else {
+			fmt.Printf("✗ (%v)\n", err)
+		}
+
+		// Programa COVID-19 (OCASIONAL para RUC 10)
+		fmt.Print(" - Programa COVID-19: ")
 		if covid, err := s.ScrapeProgramaCovid19(ruc, page); err == nil {
 			rucCompleto.ProgramaCovid19 = covid
 			fmt.Println("✓")
@@ -177,8 +205,6 @@ func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, e
 
 // ScrapeInformacionHistorica obtiene la información histórica del RUC
 func (s *ScraperExtendido) ScrapeInformacionHistorica(ruc string, page *rod.Page) (*models.InformacionHistorica, error) {
-
-	time.Sleep(5 * time.Second)
 
 	// Buscar el botón usando ElementX (sin Must) con timeout
 	histBtn, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnInfHis')]")
@@ -243,28 +269,24 @@ func (s *ScraperExtendido) ScrapeInformacionHistorica(ruc string, page *rod.Page
 func (s *ScraperExtendido) extractHistoricalInfo(page *rod.Page, info *models.InformacionHistorica) {
 	tables := page.MustElements("table")
 
-	for i, table := range tables {
+	for _, table := range tables {
 		headers := table.MustElements("thead th")
 		if len(headers) == 0 {
 			continue
 		}
 
 		firstHeaderText := strings.ToLower(strings.TrimSpace(headers[0].MustText()))
-		log.Printf("📋 Procesando tabla %d con encabezado: '%s'", i+1, firstHeaderText)
 
 		rows := table.MustElements("tbody tr")
 
 		switch {
 		case strings.Contains(firstHeaderText, "nombre") || strings.Contains(firstHeaderText, "razón social") || strings.Contains(firstHeaderText, "razon social"):
-			log.Println("📝 Procesando razón social histórica...")
 			s.procesarCambiosRazonSocial(rows, info)
 
 		case strings.Contains(firstHeaderText, "condición") && strings.Contains(firstHeaderText, "contribuyente"):
-			log.Println("📊 Procesando condición del contribuyente...")
 			s.procesarCondicionContribuyente(rows, info)
 
 		case strings.Contains(firstHeaderText, "dirección") || strings.Contains(firstHeaderText, "domicilio"):
-			log.Println("🏠 Procesando domicilio fiscal histórico...")
 			s.procesarCambiosDomicilio(rows, info)
 		}
 	}
@@ -283,7 +305,6 @@ func (s *ScraperExtendido) procesarCambiosRazonSocial(rows []*rod.Element, info 
 					FechaDeBaja: fechaBaja,
 				}
 				info.RazonesSociales = append(info.RazonesSociales, cambio)
-				log.Printf("  ✅ Razón social: %s (baja: %s)", nombre, fechaBaja)
 			}
 		}
 	}
@@ -304,7 +325,6 @@ func (s *ScraperExtendido) procesarCondicionContribuyente(rows []*rod.Element, i
 					Hasta:     fechaHasta,
 				}
 				info.Condiciones = append(info.Condiciones, cambio)
-				log.Printf("  ✅ Condición: %s (desde: %s hasta: %s)", condicion, fechaDesde, fechaHasta)
 			}
 		}
 	}
@@ -323,7 +343,6 @@ func (s *ScraperExtendido) procesarCambiosDomicilio(rows []*rod.Element, info *m
 					FechaDeBaja: fechaBaja,
 				}
 				info.Domicilios = append(info.Domicilios, cambio)
-				log.Printf("  ✅ Domicilio: %s (baja: %s)", direccion, fechaBaja)
 			}
 		}
 	}
@@ -331,9 +350,6 @@ func (s *ScraperExtendido) procesarCambiosDomicilio(rows []*rod.Element, info *m
 
 // ScrapeDeudaCoactiva obtiene información de deuda coactiva
 func (s *ScraperExtendido) ScrapeDeudaCoactiva(ruc string, page *rod.Page) (*models.DeudaCoactiva, error) {
-
-	time.Sleep(5 * time.Second)
-
 	// Buscar el botón usando ElementX (sin Must) con timeout
 	deudaBtn, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnInfDeuCoa')]")
 	if err != nil {
@@ -430,8 +446,6 @@ func (s *ScraperExtendido) extractDeudaInfo(page *rod.Page, deuda *models.DeudaC
 
 // ScrapeRepresentantesLegales obtiene información de representantes legales
 func (s *ScraperExtendido) ScrapeRepresentantesLegales(ruc string, page *rod.Page) (*models.RepresentantesLegales, error) {
-
-	time.Sleep(5 * time.Second)
 
 	// Buscar el botón usando ElementX (sin Must) con timeout
 	repButton, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnInfRepLeg')]")
@@ -567,9 +581,6 @@ func contieneCabeceras(headers []string, requeridos []string) bool {
 
 // ScrapeCantidadTrabajadores obtiene información de cantidad de trabajadores
 func (s *ScraperExtendido) ScrapeCantidadTrabajadores(ruc string, page *rod.Page) (*models.CantidadTrabajadores, error) {
-
-	time.Sleep(5 * time.Second)
-
 	// Buscar el botón usando ElementX (sin Must) con timeout
 	trabBtn, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnInfNumTra')]")
 	if err != nil {
@@ -701,8 +712,6 @@ func contains(slice []string, item string) bool {
 
 // ScrapeEstablecimientosAnexos obtiene información de establecimientos anexos
 func (s *ScraperExtendido) ScrapeEstablecimientosAnexos(ruc string, page *rod.Page) (*models.EstablecimientosAnexos, error) {
-
-	time.Sleep(5 * time.Second)
 
 	// Buscar el botón usando ElementX (sin Must) con timeout
 	estabBtn, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnInfLocAnex')]")
@@ -839,7 +848,6 @@ func (s *ScraperExtendido) extractEstablecimientosInfo(page *rod.Page, estab *mo
 
 // ScrapeOmisionesTributarias obtiene información de omisiones tributarias
 func (s *ScraperExtendido) ScrapeOmisionesTributarias(ruc string, page *rod.Page) (*models.OmisionesTributarias, error) {
-	time.Sleep(5 * time.Second)
 
 	// Buscar el botón usando ElementX (sin Must) con timeout
 	omisBtn, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnInfOmiTri')]")
@@ -941,8 +949,6 @@ func (s *ScraperExtendido) extractOmisionesInfo(page *rod.Page, omis *models.Omi
 // ScrapeActasProbatorias obtiene información de actas probatorias
 func (s *ScraperExtendido) ScrapeActasProbatorias(ruc string, page *rod.Page) (*models.ActasProbatorias, error) {
 
-	time.Sleep(5 * time.Second)
-
 	// Buscar el botón usando ElementX (sin Must) con timeout
 	actasBtn, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnInfActPro')]")
 	if err != nil {
@@ -1006,20 +1012,17 @@ func (s *ScraperExtendido) extractActasProbatoriasInfo(page *rod.Page, actas *mo
 	// Buscar la tabla con clase "table"
 	tables := page.MustElements("table.table")
 	if len(tables) == 0 {
-		log.Println("[INFO] No se encontró tabla de Actas Probatorias.")
 		return
 	}
 
 	rows := tables[0].MustElements("tbody tr")
 	if len(rows) == 0 {
-		log.Println("[INFO] La tabla de Actas Probatorias no contiene filas.")
 		return
 	}
 
 	// Verificar si hay mensaje de "no existe información"
 	celdas := rows[0].MustElements("td")
 	if len(celdas) == 1 && strings.Contains(strings.ToLower(celdas[0].MustText()), "no existe información") {
-		log.Println("[INFO] No hay actas probatorias registradas para el contribuyente.")
 		return
 	}
 
@@ -1051,9 +1054,6 @@ func (s *ScraperExtendido) extractActasProbatoriasInfo(page *rod.Page, actas *mo
 
 // ScrapeFacturasFisicas obtiene información de facturas físicas
 func (s *ScraperExtendido) ScrapeFacturasFisicas(ruc string, page *rod.Page) (*models.FacturasFisicas, error) {
-
-	time.Sleep(5 * time.Second)
-
 	// Buscar el botón usando ElementX (sin Must) con timeout - primero XPath
 	facturasBtn, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnInfActCPF')]")
 	if err != nil {
@@ -1226,8 +1226,6 @@ func (s *ScraperExtendido) extractFacturasFisicasInfo(page *rod.Page, facturas *
 // ScrapeReactivaPeru obtiene información del programa Reactiva Perú
 func (s *ScraperExtendido) ScrapeReactivaPeru(ruc string, page *rod.Page) (*models.ReactivaPeru, error) {
 
-	time.Sleep(5 * time.Second)
-
 	// Buscar el botón usando ElementX (sin Must) con timeout
 	reactivaBtn, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnInfReaPer')]")
 	if err != nil {
@@ -1347,8 +1345,6 @@ func (s *ScraperExtendido) extractReactivaPeruInfo(page *rod.Page, reactiva *mod
 
 // ScrapeProgramaCovid19 obtiene información de programas COVID-19
 func (s *ScraperExtendido) ScrapeProgramaCovid19(ruc string, page *rod.Page) (*models.ProgramaCovid19, error) {
-
-	time.Sleep(5 * time.Second)
 
 	// Buscar el botón usando ElementX (sin Must) con timeout
 	covidBtn, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnInfCovid')]")

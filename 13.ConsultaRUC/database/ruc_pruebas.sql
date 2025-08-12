@@ -1,19 +1,19 @@
 CREATE TABLE empresas_sunat (
     ruc BIGINT PRIMARY KEY,
-    estado VARCHAR(20),
-    condicion VARCHAR(20),
-    tipo VARCHAR(50),
-    actividad_economica_ciiu_rev3_principal VARCHAR(255),
-    actividad_economica_ciiu_rev3_secundaria VARCHAR(255),
-    actividad_economica_ciiu_rev4_principal VARCHAR(255),
-    nro_trabajadores VARCHAR(20),
-    tipo_facturacion VARCHAR(20),
-    tipo_contabilidad VARCHAR(20),
-    comercio_exterior VARCHAR(50),
-    ubigeo CHAR(6),
-    departamento VARCHAR(50),
-    provincia VARCHAR(50),
-    distrito VARCHAR(50),
+    estado TEXT,
+    condicion TEXT,
+    tipo TEXT,
+    actividad_economica_ciiu_rev3_principal TEXT,
+    actividad_economica_ciiu_rev3_secundaria TEXT,
+    actividad_economica_ciiu_rev4_principal TEXT,
+    nro_trabajadores TEXT,
+    tipo_facturacion TEXT,
+    tipo_contabilidad TEXT,
+    comercio_exterior TEXT,
+    ubigeo TEXT,
+    departamento TEXT,
+    provincia TEXT,
+    distrito TEXT,
     periodo_publicacion CHAR(6)
 );
 
@@ -21,4 +21,12 @@ CREATE TABLE empresas_sunat (
 CREATE TABLE IF NOT EXISTS ruc_pruebas (
     id SERIAL PRIMARY KEY,
     ruc VARCHAR(11) NOT NULL UNIQUE  -- UNIQUE constraint agregada
+);
+
+CREATE TABLE IF NOT EXISTS log_consultas (
+    id SERIAL PRIMARY KEY,
+    ruc VARCHAR(11) NOT NULL,
+    estado VARCHAR(50) NOT NULL,
+    mensaje TEXT,
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

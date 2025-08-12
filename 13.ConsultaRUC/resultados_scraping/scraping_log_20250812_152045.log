@@ -1,0 +1,30 @@
+=== INICIO OPTIMIZADO - mar 12 ago 2025 15:20:45 -05 ===
+[0;34m[INFO][0m Todos los archivos de log inicializados correctamente
+[0;34m[INFO][0m Verificando dependencias...
+[0;32m[SUCCESS][0m Dependencias verificadas
+[0;34m[INFO][0m Obteniendo conteo total de RUCs pendientes/fallidos...
+[0;32m[SUCCESS][0m Total de RUCs a procesar: 12700226
+[1;33m[WARNING][0m ⚠️  VOLUMEN MUY GRANDE DETECTADO: 12700226 RUCs
+[1;33m[WARNING][0m ⚠️  Esto puede tomar varias horas o días
+[1;33m[WARNING][0m ⚠️  El proceso se ejecutará por lotes de 100 RUCs
+[1;33m[WARNING][0m ⚠️  Tiempo estimado: 211670 - 423340 horas
+[0;34m[INFO][0m === CONFIGURACIÓN OPTIMIZADA ===
+[0;34m[INFO][0m Total de RUCs: 12700226
+[0;34m[INFO][0m Tamaño de lote: 100
+[0;34m[INFO][0m Directorio del scraper: /home/cristhianm/Downloads/13.ConsultaRUC/13.ConsultaRUC/cmd/scraper-completo
+[0;34m[INFO][0m Reintentos máximos: 2
+[0;34m[INFO][0m Timeout por RUC: 60s
+[0;34m[INFO][0m Pausa entre lotes: 10s
+[0;34m[INFO][0m Modo: Procesamiento por lotes (sin saturar memoria)
+[1;33m[WARNING][0m Se encontró archivo de progreso. ¿Reanudar desde donde se quedó?
+[0;34m[INFO][0m Reanudando desde lote , offset 
+[0;34m[INFO][0m Progreso anterior: 0 procesados, 0 exitosos
+[0;36m[BATCH][0m Iniciando procesamiento por lotes de 100 RUCs
+[0;36m[BATCH][0m Total a procesar: 12700226 RUCs
+[0;36m[BATCH][0m Archivos de control inicializados correctamente
+[0;36m[BATCH][0m === LOTE 1 ===
+[0;36m[BATCH][0m Obteniendo RUCs desde posición 0...
+[0;36m[BATCH][0m Procesando lote 1: 100 RUCs (desde RUC 1 al 100)
+[0;34m[INFO][0m [1/12700226] Procesando RUC: 10000000065
+[0;34m[INFO][0m [2/12700226] Procesando RUC: 10000000103
+[0;34m[INFO][0m [3/12700226] Procesando RUC: 10000000120

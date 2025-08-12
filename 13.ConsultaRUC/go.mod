@@ -9,8 +9,9 @@ require (
 	github.com/lib/pq v1.10.9
 )
 
+require github.com/PuerkitoBio/goquery v1.10.3
+
 require (
-	github.com/PuerkitoBio/goquery v1.10.3 // indirect
 	github.com/andybalholm/cascadia v1.3.3 // indirect
 	github.com/ysmood/fetchup v0.2.3 // indirect
 	github.com/ysmood/goob v0.4.0 // indirect

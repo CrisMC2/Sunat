@@ -60,7 +60,7 @@ CREATE TABLE ruc_comprobantes_electronicos (
 CREATE TABLE ruc_padrones (
     id BIGSERIAL PRIMARY KEY,
     ruc_id BIGINT NOT NULL REFERENCES ruc_informacion_basica(id) ON DELETE CASCADE,
-    padron VARCHAR(100) NOT NULL,
+    padron VARCHAR(500) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

@@ -1,0 +1,25 @@
+2025/08/12 15:22:51 [1/1] Procesando RUC: 10000000120
+  📋 Consultando información principal...
+    - Información General: ✓
+  ℹ️  RUC 10000000120 es: Persona Natural
+  📋 Consultando información adicional...
+    - Deuda Coactiva: ✗ (error al hacer clic en el botón de deuda coactiva: context deadline exceeded)
+    - Información Histórica: ✗ (la página de información histórica no cargó correctamente: context canceled)
+    - Omisiones Tributarias: ✗ (no se encontró el botón de omisiones tributarias: context canceled)
+    - Cantidad de Trabajadores: ✗ (no se encontró el botón de cantidad de trabajadores: context canceled)
+    - Actas Probatorias: ✗ (no se encontró el botón de actas probatorias: context canceled)
+    - Facturas Físicas: ✗ (no se encontró el botón de facturas físicas: context canceled)
+panic: context canceled
+
+goroutine 1 [running]:
+github.com/go-rod/rod/lib/utils.init.func2({0x84f0c0?, 0xf0e230?})
+	/home/cristhianm/go/pkg/mod/github.com/go-rod/rod@v0.114.5/lib/utils/utils.go:68 +0x1d
+github.com/consulta-ruc-scraper/pkg/scraper.NewSUNATScraper.New.(*Browser).WithPanic.genE.func1({0xc0003d1750?, 0xc000047ab8?, 0x1?})
+	/home/cristhianm/go/pkg/mod/github.com/go-rod/rod@v0.114.5/must.go:37 +0x62
+github.com/go-rod/rod.(*Page).MustClose(0xc0002320b0)
+	/home/cristhianm/go/pkg/mod/github.com/go-rod/rod@v0.114.5/must.go:337 +0x7b
+github.com/consulta-ruc-scraper/pkg/scraper.(*ScraperExtendido).ScrapeRUCCompleto(0xc000047e90, {0x7ffc6cbbe801, 0xb})
+	/home/cristhianm/Downloads/13.ConsultaRUC/13.ConsultaRUC/pkg/scraper/scraper_extendido.go:175 +0x11d9
+main.main()
+	/home/cristhianm/Downloads/13.ConsultaRUC/13.ConsultaRUC/cmd/scraper-completo/main.go:43 +0x371
+exit status 2
