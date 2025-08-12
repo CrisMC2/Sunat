@@ -175,7 +175,7 @@ check_dependencies() {
 # Obtener total de RUCs - RÁPIDO
 get_total_rucs() {
     print_info "Obteniendo conteo aproximado..."
-    local query="SELECT COUNT(*) FROM log_consultas WHERE estado IN ('pendiente', 'fallido');"
+    local query="SELECT COUNT(*) FROM log_consultas WHERE estado NOT IN ('exitoso');"
     
     TOTAL_RUCS=$(PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -t -c "$query" 2>/dev/null | xargs)
     
@@ -192,9 +192,9 @@ get_next_ruc() {
     local query=""
     
     if [ -z "$LAST_RUC_PROCESSED" ]; then
-        query="SELECT ruc FROM log_consultas WHERE estado IN ('pendiente', 'fallido') ORDER BY ruc LIMIT 1;"
+        query="SELECT ruc FROM log_consultas WHERE estado NOT IN ('exitoso') ORDER BY ruc LIMIT 1;"
     else
-        query="SELECT ruc FROM log_consultas WHERE estado IN ('pendiente', 'fallido') AND ruc > '$LAST_RUC_PROCESSED' ORDER BY ruc LIMIT 1;"
+        query="SELECT ruc FROM log_consultas WHERE estado NOT IN ('exitoso') AND ruc > '$LAST_RUC_PROCESSED' ORDER BY ruc LIMIT 1;"
     fi
     
     local ruc=$(PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -t -c "$query" 2>/dev/null | xargs)
