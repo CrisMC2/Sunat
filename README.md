@@ -1,5 +1,3 @@
-# Sunat
-Scraping sunat
 -- ====================================
 -- CONSULTA COMPLETA DE RUC CON DETALLES ESPECÍFICOS
 -- Muestra 50 registros aleatorios con datos detallados de tablas anidadas
