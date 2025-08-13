@@ -3,6 +3,7 @@ package scraper
 import (
 	"fmt"
 	"log"
+	"os"
 	"regexp"
 	"strconv"
 	"strings"
@@ -33,10 +34,27 @@ func NewScraperExtendido() (*ScraperExtendido, error) {
 	}, nil
 }
 
+func (s *ScraperExtendido) retryScrape(maxRetries int, name string, scrapeFunc func() error) {
+	for attempt := 1; attempt <= maxRetries; attempt++ {
+		if err := scrapeFunc(); err == nil {
+			fmt.Println("✓")
+			return
+		} else {
+			fmt.Printf("✗ intento %d/%d (%v)\n", attempt, maxRetries, err)
+			time.Sleep(2 * time.Second) // espera entre reintentos
+		}
+	}
+	fmt.Printf("❌ Falló %s después de %d intentos. Abortando.\n", name, maxRetries)
+	os.Exit(1)
+}
+
 // ScrapeRUCCompleto obtiene toda la información disponible de un RUC
 func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, error) {
 	page := s.browser.MustPage(s.baseURL)
-	defer page.MustClose()
+	defer func() {
+		page.MustClose()
+		s.browser.MustClose() // Cierra el navegador entero
+	}()
 	page.MustWaitLoad()
 	page.MustWaitStable()
 
@@ -76,58 +94,65 @@ func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, e
 	fmt.Println(" 📋 Consultando información principal obligatoria...")
 
 	// 1. Información Histórica (PRINCIPAL)
+	// Información Histórica
 	fmt.Print(" - Información Histórica: ")
-	if infoHist, err := s.ScrapeInformacionHistorica(ruc, page); err == nil {
-		rucCompleto.InformacionHistorica = infoHist
-		fmt.Println("✓")
-	} else {
-		fmt.Printf("✗ (%v)\n", err)
-	}
+	s.retryScrape(3, "Información Histórica", func() error {
+		infoHist, err := s.ScrapeInformacionHistorica(ruc, page)
+		if err == nil {
+			rucCompleto.InformacionHistorica = infoHist
+		}
+		return err
+	})
 
 	// 2. Deuda Coactiva (PRINCIPAL)
 	fmt.Print(" - Deuda Coactiva: ")
-	if deuda, err := s.ScrapeDeudaCoactiva(ruc, page); err == nil {
-		rucCompleto.DeudaCoactiva = deuda
-		fmt.Println("✓")
-	} else {
-		fmt.Printf("✗ (%v)\n", err)
-	}
+	s.retryScrape(3, "Deuda Coactiva", func() error {
+		deuda, err := s.ScrapeDeudaCoactiva(ruc, page)
+		if err == nil {
+			rucCompleto.DeudaCoactiva = deuda
+		}
+		return err
+	})
 
 	// 3. Omisiones Tributarias (PRINCIPAL)
 	fmt.Print(" - Omisiones Tributarias: ")
-	if omis, err := s.ScrapeOmisionesTributarias(ruc, page); err == nil {
-		rucCompleto.OmisionesTributarias = omis
-		fmt.Println("✓")
-	} else {
-		fmt.Printf("✗ (%v)\n", err)
-	}
+	s.retryScrape(3, "Omisiones Tributarias", func() error {
+		omis, err := s.ScrapeOmisionesTributarias(ruc, page)
+		if err == nil {
+			rucCompleto.OmisionesTributarias = omis
+		}
+		return err
+	})
 
 	// 4. Cantidad de Trabajadores (PRINCIPAL)
 	fmt.Print(" - Cantidad de Trabajadores: ")
-	if trab, err := s.ScrapeCantidadTrabajadores(ruc, page); err == nil {
-		rucCompleto.CantidadTrabajadores = trab
-		fmt.Println("✓")
-	} else {
-		fmt.Printf("✗ (%v)\n", err)
-	}
+	s.retryScrape(3, "Cantidad de Trabajadores", func() error {
+		trab, err := s.ScrapeCantidadTrabajadores(ruc, page)
+		if err == nil {
+			rucCompleto.CantidadTrabajadores = trab
+		}
+		return err
+	})
 
 	// 5. Actas Probatorias (PRINCIPAL)
 	fmt.Print(" - Actas Probatorias: ")
-	if actas, err := s.ScrapeActasProbatorias(ruc, page); err == nil {
-		rucCompleto.ActasProbatorias = actas
-		fmt.Println("✓")
-	} else {
-		fmt.Printf("✗ (%v)\n", err)
-	}
+	s.retryScrape(3, "Actas Probatorias", func() error {
+		actas, err := s.ScrapeActasProbatorias(ruc, page)
+		if err == nil {
+			rucCompleto.ActasProbatorias = actas
+		}
+		return err
+	})
 
 	// 6. Facturas Físicas (PRINCIPAL)
 	fmt.Print(" - Facturas Físicas: ")
-	if fact, err := s.ScrapeFacturasFisicas(ruc, page); err == nil {
-		rucCompleto.FacturasFisicas = fact
-		fmt.Println("✓")
-	} else {
-		fmt.Printf("✗ (%v)\n", err)
-	}
+	s.retryScrape(3, "Facturas Físicas", func() error {
+		fact, err := s.ScrapeFacturasFisicas(ruc, page)
+		if err == nil {
+			rucCompleto.FacturasFisicas = fact
+		}
+		return err
+	})
 
 	// ========================================
 	// CONSULTAS ESPECÍFICAS POR TIPO DE RUC
@@ -138,30 +163,33 @@ func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, e
 
 		// 7. Representantes Legales (PRINCIPAL para RUC 20)
 		fmt.Print(" - Representantes Legales: ")
-		if reps, err := s.ScrapeRepresentantesLegales(ruc, page); err == nil {
-			rucCompleto.RepresentantesLegales = reps
-			fmt.Println("✓")
-		} else {
-			fmt.Printf("✗ (%v)\n", err)
-		}
+		s.retryScrape(3, "Representantes Legales", func() error {
+			reps, err := s.ScrapeRepresentantesLegales(ruc, page)
+			if err == nil {
+				rucCompleto.RepresentantesLegales = reps
+			}
+			return err
+		})
 
 		// 8. Reactiva Perú (PRINCIPAL para RUC 20)
 		fmt.Print(" - Reactiva Perú: ")
-		if react, err := s.ScrapeReactivaPeru(ruc, page); err == nil {
-			rucCompleto.ReactivaPeru = react
-			fmt.Println("✓")
-		} else {
-			fmt.Printf("✗ (%v)\n", err)
-		}
+		s.retryScrape(3, "Reactiva Perú", func() error {
+			react, err := s.ScrapeReactivaPeru(ruc, page)
+			if err == nil {
+				rucCompleto.ReactivaPeru = react
+			}
+			return err
+		})
 
 		// 9. Programa COVID-19 (PRINCIPAL para RUC 20)
 		fmt.Print(" - Programa COVID-19: ")
-		if covid, err := s.ScrapeProgramaCovid19(ruc, page); err == nil {
-			rucCompleto.ProgramaCovid19 = covid
-			fmt.Println("✓")
-		} else {
-			fmt.Printf("✗ (%v)\n", err)
-		}
+		s.retryScrape(3, "Programa COVID-19", func() error {
+			covid, err := s.ScrapeProgramaCovid19(ruc, page)
+			if err == nil {
+				rucCompleto.ProgramaCovid19 = covid
+			}
+			return err
+		})
 
 		// ========================================
 		// CONSULTAS OCASIONALES PARA RUC 20

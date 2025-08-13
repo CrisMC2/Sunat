@@ -187,14 +187,21 @@ get_total_rucs() {
     print_success "Aproximadamente $TOTAL_RUCS RUCs a procesar"
 }
 
-# Obtener SIGUIENTE RUC usando cursor (sin OFFSET)
+# Obtener SIGUIENTE RUC en orden descendente
 get_next_ruc() {
     local query=""
     
     if [ -z "$LAST_RUC_PROCESSED" ]; then
-        query="SELECT ruc FROM log_consultas WHERE estado NOT IN ('exitoso') ORDER BY ruc LIMIT 1;"
+        query="SELECT ruc FROM log_consultas 
+               WHERE estado NOT IN ('exitoso') 
+               ORDER BY ruc DESC 
+               LIMIT 1;"
     else
-        query="SELECT ruc FROM log_consultas WHERE estado NOT IN ('exitoso') AND ruc > '$LAST_RUC_PROCESSED' ORDER BY ruc LIMIT 1;"
+        query="SELECT ruc FROM log_consultas 
+               WHERE estado NOT IN ('exitoso') 
+                 AND ruc < '$LAST_RUC_PROCESSED' 
+               ORDER BY ruc DESC 
+               LIMIT 1;"
     fi
     
     local ruc=$(PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -t -c "$query" 2>/dev/null | xargs)
