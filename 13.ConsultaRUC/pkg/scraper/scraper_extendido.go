@@ -1,25 +1,41 @@
 package scraper
 
 import (
+	"context"
 	"fmt"
 	"log"
+	"math"
+	"math/rand"
 	"os"
 	"regexp"
 	"strconv"
 	"strings"
 	"time"
 
-	"github.com/go-rod/rod/lib/proto"
-
 	"github.com/PuerkitoBio/goquery"
 	"github.com/consulta-ruc-scraper/pkg/models"
 	"github.com/consulta-ruc-scraper/pkg/utils"
 	"github.com/go-rod/rod"
+	"github.com/go-rod/rod/lib/input"
+	"github.com/go-rod/rod/lib/proto"
 )
+
+// HumanBehaviorSimulator simula comportamiento humano avanzado
+type HumanBehaviorSimulator struct {
+	startTime      time.Time
+	actionCount    int
+	fatigueLevel   float64
+	lastActionTime time.Time
+	userAgents     []string
+	currentUAIndex int
+	readingSpeed   float64 // palabras por minuto
+	typingSpeed    float64 // caracteres por minuto
+}
 
 // ScraperExtendido incluye métodos para todas las consultas adicionales
 type ScraperExtendido struct {
 	*SUNATScraper
+	humanSim *HumanBehaviorSimulator
 }
 
 // NewScraperExtendido crea una nueva instancia del scraper extendido
@@ -29,9 +45,405 @@ func NewScraperExtendido() (*ScraperExtendido, error) {
 		return nil, err
 	}
 
+	// Inicializar simulador de comportamiento humano
+	humanSim := &HumanBehaviorSimulator{
+		startTime:    time.Now(),
+		actionCount:  0,
+		fatigueLevel: 0.0,
+		userAgents: []string{
+			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
+			"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+			"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0",
+			"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15",
+		},
+		currentUAIndex: rand.Intn(5),
+		readingSpeed:   200 + rand.Float64()*100, // 200-300 WPM
+		typingSpeed:    180 + rand.Float64()*120, // 180-300 CPM (3-5 CPS)
+	}
+
 	return &ScraperExtendido{
 		SUNATScraper: base,
+		humanSim:     humanSim,
 	}, nil
+}
+
+// updateFatigue actualiza el nivel de fatiga basado en actividad
+func (h *HumanBehaviorSimulator) updateFatigue() {
+	h.actionCount++
+	elapsed := time.Since(h.startTime).Minutes()
+
+	// Fatiga aumenta con número de acciones y tiempo transcurrido
+	h.fatigueLevel = math.Min(1.0, float64(h.actionCount)*0.002+elapsed*0.01)
+}
+
+// shouldTakeBreak determina si debe tomar un descanso
+func (h *HumanBehaviorSimulator) shouldTakeBreak() bool {
+	// Descanso basado en tiempo desde última acción
+	timeSinceLastAction := time.Since(h.lastActionTime)
+
+	// Probabilidad de descanso aumenta con fatiga y actividad reciente
+	if h.actionCount > 0 && h.actionCount%15 == 0 { // Cada 15 acciones
+		return true
+	}
+
+	if h.fatigueLevel > 0.7 && rand.Float64() < 0.3 {
+		return true
+	}
+
+	if timeSinceLastAction < 500*time.Millisecond && rand.Float64() < 0.1 {
+		return true
+	}
+
+	return false
+}
+
+// takeBreak simula un descanso humano
+func (h *HumanBehaviorSimulator) takeBreak() {
+	breakType := rand.Intn(4)
+	var breakDuration time.Duration
+
+	switch breakType {
+	case 0: // Micro-pausa
+		breakDuration = h.generateLogNormalDelay(800, 300)
+		log.Printf(" 😴 Micro-pausa: %v", breakDuration)
+	case 1: // Pausa corta
+		breakDuration = h.generateLogNormalDelay(2000, 800)
+		log.Printf(" ☕ Pausa corta: %v", breakDuration)
+	case 2: // Pausa media
+		breakDuration = h.generateLogNormalDelay(5000, 2000)
+		log.Printf(" 🚶 Pausa media: %v", breakDuration)
+	case 3: // Pausa larga (fatiga alta)
+		if h.fatigueLevel > 0.8 {
+			breakDuration = h.generateLogNormalDelay(10000, 5000)
+			log.Printf(" 🛋️  Pausa larga: %v", breakDuration)
+			h.fatigueLevel *= 0.7 // Reduce fatiga después de pausa larga
+		} else {
+			breakDuration = h.generateLogNormalDelay(1500, 500)
+		}
+	}
+
+	time.Sleep(breakDuration)
+}
+
+// HumanClick CORREGIDO - múltiples errores solucionados
+func (s *ScraperExtendido) HumanClick(element *rod.Element, page *rod.Page) error {
+	// Actualizar fatiga y verificar descansos
+	s.humanSim.updateFatigue()
+
+	if s.humanSim.shouldTakeBreak() {
+		s.humanSim.takeBreak()
+	}
+
+	// Rotar user agent ocasionalmente
+	s.humanSim.rotateUserAgent(page)
+
+	// Delay pre-acción con distribución log-normal
+	preDelay := s.humanSim.generateLogNormalDelay(200, 80)
+	time.Sleep(preDelay)
+
+	// VERIFICAR QUE EL ELEMENTO SIGUE SIENDO VÁLIDO
+	if element == nil {
+		return fmt.Errorf("elemento es nil")
+	}
+
+	// Verificar que el elemento sigue visible y clickeable
+	visible, err := element.Visible()
+	if err != nil || !visible {
+		return fmt.Errorf("elemento ya no es visible: %w", err)
+	}
+
+	// Scroll al elemento si es necesario
+	err = element.ScrollIntoView()
+	if err != nil {
+		log.Printf("⚠️ Warning: No se pudo hacer scroll al elemento: %v", err)
+	}
+
+	// Esperar un poco después del scroll
+	time.Sleep(200 * time.Millisecond)
+
+	// Obtener coordenadas del elemento (CON VALIDACIÓN)
+	box, err := element.Shape()
+	if err != nil {
+		return fmt.Errorf("error obteniendo coordenadas del elemento: %w", err)
+	}
+
+	if len(box.Quads) == 0 {
+		return fmt.Errorf("elemento no tiene coordenadas válidas")
+	}
+
+	// Calcular centro del elemento con variación humana realista
+	quad := box.Quads[0]
+	if len(quad) < 8 {
+		return fmt.Errorf("coordenadas del quad incompletas")
+	}
+
+	centerX := (quad[0] + quad[2] + quad[4] + quad[6]) / 4
+	centerY := (quad[1] + quad[3] + quad[5] + quad[7]) / 4
+
+	// VALIDAR COORDENADAS
+	if centerX <= 0 || centerY <= 0 {
+		return fmt.Errorf("coordenadas inválidas: x=%.2f, y=%.2f", centerX, centerY)
+	}
+
+	// Variación basada en fatiga (más imprecisión cuando está cansado)
+	maxOffset := 5.0 + s.humanSim.fatigueLevel*3.0 // REDUCIR offset para más precisión
+	offsetX := (rand.Float64() - 0.5) * maxOffset
+	offsetY := (rand.Float64() - 0.5) * maxOffset
+
+	targetX := centerX + offsetX
+	targetY := centerY + offsetY
+
+	// Movimiento de mouse más simple y confiable
+	steps := 2 + rand.Intn(3) // Reducir pasos para evitar problemas
+
+	for i := 0; i < steps; i++ {
+		progress := float64(i+1) / float64(steps)
+
+		// Movimiento lineal simple (más confiable que Bézier)
+		intermediateX := centerX + (targetX-centerX)*progress
+		intermediateY := centerY + (targetY-centerY)*progress
+
+		// Mover mouse CON VALIDACIÓN
+		err = page.Mouse.MoveTo(proto.Point{X: intermediateX, Y: intermediateY})
+		if err != nil {
+			log.Printf("⚠️ Warning: Error moviendo mouse: %v", err)
+			// Continuar anyway
+		}
+
+		// Delay más corto entre movimientos
+		moveDelay := time.Duration(20+rand.Intn(30)) * time.Millisecond
+		time.Sleep(moveDelay)
+	}
+
+	// Tiempo de reacción humano antes del clic (MÁS CORTO)
+	reactionTime := time.Duration(100+rand.Intn(100)) * time.Millisecond
+	time.Sleep(reactionTime)
+
+	// CLICK SIMPLE Y CONFIABLE
+	err = page.Mouse.MoveTo(proto.Point{X: targetX, Y: targetY})
+	if err != nil {
+		log.Printf("⚠️ Warning: Error moviendo mouse antes del click: %v", err)
+	}
+	err = page.Mouse.Click(proto.InputMouseButtonLeft, 1)
+	if err != nil {
+		// Fallback: usar el método del elemento directamente
+		log.Printf("⚠️ Warning: Click de mouse falló, usando elemento.Click(): %v", err)
+		err = element.Click(proto.InputMouseButtonLeft, 1)
+		if err != nil {
+			return fmt.Errorf("error en ambos métodos de click: %w", err)
+		}
+	}
+
+	// Actualizar tiempo de última acción
+	s.humanSim.lastActionTime = time.Now()
+
+	// Delay post-clic (MÁS CORTO)
+	postDelay := time.Duration(200+rand.Intn(200)) * time.Millisecond
+	time.Sleep(postDelay)
+
+	log.Printf(" 🖱️ Click humano exitoso en (%.1f, %.1f)", targetX, targetY)
+	return nil
+}
+
+// HumanPageLoad CORREGIDO - timeouts más razonables
+func (s *ScraperExtendido) HumanPageLoad(page *rod.Page) error {
+	// Esperar carga técnica CON TIMEOUT
+	loadCtx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
+	defer cancel()
+
+	err := page.Context(loadCtx).WaitLoad()
+	if err != nil {
+		log.Printf("⚠️ Warning: WaitLoad falló: %v", err)
+		// Continuar anyway, a veces la página ya está cargada
+	}
+
+	// WaitStable con timeout más corto
+	stableCtx, cancel2 := context.WithTimeout(context.Background(), 8*time.Second)
+	defer cancel2()
+
+	err = page.Context(stableCtx).WaitStable(3 * time.Second)
+	if err != nil {
+		log.Printf("⚠️ Warning: WaitStable falló: %v", err)
+		// Continuar anyway
+	}
+
+	// Simular tiempo de lectura del contenido visible (REDUCIDO)
+	bodyText := ""
+	if body, err := page.Timeout(5 * time.Second).Element("body"); err == nil {
+		bodyText, _ = body.Text()
+	}
+
+	readingTime := s.humanSim.simulateReading(bodyText)
+
+	// LIMITAR tiempo de lectura máximo (MÁS AGRESIVO)
+	maxReadingTime := 5 * time.Second
+	if readingTime > maxReadingTime {
+		readingTime = maxReadingTime
+	}
+
+	// MÍNIMO tiempo de lectura
+	minReadingTime := 500 * time.Millisecond
+	if readingTime < minReadingTime {
+		readingTime = minReadingTime
+	}
+
+	log.Printf(" 📖 Simulando lectura de página: %v", readingTime)
+	time.Sleep(readingTime)
+
+	return nil
+}
+
+// rotateUserAgent CORREGIDO - manejo de errores
+func (h *HumanBehaviorSimulator) rotateUserAgent(page *rod.Page) {
+	// Cambiar user agent ocasionalmente (2% de probabilidad - menos frecuente)
+	if rand.Float64() < 0.02 {
+		h.currentUAIndex = (h.currentUAIndex + 1) % len(h.userAgents)
+		newUA := h.userAgents[h.currentUAIndex]
+
+		// Cambiar UA con manejo de errores
+		_, err := page.Eval(fmt.Sprintf(`
+			try {
+				Object.defineProperty(navigator, 'userAgent', {
+					get: function() { return '%s'; }
+				});
+				'success';
+			} catch(e) {
+				'error: ' + e.message;
+			}
+		`, newUA))
+
+		if err != nil {
+			log.Printf("⚠️ Warning: Error rotando user agent: %v", err)
+		} else {
+			log.Printf(" 🔄 User agent rotado")
+		}
+	}
+}
+
+// simulateReading CORREGIDO - más conservador
+func (h *HumanBehaviorSimulator) simulateReading(text string) time.Duration {
+	words := len(strings.Fields(text))
+	if words == 0 {
+		return 300 * time.Millisecond // Mínimo para elementos vacíos
+	}
+
+	// Límite de palabras para evitar tiempos excesivos
+	if words > 500 {
+		words = 500
+	}
+
+	// Tiempo base de lectura más rápido
+	readingTimeMs := float64(words) / h.readingSpeed * 60000
+
+	// Reducir tiempo de procesamiento
+	processingTime := 50 + rand.Float64()*100
+
+	totalTime := readingTimeMs + processingTime
+
+	// Limitar tiempo total
+	if totalTime > 5000 {
+		totalTime = 5000
+	}
+
+	return time.Duration(totalTime) * time.Millisecond
+}
+
+// generateLogNormalDelay CORREGIDO - valores más conservadores
+func (h *HumanBehaviorSimulator) generateLogNormalDelay(meanMs, stdMs float64) time.Duration {
+	// Usar distribución normal simple para más predictibilidad
+	normal := rand.NormFloat64()
+	result := meanMs + stdMs*normal
+
+	// Aplicar factor de fatiga reducido
+	fatigueMultiplier := 1.0 + h.fatigueLevel*0.1
+	result = result * fatigueMultiplier
+
+	// Limitar valores extremos más agresivamente
+	if result < 20 {
+		result = 20
+	}
+	if result > 2000 {
+		result = 2000
+	}
+
+	return time.Duration(result) * time.Millisecond
+}
+
+// HumanInput simula escritura humana avanzada con características realistas
+func (s *ScraperExtendido) HumanInput(element *rod.Element, text string) error {
+	// Limpiar campo con delay humano
+	err := element.SelectAllText()
+	if err == nil {
+		err = element.Input("")
+	}
+	if err != nil {
+		return fmt.Errorf("error limpiando campo: %w", err)
+	}
+
+	// Delay inicial antes de empezar a escribir
+	startDelay := s.humanSim.generateLogNormalDelay(400, 200)
+	time.Sleep(startDelay)
+
+	// Calcular velocidad de escritura base (variable por fatiga)
+	baseSpeed := s.humanSim.typingSpeed * (1.0 - s.humanSim.fatigueLevel*0.3)
+
+	for i, char := range text {
+		// Escribir carácter
+		err = element.Input(string(char))
+		if err != nil {
+			return fmt.Errorf("error escribiendo carácter: %w", err)
+		}
+
+		// Calcular delay entre caracteres
+		charDelay := 60000.0 / baseSpeed // ms por carácter
+
+		// Variaciones según tipo de carácter
+		switch {
+		case char >= '0' && char <= '9': // Números más rápidos
+			charDelay *= 0.8
+		case char >= 'A' && char <= 'Z': // Mayúsculas más lentas
+			charDelay *= 1.2
+		case char == ' ': // Espacios más rápidos
+			charDelay *= 0.6
+		}
+
+		// Pausas ocasionales como si pensara
+		if rand.Float64() < 0.15 { // 15% probabilidad de pausa
+			thinkPause := s.humanSim.generateLogNormalDelay(800, 400)
+			time.Sleep(thinkPause)
+		}
+
+		// Errores de escritura ocasionales (más frecuentes con fatiga)
+		errorProb := 0.02 + s.humanSim.fatigueLevel*0.03
+		if rand.Float64() < errorProb && i < len(text)-1 {
+			// Escribir carácter incorrecto
+			wrongChar := rune('a' + rand.Intn(26))
+			element.Input(string(wrongChar))
+
+			// Pausa de "darse cuenta del error"
+			errorRealizationDelay := s.humanSim.generateLogNormalDelay(300, 100)
+			time.Sleep(errorRealizationDelay)
+
+			// Borrar carácter incorrecto
+			page := element.Page()
+			page.Keyboard.Press(input.Backspace)
+
+			// Pausa antes de escribir el carácter correcto
+			correctionDelay := s.humanSim.generateLogNormalDelay(200, 80)
+			time.Sleep(correctionDelay)
+		}
+
+		// Aplicar delay principal entre caracteres
+		finalDelay := s.humanSim.generateLogNormalDelay(charDelay, charDelay*0.3)
+		time.Sleep(finalDelay)
+	}
+
+	// Pausa final después de escribir
+	endDelay := s.humanSim.generateLogNormalDelay(400, 200)
+	time.Sleep(endDelay)
+
+	return nil
 }
 
 func (s *ScraperExtendido) retryScrape(maxRetries int, name string, scrapeFunc func() error) {
@@ -41,11 +453,30 @@ func (s *ScraperExtendido) retryScrape(maxRetries int, name string, scrapeFunc f
 			return
 		} else {
 			fmt.Printf("✗ intento %d/%d (%v)\n", attempt, maxRetries, err)
-			time.Sleep(2 * time.Second) // espera entre reintentos
+
+			// Delay inteligente entre reintentos (aumenta con cada intento)
+			retryDelay := s.humanSim.generateLogNormalDelay(2000*float64(attempt), 800)
+			time.Sleep(retryDelay)
 		}
 	}
 	fmt.Printf("❌ Falló %s después de %d intentos. Abortando.\n", name, maxRetries)
 	os.Exit(1)
+}
+
+func (s *ScraperExtendido) retryScrape2(maxRetries int, name string, scrapeFunc func() error) {
+	for attempt := 1; attempt <= maxRetries; attempt++ {
+		if err := scrapeFunc(); err == nil {
+			fmt.Println("✓")
+			return
+		} else {
+			fmt.Printf("✗ intento %d/%d (%v)\n", attempt, maxRetries, err)
+
+			// Delay inteligente entre reintentos (aumenta con cada intento)
+			retryDelay := s.humanSim.generateLogNormalDelay(2000*float64(attempt), 800)
+			time.Sleep(retryDelay)
+		}
+	}
+	fmt.Printf("❌ Falló %s después de %d intentos.\n", name, maxRetries)
 }
 
 // ScrapeRUCCompleto obtiene toda la información disponible de un RUC
@@ -55,17 +486,32 @@ func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, e
 		page.MustClose()
 		s.browser.MustClose() // Cierra el navegador entero
 	}()
-	page.MustWaitLoad()
-	page.MustWaitStable()
+	// Carga humana de página
+	err := s.HumanPageLoad(page)
+	if err != nil {
+		return nil, fmt.Errorf("error en carga humana de página: %w", err)
+	}
 
 	// Ingresar RUC
 	rucInput := page.MustElement("#txtRuc")
 	rucInput.MustWaitVisible()
-	rucInput.MustInput(ruc)
+	err = s.HumanInput(rucInput, ruc)
+	if err != nil {
+		return nil, fmt.Errorf("error ingresando RUC: %w", err)
+	}
 	searchBtn := page.MustElement("#btnAceptar")
 	searchBtn.MustWaitVisible()
-	searchBtn.MustClick()
-	time.Sleep(3 * time.Second)
+
+	err = s.HumanClick(searchBtn, page)
+	if err != nil {
+		return nil, fmt.Errorf("error haciendo clic en buscar: %w", err)
+	}
+
+	// Esperar resultados con comportamiento humano
+	err = s.HumanPageLoad(page)
+	if err != nil {
+		return nil, fmt.Errorf("error cargando resultados: %w", err)
+	}
 
 	// Consulta información general (siempre disponible)
 	fmt.Println(" 📋 Consultando información principal...")
@@ -87,6 +533,9 @@ func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, e
 	// Determinar tipo de RUC
 	esPersonaJuridica := strings.HasPrefix(ruc, "20")
 	fmt.Printf(" ℹ️ RUC %s es: %s\n", ruc, map[bool]string{true: "Persona Jurídica", false: "Persona Natural"}[esPersonaJuridica])
+	fmt.Printf(" ℹ️ RUC %s es: %s (Fatiga: %.2f)\n", ruc,
+		map[bool]string{true: "Persona Jurídica", false: "Persona Natural"}[esPersonaJuridica],
+		s.humanSim.fatigueLevel)
 
 	// ========================================
 	// CONSULTAS PRINCIPALES (SIEMPRE DISPONIBLES)
@@ -171,9 +620,14 @@ func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, e
 			return err
 		})
 
+		// ========================================
+		// CONSULTAS OCASIONALES PARA RUC 20
+		// ========================================
+		fmt.Println(" 📋 Consultando información ocasional de Personas Jurídicas...")
+
 		// 8. Reactiva Perú (PRINCIPAL para RUC 20)
 		fmt.Print(" - Reactiva Perú: ")
-		s.retryScrape(3, "Reactiva Perú", func() error {
+		s.retryScrape2(3, "Reactiva Perú", func() error {
 			react, err := s.ScrapeReactivaPeru(ruc, page)
 			if err == nil {
 				rucCompleto.ReactivaPeru = react
@@ -183,7 +637,7 @@ func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, e
 
 		// 9. Programa COVID-19 (PRINCIPAL para RUC 20)
 		fmt.Print(" - Programa COVID-19: ")
-		s.retryScrape(3, "Programa COVID-19", func() error {
+		s.retryScrape2(3, "Programa COVID-19", func() error {
 			covid, err := s.ScrapeProgramaCovid19(ruc, page)
 			if err == nil {
 				rucCompleto.ProgramaCovid19 = covid
@@ -191,19 +645,15 @@ func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, e
 			return err
 		})
 
-		// ========================================
-		// CONSULTAS OCASIONALES PARA RUC 20
-		// ========================================
-		fmt.Println(" 📋 Consultando información ocasional de Personas Jurídicas...")
-
 		// Establecimientos Anexos (OCASIONAL para RUC 20)
 		fmt.Print(" - Establecimientos Anexos: ")
-		if estab, err := s.ScrapeEstablecimientosAnexos(ruc, page); err == nil {
-			rucCompleto.EstablecimientosAnexos = estab
-			fmt.Println("✓")
-		} else {
-			fmt.Printf("✗ (%v)\n", err)
-		}
+		s.retryScrape2(2, "Establecimientos Anexos", func() error {
+			estab, err := s.ScrapeEstablecimientosAnexos(ruc, page)
+			if err == nil {
+				rucCompleto.EstablecimientosAnexos = estab
+			}
+			return err
+		})
 
 	} else {
 		// PERSONAS NATURALES (RUC 10): consultas ocasionales
@@ -211,84 +661,92 @@ func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, e
 
 		// Reactiva Perú (OCASIONAL para RUC 10)
 		fmt.Print(" - Reactiva Perú: ")
-		if react, err := s.ScrapeReactivaPeru(ruc, page); err == nil {
-			rucCompleto.ReactivaPeru = react
-			fmt.Println("✓")
-		} else {
-			fmt.Printf("✗ (%v)\n", err)
-		}
+		s.retryScrape2(2, "Reactiva Perú", func() error {
+			react, err := s.ScrapeReactivaPeru(ruc, page)
+			if err == nil {
+				rucCompleto.ReactivaPeru = react
+			}
+			return err
+		})
 
 		// Programa COVID-19 (OCASIONAL para RUC 10)
 		fmt.Print(" - Programa COVID-19: ")
-		if covid, err := s.ScrapeProgramaCovid19(ruc, page); err == nil {
-			rucCompleto.ProgramaCovid19 = covid
-			fmt.Println("✓")
-		} else {
-			fmt.Printf("✗ (%v)\n", err)
-		}
+		s.retryScrape2(2, "Programa COVID-19", func() error {
+			covid, err := s.ScrapeProgramaCovid19(ruc, page)
+			if err == nil {
+				rucCompleto.ProgramaCovid19 = covid
+			}
+			return err
+		})
 	}
 
 	return rucCompleto, nil
 }
 
-// ScrapeInformacionHistorica obtiene la información histórica del RUC
+// ScrapeInformacionHistorica SIMPLIFICADO - solo lo esencial
 func (s *ScraperExtendido) ScrapeInformacionHistorica(ruc string, page *rod.Page) (*models.InformacionHistorica, error) {
-
-	// Buscar el botón usando ElementX (sin Must) con timeout
-	histBtn, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnInfHis')]")
+	// Buscar y hacer clic en botón
+	histBtn, err := page.Timeout(8 * time.Second).ElementX("//button[contains(@class, 'btnInfHis')]")
 	if err != nil {
 		return nil, fmt.Errorf("no se encontró el botón de información histórica: %w", err)
 	}
 
-	// Verificar si el botón está visible
 	visible, err := histBtn.Visible()
 	if err != nil || !visible {
-		return nil, fmt.Errorf("el botón de información histórica no está visible o disponible")
+		return nil, fmt.Errorf("el botón de información histórica no está visible")
 	}
 
-	// Verificar si el botón está deshabilitado
-	if disabledAttr, _ := histBtn.Attribute("disabled"); disabledAttr != nil {
-		return nil, fmt.Errorf("el botón de información histórica está deshabilitado")
-	}
-
-	// Hacer clic en el botón
-	err = histBtn.Click(proto.InputMouseButtonLeft, 1)
+	// Click humano
+	err = s.HumanClick(histBtn, page)
 	if err != nil {
-		return nil, fmt.Errorf("error al hacer clic en el botón de información histórica: %w", err)
+		return nil, fmt.Errorf("error en click humano: %w", err)
 	}
 
-	time.Sleep(3 * time.Second)
-
-	// Cambiar a la nueva pestaña si se abrió
+	// Esperar respuesta y detectar si se abrió nueva pestaña
+	time.Sleep(2 * time.Second)
 	pages := s.browser.MustPages()
+
+	var targetPage *rod.Page
 	if len(pages) > 1 {
-		page = pages[len(pages)-1]
-		err = page.WaitLoad()
-		if err != nil {
-			return nil, fmt.Errorf("error al cargar la página de información histórica: %w", err)
-		}
+		// Nueva pestaña
+		targetPage = pages[len(pages)-1]
+		targetPage.MustActivate()
+	} else {
+		// Misma pestaña
+		targetPage = page
 	}
 
-	err = page.WaitStable(10 * time.Second)
+	// Carga humana
+	err = s.HumanPageLoad(targetPage)
 	if err != nil {
-		return nil, fmt.Errorf("la página de información histórica no cargó correctamente: %w", err)
+		log.Printf("⚠️ Warning: Error en carga humana: %v", err)
 	}
 
+	// Extraer información
 	info := &models.InformacionHistorica{}
+	s.extractHistoricalInfo(targetPage, info)
 
-	// Extraer la información histórica con manejo de error
-	s.extractHistoricalInfo(page, info)
-
-	// Buscar el botón usando ElementX (sin Must) con timeout
-	volver, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnNuevaConsulta')]")
+	// Buscar y hacer clic en volver
+	volver, err := targetPage.Timeout(8 * time.Second).ElementX("//button[contains(@class, 'btnNuevaConsulta')]")
 	if err != nil {
-		return nil, fmt.Errorf("no se encontró el botón de información histórica: %w", err)
+		return nil, fmt.Errorf("no se encontró el botón volver: %w", err)
 	}
 
-	err = volver.Click(proto.InputMouseButtonLeft, 1)
+	err = s.HumanClick(volver, targetPage)
 	if err != nil {
-		return nil, fmt.Errorf("error al hacer clic en el botón de volver: %w", err)
+		return nil, fmt.Errorf("error en click volver: %w", err)
 	}
+
+	// Cleanup si era nueva pestaña
+	if targetPage != page {
+		targetPage.MustClose()
+		time.Sleep(500 * time.Millisecond)
+		page.MustActivate()
+	}
+
+	// Esperar que página original esté lista
+	page.WaitLoad()
+	page.WaitStable(2 * time.Second)
 
 	return info, nil
 }
@@ -390,49 +848,55 @@ func (s *ScraperExtendido) ScrapeDeudaCoactiva(ruc string, page *rod.Page) (*mod
 		return nil, fmt.Errorf("el botón de deuda coactiva no está visible o disponible")
 	}
 
-	// Verificar si el botón está deshabilitado
-	if disabledAttr, _ := deudaBtn.Attribute("disabled"); disabledAttr != nil {
-		return nil, fmt.Errorf("el botón de deuda coactiva está deshabilitado")
-	}
-
-	// Hacer clic en el botón
-	err = deudaBtn.Click(proto.InputMouseButtonLeft, 1)
+	// Click humano
+	err = s.HumanClick(deudaBtn, page)
 	if err != nil {
-		return nil, fmt.Errorf("error al hacer clic en el botón de deuda coactiva: %w", err)
+		return nil, fmt.Errorf("error en click humano: %w", err)
 	}
 
-	time.Sleep(3 * time.Second)
-
-	// Cambiar a la nueva pestaña si se abrió
+	// Esperar respuesta y detectar si se abrió nueva pestaña
+	time.Sleep(2 * time.Second)
 	pages := s.browser.MustPages()
+	var targetPage *rod.Page
 	if len(pages) > 1 {
-		page = pages[len(pages)-1]
-		err = page.WaitLoad()
-		if err != nil {
-			return nil, fmt.Errorf("error al cargar la página de deuda coactiva: %w", err)
-		}
+		// Nueva pestaña
+		targetPage = pages[len(pages)-1]
+		targetPage.MustActivate()
+	} else {
+		// Misma pestaña
+		targetPage = page
 	}
 
-	err = page.WaitStable(10 * time.Second)
+	// Carga humana
+	err = s.HumanPageLoad(targetPage)
 	if err != nil {
-		return nil, fmt.Errorf("la página de deuda coactiva no cargó correctamente: %w", err)
+		log.Printf("⚠️ Warning: Error en carga humana: %v", err)
 	}
 
 	deuda := &models.DeudaCoactiva{}
+	s.extractDeudaInfo(targetPage, deuda)
 
-	// Extraer la información de deuda coactiva
-	s.extractDeudaInfo(page, deuda)
-
-	// Buscar el botón usando ElementX (sin Must) con timeout
-	volver, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnNuevaConsulta')]")
+	// Buscar y hacer clic en volver
+	volver, err := targetPage.Timeout(8 * time.Second).ElementX("//button[contains(@class, 'btnNuevaConsulta')]")
 	if err != nil {
-		return nil, fmt.Errorf("no se encontró el botón de información histórica: %w", err)
+		return nil, fmt.Errorf("no se encontró el botón volver: %w", err)
 	}
 
-	err = volver.Click(proto.InputMouseButtonLeft, 1)
+	err = s.HumanClick(volver, targetPage)
 	if err != nil {
-		return nil, fmt.Errorf("error al hacer clic en el botón de volver: %w", err)
+		return nil, fmt.Errorf("error en click volver: %w", err)
 	}
+
+	// Cleanup si era nueva pestaña
+	if targetPage != page {
+		targetPage.MustClose()
+		time.Sleep(500 * time.Millisecond)
+		page.MustActivate()
+	}
+
+	// Esperar que página original esté lista
+	page.WaitLoad()
+	page.WaitStable(2 * time.Second)
 
 	return deuda, nil
 }
@@ -472,53 +936,49 @@ func (s *ScraperExtendido) extractDeudaInfo(page *rod.Page, deuda *models.DeudaC
 	}
 }
 
-// ScrapeRepresentantesLegales obtiene información de representantes legales
+// ScrapeRepresentantesLegales SIMPLIFICADO - solo lo esencial
 func (s *ScraperExtendido) ScrapeRepresentantesLegales(ruc string, page *rod.Page) (*models.RepresentantesLegales, error) {
-
-	// Buscar el botón usando ElementX (sin Must) con timeout
-	repButton, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnInfRepLeg')]")
+	// Buscar y hacer clic en botón
+	repButton, err := page.Timeout(8 * time.Second).ElementX("//button[contains(@class, 'btnInfRepLeg')]")
 	if err != nil {
 		return nil, fmt.Errorf("no se encontró el botón de representantes legales: %w", err)
 	}
 
-	// Verificar si el botón está visible
 	visible, err := repButton.Visible()
 	if err != nil || !visible {
-		return nil, fmt.Errorf("el botón de representantes legales no está visible o disponible")
+		return nil, fmt.Errorf("el botón de representantes legales no está visible")
 	}
 
-	// Verificar si el botón está deshabilitado
-	if disabledAttr, _ := repButton.Attribute("disabled"); disabledAttr != nil {
-		return nil, fmt.Errorf("el botón de representantes legales está deshabilitado")
-	}
-
-	// Hacer clic en el botón
-	err = repButton.Click(proto.InputMouseButtonLeft, 1)
+	// Click humano
+	err = s.HumanClick(repButton, page)
 	if err != nil {
-		return nil, fmt.Errorf("error al hacer clic en el botón de representantes legales: %w", err)
+		return nil, fmt.Errorf("error en click humano: %w", err)
 	}
 
-	time.Sleep(3 * time.Second)
-
-	// Cambiar a la nueva pestaña si se abrió
+	// Esperar respuesta y detectar si se abrió nueva pestaña
+	time.Sleep(2 * time.Second)
 	pages := s.browser.MustPages()
+	var targetPage *rod.Page
+
 	if len(pages) > 1 {
-		page = pages[len(pages)-1]
-		err = page.WaitLoad()
-		if err != nil {
-			return nil, fmt.Errorf("error al cargar la página de representantes legales: %w", err)
-		}
+		// Nueva pestaña
+		targetPage = pages[len(pages)-1]
+		targetPage.MustActivate()
+	} else {
+		// Misma pestaña
+		targetPage = page
 	}
 
-	err = page.WaitStable(10 * time.Second)
+	// Carga humana
+	err = s.HumanPageLoad(targetPage)
 	if err != nil {
-		return nil, fmt.Errorf("la página de representantes legales no cargó correctamente: %w", err)
+		log.Printf("⚠️ Warning: Error en carga humana: %v", err)
 	}
 
-	// Obtener HTML y parsear con goquery
-	html, err := page.HTML()
+	// Extraer información
+	html, err := targetPage.HTML()
 	if err != nil {
-		return nil, fmt.Errorf("error al obtener HTML de representantes legales: %w", err)
+		return nil, fmt.Errorf("error al obtener HTML: %w", err)
 	}
 
 	doc, err := goquery.NewDocumentFromReader(strings.NewReader(html))
@@ -526,22 +986,33 @@ func (s *ScraperExtendido) ScrapeRepresentantesLegales(ruc string, page *rod.Pag
 		return nil, fmt.Errorf("error al parsear HTML: %w", err)
 	}
 
-	// Usar tu función existente extraerRepresentantes
 	representantes := extraerRepresentantes(doc)
-
 	representantesLegales := &models.RepresentantesLegales{
 		Representantes: representantes,
 	}
-	// Buscar el botón usando ElementX (sin Must) con timeout
-	volver, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnNuevaConsulta')]")
+
+	// Buscar y hacer clic en volver
+	volver, err := targetPage.Timeout(8 * time.Second).ElementX("//button[contains(@class, 'btnNuevaConsulta')]")
 	if err != nil {
-		return nil, fmt.Errorf("no se encontró el botón de información histórica: %w", err)
+		return nil, fmt.Errorf("no se encontró el botón volver: %w", err)
 	}
 
-	err = volver.Click(proto.InputMouseButtonLeft, 1)
+	err = s.HumanClick(volver, targetPage)
 	if err != nil {
-		return nil, fmt.Errorf("error al hacer clic en el botón de volver: %w", err)
+		return nil, fmt.Errorf("error en click volver: %w", err)
 	}
+
+	// Cleanup si era nueva pestaña
+	if targetPage != page {
+		targetPage.MustClose()
+		time.Sleep(500 * time.Millisecond)
+		page.MustActivate()
+	}
+
+	// Esperar que página original esté lista
+	page.WaitLoad()
+	page.WaitStable(2 * time.Second)
+
 	return representantesLegales, nil
 }
 
@@ -607,62 +1078,71 @@ func contieneCabeceras(headers []string, requeridos []string) bool {
 	return true
 }
 
-// ScrapeCantidadTrabajadores obtiene información de cantidad de trabajadores
+// ScrapeCantidadTrabajadores SIMPLIFICADO - solo lo esencial
 func (s *ScraperExtendido) ScrapeCantidadTrabajadores(ruc string, page *rod.Page) (*models.CantidadTrabajadores, error) {
-	// Buscar el botón usando ElementX (sin Must) con timeout
-	trabBtn, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnInfNumTra')]")
+	// Buscar y hacer clic en botón
+	trabBtn, err := page.Timeout(8 * time.Second).ElementX("//button[contains(@class, 'btnInfNumTra')]")
 	if err != nil {
 		return nil, fmt.Errorf("no se encontró el botón de cantidad de trabajadores: %w", err)
 	}
 
-	// Verificar si el botón está visible
 	visible, err := trabBtn.Visible()
 	if err != nil || !visible {
-		return nil, fmt.Errorf("el botón de cantidad de trabajadores no está visible o disponible")
+		return nil, fmt.Errorf("el botón de cantidad de trabajadores no está visible")
 	}
 
-	// Verificar si el botón está deshabilitado
-	if disabledAttr, _ := trabBtn.Attribute("disabled"); disabledAttr != nil {
-		return nil, fmt.Errorf("el botón de cantidad de trabajadores está deshabilitado")
-	}
-
-	// Hacer clic en el botón
-	err = trabBtn.Click(proto.InputMouseButtonLeft, 1)
+	// Click humano
+	err = s.HumanClick(trabBtn, page)
 	if err != nil {
-		return nil, fmt.Errorf("error al hacer clic en el botón de cantidad de trabajadores: %w", err)
+		return nil, fmt.Errorf("error en click humano: %w", err)
 	}
 
-	time.Sleep(3 * time.Second)
-
-	// Cambiar a la nueva pestaña si se abrió
+	// Esperar respuesta y detectar si se abrió nueva pestaña
+	time.Sleep(2 * time.Second)
 	pages := s.browser.MustPages()
+	var targetPage *rod.Page
+
 	if len(pages) > 1 {
-		page = pages[len(pages)-1]
-		err = page.WaitLoad()
-		if err != nil {
-			return nil, fmt.Errorf("error al cargar la página de cantidad de trabajadores: %w", err)
-		}
+		// Nueva pestaña
+		targetPage = pages[len(pages)-1]
+		targetPage.MustActivate()
+	} else {
+		// Misma pestaña
+		targetPage = page
 	}
 
-	err = page.WaitStable(10 * time.Second)
+	// Carga humana
+	err = s.HumanPageLoad(targetPage)
 	if err != nil {
-		return nil, fmt.Errorf("la página de cantidad de trabajadores no cargó correctamente: %w", err)
+		log.Printf("⚠️ Warning: Error en carga humana: %v", err)
 	}
 
+	// Extraer información
 	cantidadTrabajadores := &models.CantidadTrabajadores{}
+	s.extractTrabajadoresInfo(targetPage, cantidadTrabajadores)
 
-	// Extraer información de cantidad de trabajadores
-	s.extractTrabajadoresInfo(page, cantidadTrabajadores)
-	// Buscar el botón usando ElementX (sin Must) con timeout
-	volver, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnNuevaConsulta')]")
+	// Buscar y hacer clic en volver
+	volver, err := targetPage.Timeout(8 * time.Second).ElementX("//button[contains(@class, 'btnNuevaConsulta')]")
 	if err != nil {
-		return nil, fmt.Errorf("no se encontró el botón de información histórica: %w", err)
+		return nil, fmt.Errorf("no se encontró el botón volver: %w", err)
 	}
 
-	err = volver.Click(proto.InputMouseButtonLeft, 1)
+	err = s.HumanClick(volver, targetPage)
 	if err != nil {
-		return nil, fmt.Errorf("error al hacer clic en el botón de volver: %w", err)
+		return nil, fmt.Errorf("error en click volver: %w", err)
 	}
+
+	// Cleanup si era nueva pestaña
+	if targetPage != page {
+		targetPage.MustClose()
+		time.Sleep(500 * time.Millisecond)
+		page.MustActivate()
+	}
+
+	// Esperar que página original esté lista
+	page.WaitLoad()
+	page.WaitStable(2 * time.Second)
+
 	return cantidadTrabajadores, nil
 }
 
@@ -738,67 +1218,74 @@ func contains(slice []string, item string) bool {
 	return false
 }
 
-// ScrapeEstablecimientosAnexos obtiene información de establecimientos anexos
+// ScrapeEstablecimientosAnexos SIMPLIFICADO - solo lo esencial
 func (s *ScraperExtendido) ScrapeEstablecimientosAnexos(ruc string, page *rod.Page) (*models.EstablecimientosAnexos, error) {
-
-	// Buscar el botón usando ElementX (sin Must) con timeout
-	estabBtn, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnInfLocAnex')]")
+	// Buscar y hacer clic en botón
+	estabBtn, err := page.Timeout(8 * time.Second).ElementX("//button[contains(@class, 'btnInfLocAnex')]")
 	if err != nil {
 		return nil, fmt.Errorf("no se encontró el botón de establecimientos anexos: %w", err)
 	}
 
-	// Verificar si el botón está visible
 	visible, err := estabBtn.Visible()
 	if err != nil || !visible {
-		return nil, fmt.Errorf("el botón de establecimientos anexos no está visible o disponible")
+		return nil, fmt.Errorf("el botón de establecimientos anexos no está visible")
 	}
 
-	// Verificar si el botón está deshabilitado
-	if disabledAttr, _ := estabBtn.Attribute("disabled"); disabledAttr != nil {
-		return nil, fmt.Errorf("el botón de establecimientos anexos está deshabilitado")
-	}
-
-	// Hacer clic en el botón
-	err = estabBtn.Click(proto.InputMouseButtonLeft, 1)
+	// Click humano
+	err = s.HumanClick(estabBtn, page)
 	if err != nil {
-		return nil, fmt.Errorf("error al hacer clic en el botón de establecimientos anexos: %w", err)
+		return nil, fmt.Errorf("error en click humano: %w", err)
 	}
 
-	time.Sleep(3 * time.Second)
-
-	// Cambiar a la nueva pestaña si se abrió
+	// Esperar respuesta y detectar si se abrió nueva pestaña
+	time.Sleep(2 * time.Second)
 	pages := s.browser.MustPages()
+	var targetPage *rod.Page
+
 	if len(pages) > 1 {
-		page = pages[len(pages)-1]
-		err = page.WaitLoad()
-		if err != nil {
-			return nil, fmt.Errorf("error al cargar la página de establecimientos anexos: %w", err)
-		}
+		// Nueva pestaña
+		targetPage = pages[len(pages)-1]
+		targetPage.MustActivate()
+	} else {
+		// Misma pestaña
+		targetPage = page
 	}
 
-	err = page.WaitStable(10 * time.Second)
+	// Carga humana
+	err = s.HumanPageLoad(targetPage)
 	if err != nil {
-		return nil, fmt.Errorf("la página de establecimientos anexos no cargó correctamente: %w", err)
+		log.Printf("⚠️ Warning: Error en carga humana: %v", err)
 	}
 
+	// Extraer información
 	establecimientosAnexos := &models.EstablecimientosAnexos{}
-
-	// Extraer información de establecimientos anexos
-	err = s.extractEstablecimientosInfo(page, establecimientosAnexos)
+	err = s.extractEstablecimientosInfo(targetPage, establecimientosAnexos)
 	if err != nil {
 		return nil, fmt.Errorf("error al extraer información de establecimientos: %w", err)
 	}
 
-	// Buscar el botón usando ElementX (sin Must) con timeout
-	volver, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnNuevaConsulta')]")
+	// Buscar y hacer clic en volver
+	volver, err := targetPage.Timeout(8 * time.Second).ElementX("//button[contains(@class, 'btnNuevaConsulta')]")
 	if err != nil {
-		return nil, fmt.Errorf("no se encontró el botón de información histórica: %w", err)
+		return nil, fmt.Errorf("no se encontró el botón volver: %w", err)
 	}
 
-	err = volver.Click(proto.InputMouseButtonLeft, 1)
+	err = s.HumanClick(volver, targetPage)
 	if err != nil {
-		return nil, fmt.Errorf("error al hacer clic en el botón de volver: %w", err)
+		return nil, fmt.Errorf("error en click volver: %w", err)
 	}
+
+	// Cleanup si era nueva pestaña
+	if targetPage != page {
+		targetPage.MustClose()
+		time.Sleep(500 * time.Millisecond)
+		page.MustActivate()
+	}
+
+	// Esperar que página original esté lista
+	page.WaitLoad()
+	page.WaitStable(2 * time.Second)
+
 	return establecimientosAnexos, nil
 }
 
@@ -874,64 +1361,70 @@ func (s *ScraperExtendido) extractEstablecimientosInfo(page *rod.Page, estab *mo
 
 // Métodos adicionales para las demás consultas...
 
-// ScrapeOmisionesTributarias obtiene información de omisiones tributarias
+// ScrapeOmisionesTributarias SIMPLIFICADO - solo lo esencial
 func (s *ScraperExtendido) ScrapeOmisionesTributarias(ruc string, page *rod.Page) (*models.OmisionesTributarias, error) {
-
-	// Buscar el botón usando ElementX (sin Must) con timeout
-	omisBtn, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnInfOmiTri')]")
+	// Buscar y hacer clic en botón
+	omisBtn, err := page.Timeout(8 * time.Second).ElementX("//button[contains(@class, 'btnInfOmiTri')]")
 	if err != nil {
 		return nil, fmt.Errorf("no se encontró el botón de omisiones tributarias: %w", err)
 	}
 
-	// Verificar si el botón está visible
 	visible, err := omisBtn.Visible()
 	if err != nil || !visible {
-		return nil, fmt.Errorf("el botón de omisiones tributarias no está visible o disponible")
+		return nil, fmt.Errorf("el botón de omisiones tributarias no está visible")
 	}
 
-	// Verificar si el botón está deshabilitado
-	if disabledAttr, _ := omisBtn.Attribute("disabled"); disabledAttr != nil {
-		return nil, fmt.Errorf("el botón de omisiones tributarias está deshabilitado")
-	}
-
-	// Hacer clic en el botón
-	err = omisBtn.Click(proto.InputMouseButtonLeft, 1)
+	// Click humano
+	err = s.HumanClick(omisBtn, page)
 	if err != nil {
-		return nil, fmt.Errorf("error al hacer clic en el botón de omisiones tributarias: %w", err)
+		return nil, fmt.Errorf("error en click humano: %w", err)
 	}
 
-	time.Sleep(3 * time.Second)
-
-	// Cambiar a la nueva pestaña si se abrió
+	// Esperar respuesta y detectar si se abrió nueva pestaña
+	time.Sleep(2 * time.Second)
 	pages := s.browser.MustPages()
+	var targetPage *rod.Page
+
 	if len(pages) > 1 {
-		page = pages[len(pages)-1]
-		err = page.WaitLoad()
-		if err != nil {
-			return nil, fmt.Errorf("error al cargar la página de omisiones tributarias: %w", err)
-		}
+		// Nueva pestaña
+		targetPage = pages[len(pages)-1]
+		targetPage.MustActivate()
+	} else {
+		// Misma pestaña
+		targetPage = page
 	}
 
-	err = page.WaitStable(10 * time.Second)
+	// Carga humana
+	err = s.HumanPageLoad(targetPage)
 	if err != nil {
-		return nil, fmt.Errorf("la página de omisiones tributarias no cargó correctamente: %w", err)
+		log.Printf("⚠️ Warning: Error en carga humana: %v", err)
 	}
 
+	// Extraer información
 	omisionesTributarias := &models.OmisionesTributarias{}
+	s.extractOmisionesInfo(targetPage, omisionesTributarias)
 
-	// Extraer información de omisiones tributarias
-	s.extractOmisionesInfo(page, omisionesTributarias)
-
-	// Buscar el botón usando ElementX (sin Must) con timeout
-	volver, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnNuevaConsulta')]")
+	// Buscar y hacer clic en volver
+	volver, err := targetPage.Timeout(8 * time.Second).ElementX("//button[contains(@class, 'btnNuevaConsulta')]")
 	if err != nil {
-		return nil, fmt.Errorf("no se encontró el botón de información histórica: %w", err)
+		return nil, fmt.Errorf("no se encontró el botón volver: %w", err)
 	}
 
-	err = volver.Click(proto.InputMouseButtonLeft, 1)
+	err = s.HumanClick(volver, targetPage)
 	if err != nil {
-		return nil, fmt.Errorf("error al hacer clic en el botón de volver: %w", err)
+		return nil, fmt.Errorf("error en click volver: %w", err)
 	}
+
+	// Cleanup si era nueva pestaña
+	if targetPage != page {
+		targetPage.MustClose()
+		time.Sleep(500 * time.Millisecond)
+		page.MustActivate()
+	}
+
+	// Esperar que página original esté lista
+	page.WaitLoad()
+	page.WaitStable(2 * time.Second)
 
 	return omisionesTributarias, nil
 }
@@ -974,64 +1467,70 @@ func (s *ScraperExtendido) extractOmisionesInfo(page *rod.Page, omis *models.Omi
 	}
 }
 
-// ScrapeActasProbatorias obtiene información de actas probatorias
+// ScrapeActasProbatorias SIMPLIFICADO - solo lo esencial
 func (s *ScraperExtendido) ScrapeActasProbatorias(ruc string, page *rod.Page) (*models.ActasProbatorias, error) {
-
-	// Buscar el botón usando ElementX (sin Must) con timeout
-	actasBtn, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnInfActPro')]")
+	// Buscar y hacer clic en botón
+	actasBtn, err := page.Timeout(8 * time.Second).ElementX("//button[contains(@class, 'btnInfActPro')]")
 	if err != nil {
 		return nil, fmt.Errorf("no se encontró el botón de actas probatorias: %w", err)
 	}
 
-	// Verificar si el botón está visible
 	visible, err := actasBtn.Visible()
 	if err != nil || !visible {
-		return nil, fmt.Errorf("el botón de actas probatorias no está visible o disponible")
+		return nil, fmt.Errorf("el botón de actas probatorias no está visible")
 	}
 
-	// Verificar si el botón está deshabilitado
-	if disabledAttr, _ := actasBtn.Attribute("disabled"); disabledAttr != nil {
-		return nil, fmt.Errorf("el botón de actas probatorias está deshabilitado")
-	}
-
-	// Hacer clic en el botón
-	err = actasBtn.Click(proto.InputMouseButtonLeft, 1)
+	// Click humano
+	err = s.HumanClick(actasBtn, page)
 	if err != nil {
-		return nil, fmt.Errorf("error al hacer clic en el botón de actas probatorias: %w", err)
+		return nil, fmt.Errorf("error en click humano: %w", err)
 	}
 
-	time.Sleep(3 * time.Second)
-
-	// Cambiar a la nueva pestaña si se abrió
+	// Esperar respuesta y detectar si se abrió nueva pestaña
+	time.Sleep(2 * time.Second)
 	pages := s.browser.MustPages()
+	var targetPage *rod.Page
+
 	if len(pages) > 1 {
-		page = pages[len(pages)-1]
-		err = page.WaitLoad()
-		if err != nil {
-			return nil, fmt.Errorf("error al cargar la página de actas probatorias: %w", err)
-		}
+		// Nueva pestaña
+		targetPage = pages[len(pages)-1]
+		targetPage.MustActivate()
+	} else {
+		// Misma pestaña
+		targetPage = page
 	}
 
-	err = page.WaitStable(10 * time.Second)
+	// Carga humana
+	err = s.HumanPageLoad(targetPage)
 	if err != nil {
-		return nil, fmt.Errorf("la página de actas probatorias no cargó correctamente: %w", err)
+		log.Printf("⚠️ Warning: Error en carga humana: %v", err)
 	}
 
+	// Extraer información
 	actasProbatorias := &models.ActasProbatorias{}
+	s.extractActasProbatoriasInfo(targetPage, actasProbatorias)
 
-	// Extraer información de actas probatorias
-	s.extractActasProbatoriasInfo(page, actasProbatorias)
-
-	// Buscar el botón usando ElementX (sin Must) con timeout
-	volver, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnNuevaConsulta')]")
+	// Buscar y hacer clic en volver
+	volver, err := targetPage.Timeout(8 * time.Second).ElementX("//button[contains(@class, 'btnNuevaConsulta')]")
 	if err != nil {
-		return nil, fmt.Errorf("no se encontró el botón de información histórica: %w", err)
+		return nil, fmt.Errorf("no se encontró el botón volver: %w", err)
 	}
 
-	err = volver.Click(proto.InputMouseButtonLeft, 1)
+	err = s.HumanClick(volver, targetPage)
 	if err != nil {
-		return nil, fmt.Errorf("error al hacer clic en el botón de volver: %w", err)
+		return nil, fmt.Errorf("error en click volver: %w", err)
 	}
+
+	// Cleanup si era nueva pestaña
+	if targetPage != page {
+		targetPage.MustClose()
+		time.Sleep(500 * time.Millisecond)
+		page.MustActivate()
+	}
+
+	// Esperar que página original esté lista
+	page.WaitLoad()
+	page.WaitStable(2 * time.Second)
 
 	return actasProbatorias, nil
 }
@@ -1080,75 +1579,70 @@ func (s *ScraperExtendido) extractActasProbatoriasInfo(page *rod.Page, actas *mo
 	actas.TieneActas = actas.CantidadActas > 0
 }
 
-// ScrapeFacturasFisicas obtiene información de facturas físicas
+// ScrapeFacturasFisicas SIMPLIFICADO - solo lo esencial
 func (s *ScraperExtendido) ScrapeFacturasFisicas(ruc string, page *rod.Page) (*models.FacturasFisicas, error) {
-	// Buscar el botón usando ElementX (sin Must) con timeout - primero XPath
-	facturasBtn, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnInfActCPF')]")
+	// Buscar y hacer clic en botón
+	facturasBtn, err := page.Timeout(8 * time.Second).ElementX("//button[contains(@class, 'btnInfActCPF')]")
 	if err != nil {
-		// Intentar con selector CSS como alternativa
-		facturasBtn, err = page.Timeout(5 * time.Second).Element(".btnInfActCPF")
-		if err != nil {
-			return nil, fmt.Errorf("no se encontró el botón de facturas físicas: %w", err)
-		}
+		return nil, fmt.Errorf("no se encontró el botón de facturas físicas: %w", err)
 	}
 
-	// Verificar si el botón está visible
 	visible, err := facturasBtn.Visible()
 	if err != nil || !visible {
-		return nil, fmt.Errorf("el botón de facturas físicas no está visible o disponible")
+		return nil, fmt.Errorf("el botón de facturas físicas no está visible")
 	}
 
-	// Verificar si el botón está deshabilitado
-	if disabledAttr, _ := facturasBtn.Attribute("disabled"); disabledAttr != nil {
-		return nil, fmt.Errorf("el botón de facturas físicas está deshabilitado")
-	}
-
-	// Hacer scroll hasta el botón para asegurarse de que esté en viewport
-	err = facturasBtn.ScrollIntoView()
+	// Click humano
+	err = s.HumanClick(facturasBtn, page)
 	if err != nil {
-		return nil, fmt.Errorf("error al hacer scroll al botón: %w", err)
+		return nil, fmt.Errorf("error en click humano: %w", err)
 	}
 
-	time.Sleep(1 * time.Second)
-
-	// Hacer clic en el botón
-	err = facturasBtn.Click(proto.InputMouseButtonLeft, 1)
-	if err != nil {
-		return nil, fmt.Errorf("error al hacer clic en el botón de facturas físicas: %w", err)
-	}
-
-	time.Sleep(3 * time.Second)
-
-	// Cambiar a la nueva pestaña si se abrió
+	// Esperar respuesta y detectar si se abrió nueva pestaña
+	time.Sleep(2 * time.Second)
 	pages := s.browser.MustPages()
+	var targetPage *rod.Page
+
 	if len(pages) > 1 {
-		page = pages[len(pages)-1]
-		err = page.WaitLoad()
-		if err != nil {
-			return nil, fmt.Errorf("error al cargar la página de facturas físicas: %w", err)
-		}
+		// Nueva pestaña
+		targetPage = pages[len(pages)-1]
+		targetPage.MustActivate()
+	} else {
+		// Misma pestaña
+		targetPage = page
 	}
 
-	err = page.WaitStable(10 * time.Second)
+	// Carga humana
+	err = s.HumanPageLoad(targetPage)
 	if err != nil {
-		return nil, fmt.Errorf("la página de facturas físicas no cargó correctamente: %w", err)
+		log.Printf("⚠️ Warning: Error en carga humana: %v", err)
 	}
 
+	// Extraer información
 	facturasFisicas := &models.FacturasFisicas{}
+	s.extractFacturasFisicasInfo(targetPage, facturasFisicas)
 
-	// Extraer información de facturas físicas
-	s.extractFacturasFisicasInfo(page, facturasFisicas)
-
-	// Buscar el botón usando ElementX (sin Must) con timeout
-	volver, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnNuevaConsulta')]")
+	// Buscar y hacer clic en volver
+	volver, err := targetPage.Timeout(8 * time.Second).ElementX("//button[contains(@class, 'btnNuevaConsulta')]")
 	if err != nil {
-		return nil, fmt.Errorf("no se encontró el botón de información histórica: %w", err)
+		return nil, fmt.Errorf("no se encontró el botón volver: %w", err)
 	}
 
-	err = volver.Click(proto.InputMouseButtonLeft, 1)
+	err = s.HumanClick(volver, targetPage)
 	if err != nil {
-		return nil, fmt.Errorf("error al hacer clic en el botón de volver: %w", err)
+		return nil, fmt.Errorf("error en click volver: %w", err)
 	}
+
+	// Cleanup si era nueva pestaña
+	if targetPage != page {
+		targetPage.MustClose()
+		time.Sleep(500 * time.Millisecond)
+		page.MustActivate()
+	}
+
+	// Esperar que página original esté lista
+	page.WaitLoad()
+	page.WaitStable(2 * time.Second)
 
 	return facturasFisicas, nil
 }
@@ -1251,64 +1745,70 @@ func (s *ScraperExtendido) extractFacturasFisicasInfo(page *rod.Page, facturas *
 	facturas.TieneAutorizacion = len(facturas.Autorizaciones) > 0 || len(facturas.CanceladasOBajas) > 0
 }
 
-// ScrapeReactivaPeru obtiene información del programa Reactiva Perú
+// ScrapeReactivaPeru SIMPLIFICADO - solo lo esencial
 func (s *ScraperExtendido) ScrapeReactivaPeru(ruc string, page *rod.Page) (*models.ReactivaPeru, error) {
-
-	// Buscar el botón usando ElementX (sin Must) con timeout
-	reactivaBtn, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnInfReaPer')]")
+	// Buscar y hacer clic en botón
+	reactivaBtn, err := page.Timeout(8 * time.Second).ElementX("//button[contains(@class, 'btnInfReaPer')]")
 	if err != nil {
 		return nil, fmt.Errorf("no se encontró el botón de Reactiva Perú: %w", err)
 	}
 
-	// Verificar si el botón está visible
 	visible, err := reactivaBtn.Visible()
 	if err != nil || !visible {
-		return nil, fmt.Errorf("el botón de Reactiva Perú no está visible o disponible")
+		return nil, fmt.Errorf("el botón de Reactiva Perú no está visible")
 	}
 
-	// Verificar si el botón está deshabilitado
-	if disabledAttr, _ := reactivaBtn.Attribute("disabled"); disabledAttr != nil {
-		return nil, fmt.Errorf("el botón de Reactiva Perú está deshabilitado")
-	}
-
-	// Hacer clic en el botón
-	err = reactivaBtn.Click(proto.InputMouseButtonLeft, 1)
+	// Click humano
+	err = s.HumanClick(reactivaBtn, page)
 	if err != nil {
-		return nil, fmt.Errorf("error al hacer clic en el botón de Reactiva Perú: %w", err)
+		return nil, fmt.Errorf("error en click humano: %w", err)
 	}
 
-	time.Sleep(3 * time.Second)
-
-	// Cambiar a la nueva pestaña si se abrió
+	// Esperar respuesta y detectar si se abrió nueva pestaña
+	time.Sleep(2 * time.Second)
 	pages := s.browser.MustPages()
+	var targetPage *rod.Page
+
 	if len(pages) > 1 {
-		page = pages[len(pages)-1]
-		err = page.WaitLoad()
-		if err != nil {
-			return nil, fmt.Errorf("error al cargar la página de Reactiva Perú: %w", err)
-		}
+		// Nueva pestaña
+		targetPage = pages[len(pages)-1]
+		targetPage.MustActivate()
+	} else {
+		// Misma pestaña
+		targetPage = page
 	}
 
-	err = page.WaitStable(10 * time.Second)
+	// Carga humana
+	err = s.HumanPageLoad(targetPage)
 	if err != nil {
-		return nil, fmt.Errorf("la página de Reactiva Perú no cargó correctamente: %w", err)
+		log.Printf("⚠️ Warning: Error en carga humana: %v", err)
 	}
 
+	// Extraer información
 	reactivaPeru := &models.ReactivaPeru{}
+	s.extractReactivaPeruInfo(targetPage, reactivaPeru)
 
-	// Extraer información de Reactiva Perú
-	s.extractReactivaPeruInfo(page, reactivaPeru)
-
-	// Buscar el botón usando ElementX (sin Must) con timeout
-	volver, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnNuevaConsulta')]")
+	// Buscar y hacer clic en volver
+	volver, err := targetPage.Timeout(8 * time.Second).ElementX("//button[contains(@class, 'btnNuevaConsulta')]")
 	if err != nil {
-		return nil, fmt.Errorf("no se encontró el botón de información histórica: %w", err)
+		return nil, fmt.Errorf("no se encontró el botón volver: %w", err)
 	}
 
-	err = volver.Click(proto.InputMouseButtonLeft, 1)
+	err = s.HumanClick(volver, targetPage)
 	if err != nil {
-		return nil, fmt.Errorf("error al hacer clic en el botón de volver: %w", err)
+		return nil, fmt.Errorf("error en click volver: %w", err)
 	}
+
+	// Cleanup si era nueva pestaña
+	if targetPage != page {
+		targetPage.MustClose()
+		time.Sleep(500 * time.Millisecond)
+		page.MustActivate()
+	}
+
+	// Esperar que página original esté lista
+	page.WaitLoad()
+	page.WaitStable(2 * time.Second)
 
 	return reactivaPeru, nil
 }
@@ -1386,49 +1886,57 @@ func (s *ScraperExtendido) ScrapeProgramaCovid19(ruc string, page *rod.Page) (*m
 		return nil, fmt.Errorf("el botón de Programa COVID-19 no está visible o disponible")
 	}
 
-	// Verificar si el botón está deshabilitado
-	if disabledAttr, _ := covidBtn.Attribute("disabled"); disabledAttr != nil {
-		return nil, fmt.Errorf("el botón de Programa COVID-19 está deshabilitado")
-	}
-
-	// Hacer clic en el botón
-	err = covidBtn.Click(proto.InputMouseButtonLeft, 1)
+	// Click humano
+	err = s.HumanClick(covidBtn, page)
 	if err != nil {
-		return nil, fmt.Errorf("error al hacer clic en el botón de Programa COVID-19: %w", err)
+		return nil, fmt.Errorf("error en click humano: %w", err)
 	}
 
-	time.Sleep(3 * time.Second)
-
-	// Cambiar a la nueva pestaña si se abrió
+	// Esperar respuesta y detectar si se abrió nueva pestaña
+	time.Sleep(2 * time.Second)
 	pages := s.browser.MustPages()
+	var targetPage *rod.Page
+
 	if len(pages) > 1 {
-		page = pages[len(pages)-1]
-		err = page.WaitLoad()
-		if err != nil {
-			return nil, fmt.Errorf("error al cargar la página de Programa COVID-19: %w", err)
-		}
+		// Nueva pestaña
+		targetPage = pages[len(pages)-1]
+		targetPage.MustActivate()
+	} else {
+		// Misma pestaña
+		targetPage = page
 	}
 
-	err = page.WaitStable(10 * time.Second)
+	// Carga humana
+	err = s.HumanPageLoad(targetPage)
 	if err != nil {
-		return nil, fmt.Errorf("la página de Programa COVID-19 no cargó correctamente: %w", err)
+		log.Printf("⚠️ Warning: Error en carga humana: %v", err)
 	}
 
 	programaCovid := &models.ProgramaCovid19{}
-
 	// Extraer información del Programa COVID-19
 	s.extractProgramaCovid19Info(page, programaCovid)
 
-	// Buscar el botón usando ElementX (sin Must) con timeout
-	volver, err := page.Timeout(10 * time.Second).ElementX("//button[contains(@class, 'btnNuevaConsulta')]")
+	// Buscar y hacer clic en volver
+	volver, err := targetPage.Timeout(8 * time.Second).ElementX("//button[contains(@class, 'btnNuevaConsulta')]")
 	if err != nil {
-		return nil, fmt.Errorf("no se encontró el botón de información histórica: %w", err)
+		return nil, fmt.Errorf("no se encontró el botón volver: %w", err)
 	}
 
-	err = volver.Click(proto.InputMouseButtonLeft, 1)
+	err = s.HumanClick(volver, targetPage)
 	if err != nil {
-		return nil, fmt.Errorf("error al hacer clic en el botón de volver: %w", err)
+		return nil, fmt.Errorf("error en click volver: %w", err)
 	}
+
+	// Cleanup si era nueva pestaña
+	if targetPage != page {
+		targetPage.MustClose()
+		time.Sleep(500 * time.Millisecond)
+		page.MustActivate()
+	}
+
+	// Esperar que página original esté lista
+	page.WaitLoad()
+	page.WaitStable(2 * time.Second)
 
 	return programaCovid, nil
 }
