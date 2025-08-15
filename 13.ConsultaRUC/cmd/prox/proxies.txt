@@ -1,0 +1,242 @@
+# Lista de Proxies Verificados - Generada: 2025-08-15 14:50:00
+# ⚠️  NOTA: Verificación no es 100% infalible. Proxies pueden fallar posteriormente.
+# Total de proxies funcionando: 117
+----------------------------------------------------------------------
+
+# FORMATO SIMPLE (IP:Puerto)
+66.36.234.130:1339
+18.135.100.214:3128
+4.156.78.45:80
+8.209.249.89:3128
+152.53.107.230:80
+209.97.150.167:8080
+82.102.10.253:80
+190.103.177.131:80
+4.245.123.244:80
+43.156.183.112:1080
+108.141.130.146:80
+92.67.186.210:80
+57.129.81.201:8080
+123.141.181.32:5031
+103.65.237.92:5678
+181.174.164.221:80
+113.160.132.195:8080
+90.162.35.34:80
+38.147.98.190:8080
+4.195.16.140:80
+47.74.157.194:80
+59.7.246.4:80
+45.146.163.31:80
+89.58.55.33:80
+91.107.147.219:80
+159.69.57.20:8880
+23.247.136.254:80
+89.58.57.45:80
+20.54.244.246:3128
+124.108.6.20:8085
+116.203.56.216:2212
+123.30.154.171:7777
+41.191.203.162:80
+104.222.32.98:80
+41.191.203.161:80
+185.82.218.85:80
+192.73.244.36:80
+35.197.89.213:80
+127.0.0.7:80
+160.251.142.232:80
+47.56.110.204:8989
+47.251.74.38:8445
+103.94.52.70:3128
+176.126.103.194:44214
+8.219.97.248:80
+197.255.125.12:80
+42.118.0.155:16000
+139.162.78.109:8080
+202.232.52.162:8080
+134.209.29.120:80
+143.42.66.91:80
+198.199.86.11:8080
+27.71.140.43:16000
+203.162.13.26:6868
+64.181.240.152:3128
+154.118.231.30:80
+5.45.126.128:8080
+51.79.99.237:4502
+147.75.34.105:443
+94.236.164.167:3333
+23.247.136.248:80
+203.162.13.222:6868
+162.212.153.46:8888
+138.68.60.8:80
+161.35.70.249:8080
+45.166.93.113:999
+8.209.255.114:20172
+42.118.1.111:16000
+41.59.90.168:80
+8.221.139.222:6666
+47.91.110.148:1000
+147.75.34.74:10019
+42.96.16.176:1312
+198.49.68.80:80
+47.250.51.110:9090
+47.251.43.115:33333
+103.187.86.3:8182
+23.237.210.82:80
+200.174.198.86:8888
+47.90.205.231:33333
+27.71.130.8:16000
+149.129.255.179:4002
+154.205.147.234:1080
+47.254.36.213:1081
+8.215.15.163:104
+14.225.240.23:8562
+97.74.87.226:80
+8.220.205.172:3128
+47.252.29.28:11222
+49.254.107.184:28766
+159.203.61.169:3128
+139.59.1.14:80
+49.254.146.127:28919
+46.161.196.222:8080
+174.138.30.119:443
+179.255.146.176:8080
+158.255.77.168:80
+8.213.134.213:9080
+47.91.109.17:9080
+41.59.90.171:80
+8.213.156.191:8081
+81.169.213.169:8888
+190.97.232.248:999
+154.16.41.38:5555
+158.255.77.169:80
+89.117.145.245:3128
+182.53.23.194:8080
+173.209.63.69:8245
+181.57.131.122:8080
+154.65.39.8:80
+129.213.69.94:80
+204.48.31.203:80
+191.7.215.165:1452
+207.246.234.115:4669
+51.161.56.52:80
+103.14.79.36:8080
+8.222.175.80:6128
+
+# FORMATO DETALLADO
+66.36.234.130:1339 | United States | anonymous | HTTPS: yes | Respuesta: 452ms
+18.135.100.214:3128 | United Kingdom | elite proxy | HTTPS: yes | Respuesta: 661ms
+4.156.78.45:80 | United States | anonymous | HTTPS: no | Respuesta: 720ms
+8.209.249.89:3128 | Japan | anonymous | HTTPS: yes | Respuesta: 919ms
+152.53.107.230:80 | Netherlands | anonymous | HTTPS: no | Respuesta: 920ms
+209.97.150.167:8080 | United States | anonymous | HTTPS: no | Respuesta: 1061ms
+82.102.10.253:80 | United Kingdom | anonymous | HTTPS: no | Respuesta: 1273ms
+190.103.177.131:80 | Argentina | anonymous | HTTPS: no | Respuesta: 1478ms
+4.245.123.244:80 | Netherlands | anonymous | HTTPS: no | Respuesta: 934ms
+43.156.183.112:1080 | Singapore | anonymous | HTTPS: no | Respuesta: 1781ms
+108.141.130.146:80 | Netherlands | anonymous | HTTPS: no | Respuesta: 881ms
+92.67.186.210:80 | Netherlands | anonymous | HTTPS: no | Respuesta: 1479ms
+57.129.81.201:8080 | Germany | anonymous | HTTPS: yes | Respuesta: 2106ms
+123.141.181.32:5031 | South Korea | elite proxy | HTTPS: no | Respuesta: 2141ms
+103.65.237.92:5678 | Indonesia | anonymous | HTTPS: no | Respuesta: 2206ms
+181.174.164.221:80 | Panama | anonymous | HTTPS: no | Respuesta: 2260ms
+113.160.132.195:8080 | Vietnam | elite proxy | HTTPS: yes | Respuesta: 2354ms
+90.162.35.34:80 | Spain | elite proxy | HTTPS: no | Respuesta: 1021ms
+38.147.98.190:8080 | United States | elite proxy | HTTPS: yes | Respuesta: 2544ms
+4.195.16.140:80 | Australia | anonymous | HTTPS: no | Respuesta: 1994ms
+47.74.157.194:80 | Singapore | anonymous | HTTPS: no | Respuesta: 1462ms
+59.7.246.4:80 | South Korea | anonymous | HTTPS: no | Respuesta: 1936ms
+45.146.163.31:80 | Japan | anonymous | HTTPS: no | Respuesta: 2370ms
+89.58.55.33:80 | Germany | anonymous | HTTPS: no | Respuesta: 1034ms
+91.107.147.219:80 | Germany | anonymous | HTTPS: no | Respuesta: 1550ms
+159.69.57.20:8880 | Germany | elite proxy | HTTPS: yes | Respuesta: 862ms
+23.247.136.254:80 | United States | anonymous | HTTPS: no | Respuesta: 2966ms
+89.58.57.45:80 | Germany | anonymous | HTTPS: no | Respuesta: 860ms
+20.54.244.246:3128 | Netherlands | anonymous | HTTPS: yes | Respuesta: 4212ms
+124.108.6.20:8085 | Cambodia | anonymous | HTTPS: no | Respuesta: 3498ms
+116.203.56.216:2212 | Germany | anonymous | HTTPS: yes | Respuesta: 4444ms
+123.30.154.171:7777 | Vietnam | anonymous | HTTPS: no | Respuesta: 4626ms
+41.191.203.162:80 | Lesotho | anonymous | HTTPS: no | Respuesta: 2540ms
+104.222.32.98:80 | United States | elite proxy | HTTPS: no | Respuesta: 602ms
+41.191.203.161:80 | Lesotho | anonymous | HTTPS: no | Respuesta: 2959ms
+185.82.218.85:80 | Bulgaria | anonymous | HTTPS: no | Respuesta: 1812ms
+192.73.244.36:80 | United States | elite proxy | HTTPS: no | Respuesta: 1709ms
+35.197.89.213:80 | United States | elite proxy | HTTPS: no | Respuesta: 911ms
+127.0.0.7:80 | Unknown | anonymous | HTTPS: no | Respuesta: 1ms
+160.251.142.232:80 | Japan | anonymous | HTTPS: no | Respuesta: 2095ms
+47.56.110.204:8989 | Hong Kong | anonymous | HTTPS: no | Respuesta: 2249ms
+47.251.74.38:8445 | United States | elite proxy | HTTPS: no | Respuesta: 2477ms
+103.94.52.70:3128 | Myanmar | elite proxy | HTTPS: no | Respuesta: 3926ms
+176.126.103.194:44214 | Russian Federation | elite proxy | HTTPS: yes | Respuesta: 4715ms
+8.219.97.248:80 | Singapore | anonymous | HTTPS: yes | Respuesta: 4376ms
+197.255.125.12:80 | Ghana | elite proxy | HTTPS: no | Respuesta: 1843ms
+42.118.0.155:16000 | Vietnam | elite proxy | HTTPS: yes | Respuesta: 11979ms
+139.162.78.109:8080 | Japan | anonymous | HTTPS: no | Respuesta: 1786ms
+202.232.52.162:8080 | Japan | anonymous | HTTPS: no | Respuesta: 2689ms
+134.209.29.120:80 | United Kingdom | anonymous | HTTPS: no | Respuesta: 2457ms
+143.42.66.91:80 | Singapore | anonymous | HTTPS: no | Respuesta: 2278ms
+198.199.86.11:8080 | United States | anonymous | HTTPS: no | Respuesta: 712ms
+27.71.140.43:16000 | Vietnam | elite proxy | HTTPS: yes | Respuesta: 19523ms
+203.162.13.26:6868 | Vietnam | elite proxy | HTTPS: yes | Respuesta: 19190ms
+64.181.240.152:3128 | United States | elite proxy | HTTPS: no | Respuesta: 17515ms
+154.118.231.30:80 | Tanzania | elite proxy | HTTPS: no | Respuesta: 8327ms
+5.45.126.128:8080 | Estonia | anonymous | HTTPS: no | Respuesta: 1360ms
+51.79.99.237:4502 | Canada | elite proxy | HTTPS: yes | Respuesta: 1500ms
+147.75.34.105:443 | Netherlands | anonymous | HTTPS: yes | Respuesta: 8192ms
+94.236.164.167:3333 | Bulgaria | elite proxy | HTTPS: no | Respuesta: 22706ms
+23.247.136.248:80 | United States | anonymous | HTTPS: no | Respuesta: 690ms
+203.162.13.222:6868 | Vietnam | elite proxy | HTTPS: yes | Respuesta: 26712ms
+162.212.153.46:8888 | United States | anonymous | HTTPS: no | Respuesta: 22839ms
+138.68.60.8:80 | United States | anonymous | HTTPS: no | Respuesta: 2557ms
+161.35.70.249:8080 | Germany | anonymous | HTTPS: no | Respuesta: 2942ms
+45.166.93.113:999 | Honduras | elite proxy | HTTPS: yes | Respuesta: 30243ms
+8.209.255.114:20172 | Japan | elite proxy | HTTPS: no | Respuesta: 7137ms
+42.118.1.111:16000 | Vietnam | elite proxy | HTTPS: yes | Respuesta: 4015ms
+41.59.90.168:80 | Tanzania | anonymous | HTTPS: no | Respuesta: 3513ms
+8.221.139.222:6666 | Japan | elite proxy | HTTPS: no | Respuesta: 2873ms
+47.91.110.148:1000 | United Arab Emirates | elite proxy | HTTPS: no | Respuesta: 3271ms
+147.75.34.74:10019 | Netherlands | elite proxy | HTTPS: no | Respuesta: 25809ms
+42.96.16.176:1312 | Vietnam | elite proxy | HTTPS: yes | Respuesta: 16281ms
+198.49.68.80:80 | United States | elite proxy | HTTPS: no | Respuesta: 11893ms
+47.250.51.110:9090 | Malaysia | elite proxy | HTTPS: no | Respuesta: 3588ms
+47.251.43.115:33333 | United States | anonymous | HTTPS: yes | Respuesta: 12697ms
+103.187.86.3:8182 | Indonesia | anonymous | HTTPS: no | Respuesta: 44469ms
+23.237.210.82:80 | United States | anonymous | HTTPS: yes | Respuesta: 485ms
+200.174.198.86:8888 | Brazil | anonymous | HTTPS: yes | Respuesta: 47456ms
+47.90.205.231:33333 | United States | anonymous | HTTPS: no | Respuesta: 13549ms
+27.71.130.8:16000 | Vietnam | elite proxy | HTTPS: yes | Respuesta: 49909ms
+149.129.255.179:4002 | Indonesia | elite proxy | HTTPS: no | Respuesta: 3172ms
+154.205.147.234:1080 | Oman | elite proxy | HTTPS: no | Respuesta: 3171ms
+47.254.36.213:1081 | United States | elite proxy | HTTPS: no | Respuesta: 3583ms
+8.215.15.163:104 | Indonesia | elite proxy | HTTPS: no | Respuesta: 3118ms
+14.225.240.23:8562 | Vietnam | elite proxy | HTTPS: no | Respuesta: 9827ms
+97.74.87.226:80 | Singapore | anonymous | HTTPS: no | Respuesta: 3233ms
+8.220.205.172:3128 | South Korea | elite proxy | HTTPS: yes | Respuesta: 3148ms
+47.252.29.28:11222 | United States | elite proxy | HTTPS: no | Respuesta: 7578ms
+49.254.107.184:28766 | South Korea | elite proxy | HTTPS: no | Respuesta: 15427ms
+159.203.61.169:3128 | Canada | anonymous | HTTPS: no | Respuesta: 1559ms
+139.59.1.14:80 | India | anonymous | HTTPS: no | Respuesta: 3174ms
+49.254.146.127:28919 | South Korea | elite proxy | HTTPS: no | Respuesta: 9392ms
+46.161.196.222:8080 | Iraq | elite proxy | HTTPS: no | Respuesta: 14772ms
+174.138.30.119:443 | Singapore | anonymous | HTTPS: no | Respuesta: 1945ms
+179.255.146.176:8080 | Brazil | transparent | HTTPS: no | Respuesta: 27749ms
+158.255.77.168:80 | United Arab Emirates | anonymous | HTTPS: no | Respuesta: 3170ms
+8.213.134.213:9080 | South Korea | elite proxy | HTTPS: no | Respuesta: 3286ms
+47.91.109.17:9080 | United Arab Emirates | elite proxy | HTTPS: no | Respuesta: 3039ms
+41.59.90.171:80 | Tanzania | anonymous | HTTPS: no | Respuesta: 2145ms
+8.213.156.191:8081 | South Korea | elite proxy | HTTPS: no | Respuesta: 3138ms
+81.169.213.169:8888 | Germany | anonymous | HTTPS: no | Respuesta: 3367ms
+190.97.232.248:999 | Venezuela | transparent | HTTPS: no | Respuesta: 36525ms
+154.16.41.38:5555 | South Africa | elite proxy | HTTPS: no | Respuesta: 68500ms
+158.255.77.169:80 | United Arab Emirates | anonymous | HTTPS: no | Respuesta: 2098ms
+89.117.145.245:3128 | United States | elite proxy | HTTPS: no | Respuesta: 34621ms
+182.53.23.194:8080 | Thailand | transparent | HTTPS: no | Respuesta: 63265ms
+173.209.63.69:8245 | Canada | elite proxy | HTTPS: yes | Respuesta: 4712ms
+181.57.131.122:8080 | Colombia | transparent | HTTPS: no | Respuesta: 12176ms
+154.65.39.8:80 | Senegal | elite proxy | HTTPS: no | Respuesta: 44167ms
+129.213.69.94:80 | United States | elite proxy | HTTPS: no | Respuesta: 29914ms
+204.48.31.203:80 | United States | transparent | HTTPS: no | Respuesta: 39028ms
+191.7.215.165:1452 | Brazil | elite proxy | HTTPS: yes | Respuesta: 55495ms
+207.246.234.115:4669 | United States | elite proxy | HTTPS: no | Respuesta: 67389ms
+51.161.56.52:80 | Canada | elite proxy | HTTPS: no | Respuesta: 58522ms
+103.14.79.36:8080 | Singapore | transparent | HTTPS: no | Respuesta: 65650ms
+8.222.175.80:6128 | Singapore | transparent | HTTPS: no | Respuesta: 62421ms
