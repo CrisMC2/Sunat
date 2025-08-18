@@ -10,6 +10,7 @@ import (
 	"github.com/consulta-ruc-scraper/pkg/scraper"
 )
 
+// Función main modificada
 func main() {
 	rucs := []string{"20606316977"}
 	if len(os.Args) > 1 {
@@ -39,24 +40,33 @@ func main() {
 	for i, ruc := range rucs {
 		log.Printf("[%d/%d] Procesando RUC: %s", i+1, len(rucs), ruc)
 
-		// Obtener información completa del RUC
-		rucCompleto, err := scraperExt.ScrapeRUCCompleto(ruc)
-		if err != nil {
-			log.Printf("❌ Error obteniendo información del RUC %s: %v", ruc, err)
+		// Obtener información completa del RUC (ahora pasa dbService)
+		rucCompleto, err := scraperExt.ScrapeRUCCompleto(ruc, dbService)
+
+		// Guardar en la base de datos incluso si hay errores parciales
+		if rucCompleto != nil {
+			// Insertar en la base de datos
+			dbErr := dbService.InsertRUCCompleto(rucCompleto)
+			if dbErr != nil {
+				log.Printf("❌ Error guardando RUC %s en la base de datos: %v", ruc, dbErr)
+				continue
+			}
+
+			// Determinar el tipo de resultado
+			if err != nil {
+				log.Printf("⚠️ RUC %s (%s) guardado con datos parciales - Error: %v",
+					ruc, getValueOrDefault(rucCompleto.InformacionBasica.RazonSocial), err)
+			} else {
+				log.Printf("✅ RUC %s (%s) guardado exitosamente",
+					ruc, getValueOrDefault(rucCompleto.InformacionBasica.RazonSocial))
+			}
+
+			showSummary(rucCompleto)
+		} else {
+			log.Printf("❌ Error crítico obteniendo información del RUC %s: %v", ruc, err)
 			continue
 		}
-
-		// Insertar en la base de datos
-		err = dbService.InsertRUCCompleto(rucCompleto)
-		if err != nil {
-			log.Printf("❌ Error guardando RUC %s en la base de datos: %v", ruc, err)
-			continue
-		}
-
-		log.Printf("✅ RUC %s (%s) guardado exitosamente", ruc, getValueOrDefault(rucCompleto.InformacionBasica.RazonSocial))
-		showSummary(rucCompleto)
 	}
-
 	log.Println("Proceso completado.")
 }
 

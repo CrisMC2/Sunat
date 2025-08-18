@@ -13,6 +13,7 @@ import (
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/consulta-ruc-scraper/pkg/database"
 	"github.com/consulta-ruc-scraper/pkg/models"
 	"github.com/consulta-ruc-scraper/pkg/utils"
 	"github.com/go-rod/rod"
@@ -446,20 +447,34 @@ func (s *ScraperExtendido) HumanInput(element *rod.Element, text string) error {
 	return nil
 }
 
-func (s *ScraperExtendido) retryScrape(maxRetries int, name string, scrapeFunc func() error) {
+// Función modificada que guarda datos parciales antes de terminar
+func (s *ScraperExtendido) retryScrapeWithPartialSave(maxRetries int, name string, scrapeFunc func() error, rucCompleto *models.RUCCompleto, dbService *database.DatabaseService, ruc string, page *rod.Page) {
 	for attempt := 1; attempt <= maxRetries; attempt++ {
 		if err := scrapeFunc(); err == nil {
 			fmt.Println("✓")
 			return
 		} else {
 			fmt.Printf("✗ intento %d/%d (%v)\n", attempt, maxRetries, err)
-
 			// Delay inteligente entre reintentos (aumenta con cada intento)
 			retryDelay := s.humanSim.generateLogNormalDelay(2000*float64(attempt), 800)
 			time.Sleep(retryDelay)
 		}
 	}
-	fmt.Printf("❌ Falló %s después de %d intentos. Abortando.\n", name, maxRetries)
+
+	fmt.Printf("❌ Falló %s después de %d intentos.\n", name, maxRetries)
+
+	// GUARDAR DATOS PARCIALES ANTES DE TERMINAR
+	if rucCompleto != nil && dbService != nil {
+		fmt.Printf("💾 Guardando datos parciales obtenidos hasta el momento para RUC %s...\n", ruc)
+		if err := dbService.InsertRUCCompleto(rucCompleto); err != nil {
+			fmt.Printf("❌ Error guardando datos parciales: %v\n", err)
+		} else {
+			fmt.Printf("✅ Datos parciales guardados exitosamente para RUC %s\n", ruc)
+		}
+	}
+
+	fmt.Printf("🛑 Terminando programa debido a falla en: %s\n", name)
+	fmt.Printf("📄 Último HTML obtenido: %s\n", page.MustHTML())
 	os.Exit(1)
 }
 
@@ -480,12 +495,13 @@ func (s *ScraperExtendido) retryScrape2(maxRetries int, name string, scrapeFunc 
 }
 
 // ScrapeRUCCompleto obtiene toda la información disponible de un RUC
-func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, error) {
+func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string, dbService *database.DatabaseService) (*models.RUCCompleto, error) {
 	page := s.browser.MustPage(s.baseURL)
 	defer func() {
 		page.MustClose()
 		s.browser.MustClose() // Cierra el navegador entero
 	}()
+
 	// Carga humana de página
 	err := s.HumanPageLoad(page)
 	if err != nil {
@@ -521,6 +537,8 @@ func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, e
 		fmt.Println("✓")
 	} else {
 		fmt.Printf("✗ (%v)\n", err)
+		// Si falla la información básica, no podemos continuar
+		return nil, fmt.Errorf("error obteniendo información básica: %w", err)
 	}
 
 	// Crear estructura completa
@@ -532,7 +550,6 @@ func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, e
 
 	// Determinar tipo de RUC
 	esPersonaJuridica := strings.HasPrefix(ruc, "20")
-	fmt.Printf(" ℹ️ RUC %s es: %s\n", ruc, map[bool]string{true: "Persona Jurídica", false: "Persona Natural"}[esPersonaJuridica])
 	fmt.Printf(" ℹ️ RUC %s es: %s (Fatiga: %.2f)\n", ruc,
 		map[bool]string{true: "Persona Jurídica", false: "Persona Natural"}[esPersonaJuridica],
 		s.humanSim.fatigueLevel)
@@ -543,65 +560,67 @@ func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, e
 	fmt.Println(" 📋 Consultando información principal obligatoria...")
 
 	// 1. Información Histórica (PRINCIPAL)
-	// Información Histórica
 	fmt.Print(" - Información Histórica: ")
-	s.retryScrape(3, "Información Histórica", func() error {
+	s.retryScrapeWithPartialSave(3, "Información Histórica", func() error {
 		infoHist, err := s.ScrapeInformacionHistorica(ruc, page)
 		if err == nil {
 			rucCompleto.InformacionHistorica = infoHist
 		}
 		return err
-	})
+	}, rucCompleto, dbService, ruc, page)
 
 	// 2. Deuda Coactiva (PRINCIPAL)
 	fmt.Print(" - Deuda Coactiva: ")
-	s.retryScrape(3, "Deuda Coactiva", func() error {
+	s.retryScrapeWithPartialSave(3, "Deuda Coactiva", func() error {
 		deuda, err := s.ScrapeDeudaCoactiva(ruc, page)
 		if err == nil {
 			rucCompleto.DeudaCoactiva = deuda
 		}
 		return err
-	})
+	}, rucCompleto, dbService, ruc, page)
 
 	// 3. Omisiones Tributarias (PRINCIPAL)
 	fmt.Print(" - Omisiones Tributarias: ")
-	s.retryScrape(3, "Omisiones Tributarias", func() error {
+	s.retryScrapeWithPartialSave(3, "Omisiones Tributarias", func() error {
 		omis, err := s.ScrapeOmisionesTributarias(ruc, page)
 		if err == nil {
 			rucCompleto.OmisionesTributarias = omis
 		}
 		return err
-	})
+	}, rucCompleto, dbService, ruc, page)
 
 	// 4. Cantidad de Trabajadores (PRINCIPAL)
 	fmt.Print(" - Cantidad de Trabajadores: ")
-	s.retryScrape(3, "Cantidad de Trabajadores", func() error {
+	s.retryScrapeWithPartialSave(3, "Cantidad de Trabajadores", func() error {
 		trab, err := s.ScrapeCantidadTrabajadores(ruc, page)
 		if err == nil {
 			rucCompleto.CantidadTrabajadores = trab
 		}
 		return err
-	})
+	}, rucCompleto, dbService, ruc, page)
 
 	// 5. Actas Probatorias (PRINCIPAL)
 	fmt.Print(" - Actas Probatorias: ")
-	s.retryScrape(3, "Actas Probatorias", func() error {
+	s.retryScrapeWithPartialSave(3, "Actas Probatorias", func() error {
 		actas, err := s.ScrapeActasProbatorias(ruc, page)
 		if err == nil {
 			rucCompleto.ActasProbatorias = actas
 		}
 		return err
-	})
+	}, rucCompleto, dbService, ruc, page)
 
 	// 6. Facturas Físicas (PRINCIPAL)
 	fmt.Print(" - Facturas Físicas: ")
-	s.retryScrape(3, "Facturas Físicas", func() error {
+	s.retryScrapeWithPartialSave(3, "Facturas Físicas", func() error {
 		fact, err := s.ScrapeFacturasFisicas(ruc, page)
 		if err == nil {
 			rucCompleto.FacturasFisicas = fact
 		}
 		return err
-	})
+	}, rucCompleto, dbService, ruc, page)
+
+	// Si hubo un error crítico en las primeras consultas, retornar los datos parciales
+	// (Este bloque ya no es necesario porque retryScrapeWithPartialSave maneja todo)
 
 	// ========================================
 	// CONSULTAS ESPECÍFICAS POR TIPO DE RUC
@@ -612,13 +631,13 @@ func (s *ScraperExtendido) ScrapeRUCCompleto(ruc string) (*models.RUCCompleto, e
 
 		// 7. Representantes Legales (PRINCIPAL para RUC 20)
 		fmt.Print(" - Representantes Legales: ")
-		s.retryScrape(3, "Representantes Legales", func() error {
+		s.retryScrapeWithPartialSave(3, "Representantes Legales", func() error {
 			reps, err := s.ScrapeRepresentantesLegales(ruc, page)
 			if err == nil {
 				rucCompleto.RepresentantesLegales = reps
 			}
 			return err
-		})
+		}, rucCompleto, dbService, ruc, page)
 
 		// ========================================
 		// CONSULTAS OCASIONALES PARA RUC 20
