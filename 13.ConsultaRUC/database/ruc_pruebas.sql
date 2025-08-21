@@ -30,3 +30,5 @@ CREATE TABLE IF NOT EXISTS log_consultas (
     mensaje TEXT,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+ALTER TABLE log_consultas ADD COLUMN especificacion TEXT;

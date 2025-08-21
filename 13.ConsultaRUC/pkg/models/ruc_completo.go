@@ -20,6 +20,7 @@ type RUCCompleto struct {
 	EstablecimientosAnexos *EstablecimientosAnexos `json:"establecimientos_anexos,omitempty"`
 
 	// Metadata
-	FechaConsulta time.Time `json:"fecha_consulta"`
-	VersionAPI    string    `json:"version_api"`
+	FechaConsulta       time.Time       `json:"fecha_consulta"`
+	VersionAPI          string          `json:"version_api"`
+	DeteccionPaginacion map[string]bool `json:"deteccion_paginacion,omitempty"`
 }

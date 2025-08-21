@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"strings"
@@ -98,6 +99,42 @@ func showSummary(ruc *models.RUCCompleto) {
 
 	if len(info) > 0 {
 		log.Printf("   Datos adicionales: %s", strings.Join(info, ", "))
+	}
+	showPaginationSummary(ruc)
+}
+
+func showPaginationSummary(rucCompleto *models.RUCCompleto) {
+	if len(rucCompleto.DeteccionPaginacion) == 0 {
+		return
+	}
+
+	fmt.Println("\n📄 DETECCIÓN DE PAGINACIÓN:")
+
+	secciones := []string{
+		"Información Histórica",
+		"Deuda Coactiva",
+		"Omisiones Tributarias",
+		"Cantidad de Trabajadores",
+		"Actas Probatorias",
+		"Facturas Físicas",
+		"Representantes Legales",
+		"Establecimientos Anexos",
+	}
+
+	hayPaginacion := false
+	for _, seccion := range secciones {
+		if tienePag, existe := rucCompleto.DeteccionPaginacion[seccion]; existe {
+			status := "❌ No"
+			if tienePag {
+				status = "✅ Sí"
+				hayPaginacion = true
+			}
+			fmt.Printf("   %s: %s\n", seccion, status)
+		}
+	}
+
+	if !hayPaginacion {
+		fmt.Println("   ℹ️  No se detectó paginación en ninguna sección")
 	}
 }
 

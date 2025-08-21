@@ -214,6 +214,23 @@ mark_failed() {
     update_log_consultas "$1" "fallido" "${2:-Error durante el scraping}"
 }
 
+# Función para marcar error con especificación
+mark_failed_with_specification() {
+    local ruc="$1"
+    local mensaje="$2"
+    local especificacion="$3"
+    
+    local mensaje_escaped=""
+    local especificacion_escaped=""
+    
+    [ -n "$mensaje" ] && mensaje_escaped=$(escape_sql "$mensaje")
+    [ -n "$especificacion" ] && especificacion_escaped=$(escape_sql "$especificacion")
+    
+    local query="UPDATE log_consultas SET estado = 'fallido', mensaje = '$mensaje_escaped', especificacion = '$especificacion_escaped', fecha_registro = CURRENT_TIMESTAMP WHERE ruc = '$ruc';"
+    
+    PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -c "$query" >/dev/null 2>&1
+}
+
 mark_processing() {
     local ruc="$1"
     local worker_id="${2:-1}"
@@ -336,11 +353,26 @@ get_ruc_batch() {
     local batch_size="$1"
     local query=""
     
-    # CAMBIO PRINCIPAL: Siempre obtener exactamente batch_size RUCs no exitosos
+    # CAMBIO: Obtener RUCs de contabilidad no exitosos NI revision (incluyendo nunca procesados)
     if [ -z "$LAST_RUC_PROCESSED" ]; then
-        query="SELECT ruc FROM log_consultas WHERE estado != 'exitoso' ORDER BY ruc DESC LIMIT $batch_size;"
+        query="SELECT es.ruc 
+               FROM empresas_sunat es
+               LEFT JOIN log_consultas lc ON es.ruc::text = lc.ruc
+               WHERE (lc.estado IS NULL OR lc.estado NOT IN ('exitoso', 'revision'))
+               AND (es.actividad_economica_ciiu_rev3_principal ILIKE '%contabilidad%' 
+                    OR es.actividad_economica_ciiu_rev3_secundaria ILIKE '%contabilidad%' 
+                    OR es.actividad_economica_ciiu_rev4_principal ILIKE '%contabilidad%')
+               ORDER BY es.ruc DESC LIMIT $batch_size;"
     else
-        query="SELECT ruc FROM log_consultas WHERE estado != 'exitoso' AND ruc < '$LAST_RUC_PROCESSED' ORDER BY ruc DESC LIMIT $batch_size;"
+        query="SELECT es.ruc 
+               FROM empresas_sunat es
+               LEFT JOIN log_consultas lc ON es.ruc::text = lc.ruc
+               WHERE (lc.estado IS NULL OR lc.estado NOT IN ('exitoso', 'revision'))
+               AND es.ruc < '$LAST_RUC_PROCESSED'
+               AND (es.actividad_economica_ciiu_rev3_principal ILIKE '%contabilidad%' 
+                    OR es.actividad_economica_ciiu_rev3_secundaria ILIKE '%contabilidad%' 
+                    OR es.actividad_economica_ciiu_rev4_principal ILIKE '%contabilidad%')
+               ORDER BY es.ruc DESC LIMIT $batch_size;"
     fi
     
     PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -t -c "$query" 2>/dev/null | sed 's/^[ \t]*//;s/[ \t]*$//' | grep -v '^$'
@@ -403,18 +435,17 @@ register_cache_dir() {
 
 # Limpiar caché del sistema Go
 clean_go_cache() {
-    print_cache "Limpiando caché de Go..."
+    print_cache "Limpiando caché de Go (preservando dependencias)..."
     
-    # Limpiar build cache
+    # Limpiar solo build cache (NO modcache para preservar dependencias)
     go clean -cache 2>/dev/null || true
-    
-    # Limpiar module cache (más agresivo)
-    go clean -modcache 2>/dev/null || true
     
     # Limpiar test cache
     go clean -testcache 2>/dev/null || true
     
-    print_cache "Caché de Go limpiado"
+    # NO ejecutar: go clean -modcache (esto borra las dependencias descargadas)
+    
+    print_cache "Caché de Go limpiado (dependencias preservadas)"
 }
 
 # Limpiar archivos temporales del sistema
@@ -587,7 +618,7 @@ clean_memory_buffers_with_permissions() {
     print_cache "✓ Garbage collection de Go configurado"
 }
 
-# Worker function mejorada con mejor manejo de procesos
+# Worker function mejorada con detección de paginación
 worker_function() {
     local worker_id="$1"
     local ruc="$2"
@@ -643,12 +674,46 @@ worker_function() {
     # Leer salida completa con verificación de archivos
     local output=""
     local error_output=""
+    local falla_especifica=""
+
     if [ -r "$temp_output" ]; then
-        output=$(cat "$temp_output" 2>/dev/null || echo "")  # ← CAMBIO: cat en lugar de head -c 200
+        output=$(cat "$temp_output" 2>/dev/null || echo "")
+        # Buscar la línea específica de falla
+        falla_especifica=$(echo "$output" | grep -o "🛑 Terminando programa debido a falla en:.*" | head -1)
     fi
     if [ -r "$temp_error" ]; then
-        error_output=$(cat "$temp_error" 2>/dev/null || echo "")  # ← CAMBIO: cat en lugar de head -c 100
+        error_output=$(cat "$temp_error" 2>/dev/null || echo "")
+        # Si no encontró en output, buscar en error
+        if [ -z "$falla_especifica" ]; then
+            falla_especifica=$(echo "$error_output" | grep -o "🛑 Terminando programa debido a falla en:.*" | head -1)
+        fi
     fi
+    
+    # ====================================
+    # NUEVA LÓGICA PARA DETECTAR PAGINACIÓN
+    # ====================================
+    
+    # Función para detectar paginación en la salida
+    detect_pagination() {
+        local content="$1"
+        local pagination_info=""
+        local has_pagination=false
+        
+        # Buscar la sección de paginación después de "📄 DETECCIÓN DE PAGINACIÓN:"
+        local pagination_section=$(echo "$content" | awk '/📄 DETECCIÓN DE PAGINACIÓN:/{flag=1;next}/^[[:space:]]*$/{if(flag) flag=0}flag')
+        
+        if [ -n "$pagination_section" ]; then
+            # Buscar líneas que contengan ✅ Sí
+            local pagination_checks=$(echo "$pagination_section" | grep "✅ Sí" | sed 's/^[[:space:]]*//' | sed 's/:[[:space:]]*✅ Sí$//')
+            
+            if [ -n "$pagination_checks" ]; then
+                has_pagination=true
+                pagination_info="Paginación detectada en: $(echo "$pagination_checks" | tr '\n' ', ' | sed 's/, $//')"
+            fi
+        fi
+        
+        echo "$has_pagination|$pagination_info"
+    }
     
     # Limpiar archivos temporales del worker con verificación de permisos
     if [ -d "$worker_temp_dir" ] && [ "$worker_temp_dir" != "/tmp" ]; then
@@ -659,14 +724,29 @@ worker_function() {
         }
     fi
     
-    # Manejo de códigos de salida
+    # Manejo de códigos de salida con detección de paginación
     case $exit_code in
         0)
-            print_worker "$worker_id" "OK: RUC $ruc"
-            mark_success "$ruc"
-            unmark_ruc_processing "$ruc"
-            update_stats "success"
-            return 0
+            # PROCESO EXITOSO - VERIFICAR SI HAY PAGINACIÓN
+            local pagination_result=$(detect_pagination "$output")
+            local has_pagination=$(echo "$pagination_result" | cut -d'|' -f1)
+            local pagination_details=$(echo "$pagination_result" | cut -d'|' -f2)
+            
+            if [ "$has_pagination" = "true" ]; then
+                # HAY PAGINACIÓN - MARCAR COMO REVISIÓN
+                print_worker "$worker_id" "REVISIÓN: RUC $ruc (paginación detectada)"
+                mark_revision "$ruc" "Procesamiento exitoso con paginación detectada" "$pagination_details"
+                unmark_ruc_processing "$ruc"
+                update_stats "success"  # Contar como éxito para estadísticas
+                return 0
+            else
+                # NO HAY PAGINACIÓN - MARCAR COMO EXITOSO NORMAL
+                print_worker "$worker_id" "OK: RUC $ruc"
+                mark_success "$ruc"
+                unmark_ruc_processing "$ruc"
+                update_stats "success"
+                return 0
+            fi
             ;;
         124)
             print_worker "$worker_id" "TIMEOUT: RUC $ruc (${TIMEOUT_SCRAPER}s)"
@@ -677,6 +757,7 @@ worker_function() {
             ;;
         *)
             # Preparar mensaje de error CON TODO EL DETALLE para la BD
+            local error_msg="Exit code: $exit_code"
             if [ -n "$error_output" ]; then
                 error_msg="$error_msg: $error_output"
             fi
@@ -687,13 +768,40 @@ worker_function() {
             # MOSTRAR SOLO ESTO EN EL TERMINAL:
             print_worker "$worker_id" "ERROR: RUC $ruc"
             
-            # PERO GUARDAR TODO EL DETALLE EN LA BASE DE DATOS:
-            mark_failed "$ruc" "$error_msg"
+            # GUARDAR EN LA BASE DE DATOS CON ESPECIFICACIÓN SI HAY FALLA ESPECÍFICA:
+            if [ -n "$falla_especifica" ]; then
+                mark_failed_with_specification "$ruc" "$error_msg" "$falla_especifica"
+            else
+                mark_failed "$ruc" "$error_msg"
+            fi
+            
             unmark_ruc_processing "$ruc"
             update_stats "error"
             return 1
             ;;
     esac
+}
+
+# Nueva función para marcar como revisión
+mark_revision() {
+    local ruc="$1"
+    local mensaje="$2"
+    local especificacion="$3"
+    
+    local mensaje_escaped=""
+    local especificacion_escaped=""
+    
+    [ -n "$mensaje" ] && mensaje_escaped=$(escape_sql "$mensaje")
+    [ -n "$especificacion" ] && especificacion_escaped=$(escape_sql "$especificacion")
+    
+    local query=""
+    if [ -n "$especificacion" ]; then
+        query="UPDATE log_consultas SET estado = 'revision', mensaje = '$mensaje_escaped', especificacion = '$especificacion_escaped', fecha_registro = CURRENT_TIMESTAMP WHERE ruc = '$ruc';"
+    else
+        query="UPDATE log_consultas SET estado = 'revision', mensaje = '$mensaje_escaped', fecha_registro = CURRENT_TIMESTAMP WHERE ruc = '$ruc';"
+    fi
+    
+    PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -c "$query" >/dev/null 2>&1
 }
 
 # Procesar RUC con reintentos

@@ -19,12 +19,13 @@ CREATE TABLE IF NOT EXISTS log_consultas (
     mensaje TEXT,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+ALTER TABLE log_consultas ADD COLUMN especificacion TEXT;
 EOF
 
 # Insertar datos iniciales desde empresas_sunat
 psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" <<'EOF'
-INSERT INTO log_consultas (ruc, estado, mensaje)
-SELECT ruc, 'pendiente', 'Registro inicial'
+INSERT INTO log_consultas (ruc, estado, mensaje, especificacion)
+SELECT ruc, 'pendiente', 'Registro inicial', 'Consulta RUC inicial desde empresas_sunat'
 FROM empresas_sunat
 ON CONFLICT DO NOTHING;
 EOF
