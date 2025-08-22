@@ -316,6 +316,7 @@ func (h *HumanBehaviorSimulator) rotateUserAgent(page *rod.Page) {
 
 		if err != nil {
 			log.Printf("⚠️ Warning: Error rotando user agent: %v", err)
+
 		} else {
 			log.Printf(" 🔄 User agent rotado")
 		}
@@ -519,7 +520,7 @@ func (s *ScraperExtendido) DetectarPaginacion(page *rod.Page) bool {
 		}
 	}
 
-	// 3. Buscar patrón específico de SUNAT: "1 a X de Y"
+	// 3. Buscar patrón específico de SUNAT: "1 a X de Y" - CORREGIDO
 	patronResultados, err := page.Timeout(3 * time.Second).ElementX("//td[contains(text(), ' a ') and contains(text(), ' de ')]")
 	if err == nil && patronResultados != nil {
 		visible, err := patronResultados.Visible()
@@ -527,8 +528,22 @@ func (s *ScraperExtendido) DetectarPaginacion(page *rod.Page) bool {
 			texto, _ := patronResultados.Text()
 			// Verificar que sigue el patrón "X a Y de Z"
 			if matched, _ := regexp.MatchString(`\d+\s+a\s+\d+\s+de\s+\d+`, texto); matched {
-				log.Printf("✅ Detectada paginación SUNAT: patrón de resultados '%s'", texto)
-				return true
+				// NUEVA VALIDACIÓN: Solo considerar paginación si hay más de 1 página
+				// Extraer el total de resultados
+				re := regexp.MustCompile(`(\d+)\s+a\s+(\d+)\s+de\s+(\d+)`)
+				matches := re.FindStringSubmatch(texto)
+				if len(matches) == 4 {
+					totalResultados, _ := strconv.Atoi(matches[3])
+					resultadosPorPagina, _ := strconv.Atoi(matches[2])
+
+					// Solo hay paginación si el total es mayor que los resultados mostrados
+					if totalResultados > resultadosPorPagina {
+						log.Printf("✅ Detectada paginación SUNAT: patrón de resultados '%s' (%d total, %d por página)", texto, totalResultados, resultadosPorPagina)
+						return true
+					} else {
+						log.Printf("📄 Sin paginación SUNAT: solo una página '%s'", texto)
+					}
+				}
 			}
 		}
 	}
@@ -594,15 +609,29 @@ func (s *ScraperExtendido) DetectarPaginacion(page *rod.Page) bool {
 	// Búsqueda por texto con patrones MUY específicos
 	pageText, err := page.MustElement("body").Text()
 	if err == nil {
-		// PATRONES ESPECÍFICOS DE SUNAT
+		// PATRONES ESPECÍFICOS DE SUNAT - CON VALIDACIÓN MEJORADA
 		if strings.Contains(pageText, "Páginas:") {
-			log.Printf("✅ Detectada paginación SUNAT: texto 'Páginas:' encontrado en body")
-			return true
+			// Verificar también que no sea "1 a 1 de 1"
+			re := regexp.MustCompile(`(\d+)\s+a\s+(\d+)\s+de\s+(\d+)`)
+			matches := re.FindStringSubmatch(pageText)
+			if len(matches) == 4 {
+				totalResultados, _ := strconv.Atoi(matches[3])
+				resultadosPorPagina, _ := strconv.Atoi(matches[2])
+				if totalResultados > resultadosPorPagina {
+					log.Printf("✅ Detectada paginación SUNAT: texto 'Páginas:' encontrado en body con múltiples páginas")
+					return true
+				} else {
+					log.Printf("📄 Sin paginación SUNAT: 'Páginas:' encontrado pero solo una página (%d de %d)", resultadosPorPagina, totalResultados)
+				}
+			} else {
+				// Si no puede extraer números, asumir que hay paginación (caso edge)
+				log.Printf("✅ Detectada paginación SUNAT: texto 'Páginas:' encontrado en body")
+				return true
+			}
 		}
 
-		// Patrones muy específicos que indican paginación real
+		// Patrones muy específicos que indican paginación real - SIN EL PATRÓN PROBLEMÁTICO
 		patronesPaginacionEspecificos := []string{
-			`\d+\s+a\s+\d+\s+de\s+\d+`, // "1 a 30 de 225"
 			`Página\s+\d+\s+de\s+\d+`,
 			`Mostrando\s+\d+\s*[-–]\s*\d+\s+de\s+\d+`,
 			`Registros\s+\d+\s+al\s+\d+\s+de\s+\d+`,
@@ -615,6 +644,24 @@ func (s *ScraperExtendido) DetectarPaginacion(page *rod.Page) bool {
 		for _, patron := range patronesPaginacionEspecificos {
 			matched, err := regexp.MatchString("(?i)"+patron, pageText)
 			if err == nil && matched {
+				// VALIDACIÓN ADICIONAL: Para patrones que pueden incluir "1 a 1 de 1"
+				if strings.Contains(patron, `\d+\s*[-–]\s*\d+\s+de\s+\d+`) || strings.Contains(patron, `\d+\s+al\s+\d+\s+de\s+\d+`) || strings.Contains(patron, `\d+\s+to\s+\d+\s+of\s+\d+`) {
+					// Extraer números para validar que no sea una sola página
+					re := regexp.MustCompile(`(\d+).*?(\d+).*?(\d+)`)
+					matches := re.FindStringSubmatch(pageText)
+					if len(matches) >= 4 {
+						inicio, _ := strconv.Atoi(matches[1])
+						fin, _ := strconv.Atoi(matches[2])
+						total, _ := strconv.Atoi(matches[3])
+						if total > fin || (fin-inicio) > 0 {
+							log.Printf("✅ Detectada paginación por patrón de texto validado: %s", patron)
+							return true
+						} else {
+							log.Printf("📄 Patrón encontrado pero es una sola página: %s", patron)
+							continue
+						}
+					}
+				}
 				log.Printf("✅ Detectada paginación por patrón de texto: %s", patron)
 				return true
 			}
@@ -664,13 +711,24 @@ func (s *ScraperExtendido) DetectarPaginacion(page *rod.Page) bool {
 
 	// Si solo tiene "Siguiente", también puede ser paginación (primera página)
 	if hasSiguiente {
-		// Buscar indicios adicionales de que es primera página
+		// Buscar indicios adicionales de que es primera página - CON VALIDACIÓN MEJORADA
 		pageText, err := page.MustElement("body").Text()
 		if err == nil {
-			if strings.Contains(pageText, "Páginas:") ||
-				regexp.MustCompile(`\d+\s+a\s+\d+\s+de\s+\d+`).MatchString(pageText) {
-				log.Printf("✅ Detectada paginación: botón Siguiente + indicadores de primera página")
-				return true
+			if strings.Contains(pageText, "Páginas:") {
+				// Validar que no sea "1 a 1 de 1"
+				re := regexp.MustCompile(`(\d+)\s+a\s+(\d+)\s+de\s+(\d+)`)
+				matches := re.FindStringSubmatch(pageText)
+				if len(matches) == 4 {
+					totalResultados, _ := strconv.Atoi(matches[3])
+					resultadosPorPagina, _ := strconv.Atoi(matches[2])
+					if totalResultados > resultadosPorPagina {
+						log.Printf("✅ Detectada paginación: botón Siguiente + indicadores de primera página válidos")
+						return true
+					}
+				} else {
+					log.Printf("✅ Detectada paginación: botón Siguiente + indicadores de primera página")
+					return true
+				}
 			}
 		}
 	}

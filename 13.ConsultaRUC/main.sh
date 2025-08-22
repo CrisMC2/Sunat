@@ -21,7 +21,7 @@ MAX_PARALLEL_JOBS=10      # Número máximo de procesos simultáneos
 TIMEOUT_SCRAPER=600       # 10 minutos por RUC
 PAUSE_BETWEEN_BATCHES=10  # 10 segundos entre lotes (aumentado para limpieza)
 MAX_REINTENTOS=2          # Máximo 2 intentos por RUC
-BATCH_SIZE=100            # FIJO: 100 RUCs por lote
+BATCH_SIZE=10            # FIJO: 100 RUCs por lote
 DEEP_CLEAN_ENABLED=true   # Habilitar limpieza profunda
 
 # Contadores globales (con archivos para sincronización)
@@ -515,7 +515,7 @@ deep_clean_after_batch() {
     sleep 3
     
     # 2. Limpiar procesos Chrome que puedan haber quedado del lote
-    local chrome_count=$(pgrep -c -f "chrome\|chromium" 2>/dev/null || echo "0")
+    local chrome_count=$(pgrep -c -f "chrome\|chromium" 2>/dev/null | tr -d '\n\r' || echo "0")
     if [ "$chrome_count" -gt 0 ]; then
         print_cache "Encontrados $chrome_count procesos Chrome del lote anterior"
         kill_all_chrome_processes
@@ -557,7 +557,7 @@ deep_clean_after_batch() {
     sync
     
     # 9. Verificación final del lote
-    local remaining_processes=$(pgrep -c -f "go run\|chrome\|chromium" 2>/dev/null || echo "0")
+    local remaining_processes=$(pgrep -c -f "go run\|chrome\|chromium" 2>/dev/null | tr -d '\n\r' || echo "0")
     if [ "$remaining_processes" -gt 0 ]; then
         print_warning "Aún quedan $remaining_processes procesos activos después de la limpieza"
     fi
@@ -650,7 +650,6 @@ worker_function() {
     
     # Ejecutar con timeout mejorado y manejo de señales
     local go_pid=""
-    # Ejecutar con timeout y capturar el PID del proceso Go real
     timeout ${TIMEOUT_SCRAPER}s go run . "$ruc" > "$temp_output" 2> "$temp_error" &
     go_pid=$!
 
@@ -666,23 +665,38 @@ worker_function() {
         # Si el proceso fue matado por timeout
         if [ $exit_code -eq 124 ]; then
             print_worker "$worker_id" "TIMEOUT: Matando procesos relacionados con RUC $ruc"
-            # Matar cualquier proceso Go hijo que pueda haber quedado
             pkill -P $go_pid 2>/dev/null || true
         fi
     fi
+    
+    # ====================================
+    # MODIFICACIÓN PRINCIPAL: CAPTURAR TODO EL TERMINAL
+    # ====================================
     
     # Leer salida completa con verificación de archivos
     local output=""
     local error_output=""
     local falla_especifica=""
+    local terminal_completo=""
 
     if [ -r "$temp_output" ]; then
         output=$(cat "$temp_output" 2>/dev/null || echo "")
-        # Buscar la línea específica de falla
+        # NUEVO: Capturar TODA la salida para especificación
+        terminal_completo="$output"
+        
+        # Buscar la línea específica de falla para mensaje
         falla_especifica=$(echo "$output" | grep -o "🛑 Terminando programa debido a falla en:.*" | head -1)
     fi
+    
     if [ -r "$temp_error" ]; then
         error_output=$(cat "$temp_error" 2>/dev/null || echo "")
+        # NUEVO: Agregar errores al terminal completo
+        if [ -n "$terminal_completo" ] && [ -n "$error_output" ]; then
+            terminal_completo="$terminal_completo\n\n=== ERRORES ===\n$error_output"
+        elif [ -n "$error_output" ]; then
+            terminal_completo="$error_output"
+        fi
+        
         # Si no encontró en output, buscar en error
         if [ -z "$falla_especifica" ]; then
             falla_especifica=$(echo "$error_output" | grep -o "🛑 Terminando programa debido a falla en:.*" | head -1)
@@ -690,7 +704,7 @@ worker_function() {
     fi
     
     # ====================================
-    # NUEVA LÓGICA PARA DETECTAR PAGINACIÓN
+    # NUEVA LÓGICA PARA DETECTAR PAGINACIÓN Y GUARDAR TERMINAL COMPLETO
     # ====================================
     
     # Función para detectar paginación en la salida
@@ -719,12 +733,13 @@ worker_function() {
     if [ -d "$worker_temp_dir" ] && [ "$worker_temp_dir" != "/tmp" ]; then
         rm -rf "$worker_temp_dir" 2>/dev/null || {
             print_worker "$worker_id" "WARN: No se pudo limpiar directorio temporal"
-            # Intentar limpiar archivos individuales
             rm -f "$temp_output" "$temp_error" 2>/dev/null || true
         }
     fi
     
-    # Manejo de códigos de salida con detección de paginación
+    # ====================================
+    # MODIFICACIÓN: MANEJO DE CÓDIGOS DE SALIDA CON TERMINAL COMPLETO
+    # ====================================
     case $exit_code in
         0)
             # PROCESO EXITOSO - VERIFICAR SI HAY PAGINACIÓN
@@ -733,16 +748,30 @@ worker_function() {
             local pagination_details=$(echo "$pagination_result" | cut -d'|' -f2)
             
             if [ "$has_pagination" = "true" ]; then
-                # HAY PAGINACIÓN - MARCAR COMO REVISIÓN
+                # HAY PAGINACIÓN - MARCAR COMO REVISIÓN CON TERMINAL COMPLETO
                 print_worker "$worker_id" "REVISIÓN: RUC $ruc (paginación detectada)"
-                mark_revision "$ruc" "Procesamiento exitoso con paginación detectada" "$pagination_details"
+                
+                # NUEVO: Usar terminal completo en especificación y falla específica en mensaje
+                local mensaje_revision="Procesamiento exitoso con paginación detectada"
+                if [ -n "$falla_especifica" ]; then
+                    mensaje_revision="$mensaje_revision: $falla_especifica"
+                fi
+                
+                mark_revision_with_terminal "$ruc" "$mensaje_revision" "$terminal_completo"
                 unmark_ruc_processing "$ruc"
-                update_stats "success"  # Contar como éxito para estadísticas
+                update_stats "success"
                 return 0
             else
-                # NO HAY PAGINACIÓN - MARCAR COMO EXITOSO NORMAL
+                # NO HAY PAGINACIÓN - MARCAR COMO EXITOSO NORMAL CON TERMINAL COMPLETO
                 print_worker "$worker_id" "OK: RUC $ruc"
-                mark_success "$ruc"
+                
+                # NUEVO: Usar terminal completo en especificación y falla específica en mensaje
+                local mensaje_exitoso="Scraping completado"
+                if [ -n "$falla_especifica" ]; then
+                    mensaje_exitoso="$mensaje_exitoso: $falla_especifica"
+                fi
+                
+                mark_success_with_terminal "$ruc" "$mensaje_exitoso" "$terminal_completo"
                 unmark_ruc_processing "$ruc"
                 update_stats "success"
                 return 0
@@ -750,36 +779,297 @@ worker_function() {
             ;;
         124)
             print_worker "$worker_id" "TIMEOUT: RUC $ruc (${TIMEOUT_SCRAPER}s)"
-            mark_timeout "$ruc" "$TIMEOUT_SCRAPER"
+            
+            # NUEVO: También guardar terminal completo para timeouts
+            local mensaje_timeout="Timeout después de ${TIMEOUT_SCRAPER}s"
+            mark_timeout_with_terminal "$ruc" "$TIMEOUT_SCRAPER" "$terminal_completo"
             unmark_ruc_processing "$ruc"
             update_stats "error"
             return 2
             ;;
         *)
-            # Preparar mensaje de error CON TODO EL DETALLE para la BD
-            local error_msg="Exit code: $exit_code"
-            if [ -n "$error_output" ]; then
-                error_msg="$error_msg: $error_output"
-            fi
-            if [ -n "$output" ]; then
-                error_msg="$error_msg | STDOUT: $output"
-            fi
-            
-            # MOSTRAR SOLO ESTO EN EL TERMINAL:
+            # NUEVO: Usar terminal completo para errores
             print_worker "$worker_id" "ERROR: RUC $ruc"
             
-            # GUARDAR EN LA BASE DE DATOS CON ESPECIFICACIÓN SI HAY FALLA ESPECÍFICA:
+            # Crear mensaje corto para campo 'mensaje'
+            local mensaje_error="Exit code: $exit_code"
             if [ -n "$falla_especifica" ]; then
-                mark_failed_with_specification "$ruc" "$error_msg" "$falla_especifica"
-            else
-                mark_failed "$ruc" "$error_msg"
+                mensaje_error="$mensaje_error: $falla_especifica"
             fi
+            
+            # NUEVO: Guardar terminal completo en especificación para errores
+            mark_failed_with_terminal "$ruc" "$mensaje_error" "$terminal_completo"
             
             unmark_ruc_processing "$ruc"
             update_stats "error"
             return 1
             ;;
     esac
+}
+
+# =============================================================================
+# MODIFICACIONES ESPECÍFICAS PARA CAPTURAR TERMINAL COMPLETO
+# =============================================================================
+
+# 1. MODIFICAR la función worker_function - CAMBIOS EN LÍNEAS ~580-750
+worker_function() {
+    local worker_id="$1"
+    local ruc="$2"
+    local attempt="${3:-1}"
+    
+    cd "$GO_PROJECT_DIR" || {
+        print_worker "$worker_id" "ERROR: No se puede cambiar al directorio"
+        return 1
+    }
+    
+    export DATABASE_URL="$DATABASE_URL"
+    
+    # Crear directorio temporal con permisos adecuados
+    local worker_temp_dir="/tmp/worker_${worker_id}_$$"
+    if mkdir -p "$worker_temp_dir" 2>/dev/null; then
+        chmod 755 "$worker_temp_dir" 2>/dev/null || true
+        register_cache_dir "$worker_temp_dir"
+    else
+        print_worker "$worker_id" "WARN: No se pudo crear directorio temporal"
+        worker_temp_dir="/tmp"
+    fi
+    
+    print_worker "$worker_id" "Procesando RUC: $ruc (intento $attempt)"
+    mark_processing "$ruc" "$worker_id" "$attempt"
+    
+    # Archivos de salida con verificación de permisos
+    local temp_output="${worker_temp_dir}/output_${worker_id}.log"
+    local temp_error="${worker_temp_dir}/error_${worker_id}.log"
+    
+    # Ejecutar con timeout mejorado y manejo de señales
+    local go_pid=""
+    timeout ${TIMEOUT_SCRAPER}s go run . "$ruc" > "$temp_output" 2> "$temp_error" &
+    go_pid=$!
+
+    # Registrar el PID del proceso binario para poder matarlo después
+    echo "$go_pid" >> "${ACTIVE_PIDS_FILE}.go_processes" 2>/dev/null || true
+    
+    # Esperar el proceso con manejo de señales
+    local exit_code=0
+    if wait $go_pid; then
+        exit_code=0
+    else
+        exit_code=$?
+        # Si el proceso fue matado por timeout
+        if [ $exit_code -eq 124 ]; then
+            print_worker "$worker_id" "TIMEOUT: Matando procesos relacionados con RUC $ruc"
+            pkill -P $go_pid 2>/dev/null || true
+        fi
+    fi
+    
+    # ====================================
+    # MODIFICACIÓN PRINCIPAL: CAPTURAR TODO EL TERMINAL
+    # ====================================
+    
+    # Leer salida completa con verificación de archivos
+    local output=""
+    local error_output=""
+    local falla_especifica=""
+    local terminal_completo=""
+
+    if [ -r "$temp_output" ]; then
+        output=$(cat "$temp_output" 2>/dev/null || echo "")
+        # NUEVO: Capturar TODA la salida para especificación
+        terminal_completo="$output"
+        
+        # Buscar la línea específica de falla para mensaje
+        falla_especifica=$(echo "$output" | grep -o "🛑 Terminando programa debido a falla en:.*" | head -1)
+    fi
+    
+    if [ -r "$temp_error" ]; then
+        error_output=$(cat "$temp_error" 2>/dev/null || echo "")
+        # NUEVO: Agregar errores al terminal completo
+        if [ -n "$terminal_completo" ] && [ -n "$error_output" ]; then
+            terminal_completo="$terminal_completo\n\n=== ERRORES ===\n$error_output"
+        elif [ -n "$error_output" ]; then
+            terminal_completo="$error_output"
+        fi
+        
+        # Si no encontró en output, buscar en error
+        if [ -z "$falla_especifica" ]; then
+            falla_especifica=$(echo "$error_output" | grep -o "🛑 Terminando programa debido a falla en:.*" | head -1)
+        fi
+    fi
+    
+    # ====================================
+    # NUEVA LÓGICA PARA DETECTAR PAGINACIÓN Y GUARDAR TERMINAL COMPLETO
+    # ====================================
+    
+    # Función para detectar paginación en la salida
+    detect_pagination() {
+        local content="$1"
+        local pagination_info=""
+        local has_pagination=false
+        
+        # Buscar la sección de paginación después de "📄 DETECCIÓN DE PAGINACIÓN:"
+        local pagination_section=$(echo "$content" | awk '/📄 DETECCIÓN DE PAGINACIÓN:/{flag=1;next}/^[[:space:]]*$/{if(flag) flag=0}flag')
+        
+        if [ -n "$pagination_section" ]; then
+            # Buscar líneas que contengan ✅ Sí
+            local pagination_checks=$(echo "$pagination_section" | grep "✅ Sí" | sed 's/^[[:space:]]*//' | sed 's/:[[:space:]]*✅ Sí$//')
+            
+            if [ -n "$pagination_checks" ]; then
+                has_pagination=true
+                pagination_info="Paginación detectada en: $(echo "$pagination_checks" | tr '\n' ', ' | sed 's/, $//')"
+            fi
+        fi
+        
+        echo "$has_pagination|$pagination_info"
+    }
+    
+    # Limpiar archivos temporales del worker con verificación de permisos
+    if [ -d "$worker_temp_dir" ] && [ "$worker_temp_dir" != "/tmp" ]; then
+        rm -rf "$worker_temp_dir" 2>/dev/null || {
+            print_worker "$worker_id" "WARN: No se pudo limpiar directorio temporal"
+            rm -f "$temp_output" "$temp_error" 2>/dev/null || true
+        }
+    fi
+    
+    # ====================================
+    # MODIFICACIÓN: MANEJO DE CÓDIGOS DE SALIDA CON TERMINAL COMPLETO
+    # ====================================
+    case $exit_code in
+        0)
+            # PROCESO EXITOSO - VERIFICAR SI HAY PAGINACIÓN
+            local pagination_result=$(detect_pagination "$output")
+            local has_pagination=$(echo "$pagination_result" | cut -d'|' -f1)
+            local pagination_details=$(echo "$pagination_result" | cut -d'|' -f2)
+            
+            if [ "$has_pagination" = "true" ]; then
+                # HAY PAGINACIÓN - MARCAR COMO REVISIÓN CON TERMINAL COMPLETO
+                print_worker "$worker_id" "REVISIÓN: RUC $ruc (paginación detectada)"
+                
+                # NUEVO: Usar terminal completo en especificación y falla específica en mensaje
+                local mensaje_revision="Procesamiento exitoso con paginación detectada"
+                if [ -n "$falla_especifica" ]; then
+                    mensaje_revision="$mensaje_revision: $falla_especifica"
+                fi
+                
+                mark_revision_with_terminal "$ruc" "$mensaje_revision" "$terminal_completo"
+                unmark_ruc_processing "$ruc"
+                update_stats "success"
+                return 0
+            else
+                # NO HAY PAGINACIÓN - MARCAR COMO EXITOSO NORMAL CON TERMINAL COMPLETO
+                print_worker "$worker_id" "OK: RUC $ruc"
+                
+                # NUEVO: Usar terminal completo en especificación y falla específica en mensaje
+                local mensaje_exitoso="Scraping completado"
+                if [ -n "$falla_especifica" ]; then
+                    mensaje_exitoso="$mensaje_exitoso: $falla_especifica"
+                fi
+                
+                mark_success_with_terminal "$ruc" "$mensaje_exitoso" "$terminal_completo"
+                unmark_ruc_processing "$ruc"
+                update_stats "success"
+                return 0
+            fi
+            ;;
+        124)
+            print_worker "$worker_id" "TIMEOUT: RUC $ruc (${TIMEOUT_SCRAPER}s)"
+            
+            # NUEVO: También guardar terminal completo para timeouts
+            local mensaje_timeout="Timeout después de ${TIMEOUT_SCRAPER}s"
+            mark_timeout_with_terminal "$ruc" "$TIMEOUT_SCRAPER" "$terminal_completo"
+            unmark_ruc_processing "$ruc"
+            update_stats "error"
+            return 2
+            ;;
+        *)
+            # NUEVO: Usar terminal completo para errores
+            print_worker "$worker_id" "ERROR: RUC $ruc"
+            
+            # Crear mensaje corto para campo 'mensaje'
+            local mensaje_error="Exit code: $exit_code"
+            if [ -n "$falla_especifica" ]; then
+                mensaje_error="$mensaje_error: $falla_especifica"
+            fi
+            
+            # NUEVO: Guardar terminal completo en especificación para errores
+            mark_failed_with_terminal "$ruc" "$mensaje_error" "$terminal_completo"
+            
+            unmark_ruc_processing "$ruc"
+            update_stats "error"
+            return 1
+            ;;
+    esac
+}
+
+# =============================================================================
+# 2. AGREGAR NUEVAS FUNCIONES PARA GUARDAR CON TERMINAL COMPLETO
+# =============================================================================
+
+# Nueva función para marcar éxito con terminal completo
+mark_success_with_terminal() {
+    local ruc="$1"
+    local mensaje="$2"
+    local terminal_completo="$3"
+    
+    local mensaje_escaped=""
+    local terminal_escaped=""
+    
+    [ -n "$mensaje" ] && mensaje_escaped=$(escape_sql "$mensaje")
+    [ -n "$terminal_completo" ] && terminal_escaped=$(escape_sql "$terminal_completo")
+    
+    local query="UPDATE log_consultas SET estado = 'exitoso', mensaje = '$mensaje_escaped', especificacion = '$terminal_escaped', fecha_registro = CURRENT_TIMESTAMP WHERE ruc = '$ruc';"
+    
+    PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -c "$query" >/dev/null 2>&1
+}
+
+# Nueva función para marcar revisión con terminal completo
+mark_revision_with_terminal() {
+    local ruc="$1"
+    local mensaje="$2"
+    local terminal_completo="$3"
+    
+    local mensaje_escaped=""
+    local terminal_escaped=""
+    
+    [ -n "$mensaje" ] && mensaje_escaped=$(escape_sql "$mensaje")
+    [ -n "$terminal_completo" ] && terminal_escaped=$(escape_sql "$terminal_completo")
+    
+    local query="UPDATE log_consultas SET estado = 'revision', mensaje = '$mensaje_escaped', especificacion = '$terminal_escaped', fecha_registro = CURRENT_TIMESTAMP WHERE ruc = '$ruc';"
+    
+    PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -c "$query" >/dev/null 2>&1
+}
+
+# Nueva función para marcar timeout con terminal completo
+mark_timeout_with_terminal() {
+    local ruc="$1"
+    local timeout_seconds="$2"
+    local terminal_completo="$3"
+    
+    local mensaje="Timeout después de ${timeout_seconds}s"
+    local mensaje_escaped=$(escape_sql "$mensaje")
+    local terminal_escaped=""
+    
+    [ -n "$terminal_completo" ] && terminal_escaped=$(escape_sql "$terminal_completo")
+    
+    local query="UPDATE log_consultas SET estado = 'fallido', mensaje = '$mensaje_escaped', especificacion = '$terminal_escaped', fecha_registro = CURRENT_TIMESTAMP WHERE ruc = '$ruc';"
+    
+    PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -c "$query" >/dev/null 2>&1
+}
+
+# Nueva función para marcar falla con terminal completo
+mark_failed_with_terminal() {
+    local ruc="$1"
+    local mensaje="$2"
+    local terminal_completo="$3"
+    
+    local mensaje_escaped=""
+    local terminal_escaped=""
+    
+    [ -n "$mensaje" ] && mensaje_escaped=$(escape_sql "$mensaje")
+    [ -n "$terminal_completo" ] && terminal_escaped=$(escape_sql "$terminal_completo")
+    
+    local query="UPDATE log_consultas SET estado = 'fallido', mensaje = '$mensaje_escaped', especificacion = '$terminal_escaped', fecha_registro = CURRENT_TIMESTAMP WHERE ruc = '$ruc';"
+    
+    PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -c "$query" >/dev/null 2>&1
 }
 
 # Nueva función para marcar como revisión
