@@ -1215,6 +1215,32 @@ process_batch_parallel() {
     update_stats "batch"
     print_success "Lote $batch_num completado en ${batch_duration}s (Procesados=$TOTAL_PROCESSED)"
     
+    # RECUENTO TOTAL DESPUÉS DE CADA LOTE
+    print_info "=== RECUENTO TOTAL DESPUÉS DEL LOTE $batch_num ==="
+
+    # Consultar totales desde la base de datos
+    local total_exitoso=$(PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -t -c "SELECT COUNT(*) FROM log_consultas WHERE estado = 'exitoso';" 2>/dev/null | tr -d ' \t\n\r' || echo "0")
+    local total_revision=$(PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -t -c "SELECT COUNT(*) FROM log_consultas WHERE estado = 'revision';" 2>/dev/null | tr -d ' \t\n\r' || echo "0")
+    local total_fallido=$(PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -t -c "SELECT COUNT(*) FROM log_consultas WHERE estado = 'fallido';" 2>/dev/null | tr -d ' \t\n\r' || echo "0")
+    local total_procesando=$(PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -t -c "SELECT COUNT(*) FROM log_consultas WHERE estado = 'procesando';" 2>/dev/null | tr -d ' \t\n\r' || echo "0")
+    local total_error_terminal=$(PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "$DB_PORT" -U "$DB_USER" -d "$DB_NAME" -t -c "SELECT COUNT(*) FROM log_consultas WHERE estado = 'error_terminal';" 2>/dev/null | tr -d ' \t\n\r' || echo "0")
+    local total_general=$((total_exitoso + total_revision + total_fallido + total_procesando + total_error_terminal))
+
+    print_success "✅ EXITOSOS: $total_exitoso"
+    print_info "🔄 REVISIÓN (paginación): $total_revision" 
+    print_error "❌ FALLIDOS: $total_fallido"
+    print_warning "⏳ PROCESANDO: $total_procesando"
+    print_error "💀 ERROR TERMINAL: $total_error_terminal"
+    print_info "📊 TOTAL PROCESADOS: $total_general"
+
+    # Calcular porcentajes
+    if [ $total_general -gt 0 ]; then
+        local pct_exitoso=$(( (total_exitoso * 100) / total_general ))
+        local pct_fallido=$(( (total_fallido * 100) / total_general ))
+        print_info "📈 Tasa de éxito: ${pct_exitoso}% | Tasa de fallo: ${pct_fallido}%"
+    fi
+    print_info "================================================="
+
     # LIMPIEZA PROFUNDA DESPUÉS DEL LOTE
     if [ "$DEEP_CLEAN_ENABLED" = true ]; then
         deep_clean_after_batch "$batch_num"
