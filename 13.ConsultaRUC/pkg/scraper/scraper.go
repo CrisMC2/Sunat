@@ -17,14 +17,15 @@ type SUNATScraper struct {
 
 func NewSUNATScraper() (*SUNATScraper, error) {
 	l := launcher.New().
-		Headless(false).
-		Devtools(false)
-
+		Headless(true).
+		Devtools(false).
+		Set("no-sandbox").
+		Set("disable-dev-shm-usage").
+		Set("disable-gpu")
 	url := l.MustLaunch()
 	browser := rod.New().
 		ControlURL(url).
 		MustConnect()
-
 	return &SUNATScraper{
 		browser: browser,
 		baseURL: "https://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/FrameCriterioBusquedaWeb.jsp",
