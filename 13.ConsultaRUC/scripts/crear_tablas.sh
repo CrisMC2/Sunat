@@ -4,8 +4,10 @@
 DB_USER="postgres"
 DB_NAME="sunat"
 DB_PASSWORD="admin123"
-DB_HOST="localhost"
-DB_PORT="5433"
+#DB_HOST="localhost"
+#DB_PORT="5433"
+DB_HOST="192.168.18.16"
+DB_PORT="5432"
 
 # Ruta del archivo SQL
 SQL_FILE="./database/prueba.sql"

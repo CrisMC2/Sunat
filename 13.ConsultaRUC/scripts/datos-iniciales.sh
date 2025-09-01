@@ -1,11 +1,13 @@
 #!/bin/bash
 
 # Variables de conexión
-DB_NAME="sunat"
 DB_USER="postgres"
-DB_HOST="localhost"
-DB_PORT="5433"
-DB_PASS="admin123"
+DB_NAME="sunat"
+DB_PASSWORD="admin123"
+#DB_HOST="localhost"
+#DB_PORT="5433"
+DB_HOST="192.168.18.16"
+DB_PORT="5432"
 
 # Exportar la contraseña para psql
 export PGPASSWORD="$DB_PASS"

@@ -3,9 +3,11 @@
 # Variables (ajusta según tu configuración)
 DB_USER="postgres"
 DB_NAME="sunat"
-DB_PASSWORD="admin123"  # pon tu contraseña real
-DB_HOST="localhost"
-DB_PORT="5433"
+DB_PASSWORD="admin123"
+#DB_HOST="localhost"
+#DB_PORT="5433"
+DB_HOST="192.168.18.16"
+DB_PORT="5432"
 
 # Colores
 RED='\033[0;31m'

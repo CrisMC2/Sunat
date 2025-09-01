@@ -21,7 +21,8 @@ func main() {
 	// Configuración de la base de datos
 	dbConnectionString := os.Getenv("DATABASE_URL")
 	if dbConnectionString == "" {
-		dbConnectionString = "postgres://postgres:admin123@localhost:5433/sunat?sslmode=disable"
+		//dbConnectionString = "postgres://postgres:admin123@localhost:5433/sunat?sslmode=disable"
+		dbConnectionString = "postgres://postgres:admin123@192.168.18.16:5432/sunat?sslmode=disable"
 	}
 
 	// Crear conexión a la base de datos

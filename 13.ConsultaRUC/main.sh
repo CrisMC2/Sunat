@@ -9,9 +9,12 @@
 DB_USER="postgres"
 DB_NAME="sunat"
 DB_PASSWORD="admin123"
-DB_HOST="localhost"
-DB_PORT="5433"
-DATABASE_URL="postgres://postgres:admin123@localhost:5433/sunat?sslmode=disable"
+#DB_HOST="localhost"
+#DB_PORT="5433"
+DB_HOST="192.168.18.16"
+DB_PORT="5432"
+#DATABASE_URL="postgres://postgres:admin123@localhost:5433/sunat?sslmode=disable"
+DATABASE_URL="postgres://postgres:admin123@192.168.18.16:5432/sunat?sslmode=disable"
 
 # Directorio del proyecto Go
 GO_PROJECT_DIR="$(pwd)/cmd/scraper-completo"
@@ -21,7 +24,7 @@ MAX_PARALLEL_JOBS=10      # Número máximo de procesos simultáneos
 TIMEOUT_SCRAPER=600       # 10 minutos por RUC
 PAUSE_BETWEEN_BATCHES=10  # 10 segundos entre lotes (aumentado para limpieza)
 MAX_REINTENTOS=2          # Máximo 2 intentos por RUC
-BATCH_SIZE=10            # FIJO: 100 RUCs por lote
+BATCH_SIZE=100            # FIJO: 100 RUCs por lote
 DEEP_CLEAN_ENABLED=true   # Habilitar limpieza profunda
 
 # Contadores globales (con archivos para sincronización)
