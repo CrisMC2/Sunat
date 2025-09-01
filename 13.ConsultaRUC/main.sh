@@ -358,6 +358,14 @@ get_ruc_batch() {
     
     # CAMBIO: Obtener RUCs de contabilidad no exitosos NI revision (incluyendo nunca procesados)
     if [ -z "$LAST_RUC_PROCESSED" ]; then
+        # query="SELECT es.ruc 
+        #        FROM empresas_sunat es
+        #        LEFT JOIN log_consultas lc ON es.ruc::text = lc.ruc
+        #        WHERE (lc.estado IS NULL OR lc.estado NOT IN ('exitoso', 'revision'))
+        #        AND (es.actividad_economica_ciiu_rev3_principal ILIKE '%contabilidad%' 
+        #             OR es.actividad_economica_ciiu_rev3_secundaria ILIKE '%contabilidad%' 
+        #             OR es.actividad_economica_ciiu_rev4_principal ILIKE '%contabilidad%')
+        #        ORDER BY es.ruc ASC LIMIT $batch_size;"
         query="SELECT es.ruc 
                FROM empresas_sunat es
                LEFT JOIN log_consultas lc ON es.ruc::text = lc.ruc
@@ -367,6 +375,15 @@ get_ruc_batch() {
                     OR es.actividad_economica_ciiu_rev4_principal ILIKE '%contabilidad%')
                ORDER BY es.ruc DESC LIMIT $batch_size;"
     else
+        # query="SELECT es.ruc 
+        #        FROM empresas_sunat es
+        #        LEFT JOIN log_consultas lc ON es.ruc::text = lc.ruc
+        #        WHERE (lc.estado IS NULL OR lc.estado NOT IN ('exitoso', 'revision'))
+        #        AND es.ruc < '$LAST_RUC_PROCESSED'
+        #        AND (es.actividad_economica_ciiu_rev3_principal ILIKE '%contabilidad%' 
+        #             OR es.actividad_economica_ciiu_rev3_secundaria ILIKE '%contabilidad%' 
+        #             OR es.actividad_economica_ciiu_rev4_principal ILIKE '%contabilidad%')
+        #        ORDER BY es.ruc ASC LIMIT $batch_size;"
         query="SELECT es.ruc 
                FROM empresas_sunat es
                LEFT JOIN log_consultas lc ON es.ruc::text = lc.ruc
